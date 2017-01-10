@@ -1,16 +1,4 @@
 
-#----------------------------------------------------------------------------------------------------------
-# the "cleanup" file is a copy FROM : https://github.com/eddelbuettel/rcppmlpack2/blob/master/configure.ac
-#----------------------------------------------------------------------------------------------------------
+#!/bin/sh
 
-#----------------------------------
-## compilation and editing objects
-#----------------------------------
-
-rm -f src/*.o src/*.so src/*.dylib src/*~ *~
-
-#-------------------------------
-## autoconf/configure leftovers
-#-------------------------------
-
-rm -rf autom4te.cache/ config.log config.status src/Makevars
+rm -f config.* src/Makevars autom4te.cache/

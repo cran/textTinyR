@@ -432,7 +432,7 @@
 #  ref 0.45236 -0.21766 0.6341 0.76392 0.53734 0.66976 -0.23162 .....
 #  http -0.42692 0.48637 0.28622 1.7019 -0.25739 0.25948 -0.026582 .....
 #  namequot 0.56828 -0.30782 0.45707 0.78346 0.53727 0.62445 .....
-#  � -0.010281 0.25528 0.04708 0.49679 0.043934 0.33733 -0.42706 .....
+#  – -0.010281 0.25528 0.04708 0.49679 0.043934 0.33733 -0.42706 .....
 #  amp 0.06308 0.11968 0.11885 0.67699 -0.11448 0.25183 -0.48789 .....
 #  category -1.5705 -0.40638 0.61064 2.5691 -0.52987 0.68096 .....
 #  county -0.85743 0.071625 -0.43393 0.17157 -0.32874 1.771 .....
@@ -464,7 +464,7 @@
 #  
 #  
 #  
-#  tm = init$Term_Matrix(sort_columns = TRUE,      # initial terms are sorted
+#  tm = init$Term_Matrix(sort_terms = TRUE,      # initial terms are sorted
 #  
 #                        to_lower = TRUE,          # convert to lower case
 #  
@@ -484,95 +484,134 @@
 #  Warning message:
 #  empty character strings present in the column names they will be replaced with proper characters
 #  
+#  5 x 212 sparse Matrix of class "dgCMatrix"
+#     [[ suppressing 91 column names ‘X’, ‘X17th’, ‘X1950’ ... ]]
 #  
-#  5 x 214 sparse Matrix of class "dgCMatrix"
-#     [[ suppressing 214 column names 'X', 'X.planets.', 'X17th' ... ]]
+#  [1,] -0.001939591 .         .          0.009747774 0.01949555   ......
+#  [2,] -0.003255742 .         0.01636233 .           .            ......
+#  [3,] -0.003440029 0.0172885 .          .           .            ......
+#  [4,] -0.002196645 .         .          .           .            ......
+#  [5,] -0.002681199 .         .          .           .          . ......
 #  
-#  [1,] -0.001939591 .          .        .          0.00974777 0.0194955  . . . . .
-#  [2,] -0.003255742 0.0163623  .         0.0163623 .           .         . . . . .
-#  [3,] -0.003440029 .          0.017288 .          .           .         . . . . .
-#  [4,] -0.002196645 .          .        .          .           .         . . . . .
-#  [5,] -0.002681199 .          .        .          .           .         . . . . .
+#  [1,] 0.007121603 .          0.009747774 .          0.005434315 . ......
+#  [2,] 0.007969413 0.01636233 .           .          .           . ......
+#  [3,] .           .          .           .          0.009638219 . ......
+#  [4,] 0.008065430 .          .           0.01103965 .             ......
+#  [5,] .           .          .           .          .             ......
 #  
-#  
+#  [1,] -0.001939591 0.009747774 .          .          .           ......
+#  [2,] -0.003255742 .           .          .          0.01636233  ......
+#  [3,] -0.010320088 .           .          .          .           ......
+#  [4,] -0.006589936 .           0.01103965 0.01103965 .           ......
+#  [5,] -0.002681199 .           .          .          .           ......
+#  .
+#  .
+#  .
 #  
 
 ## ---- eval = F, echo = T-------------------------------------------------
 #  
-#  init$Term_Matrix_Adjust(sparsity_thresh = 0.995)
+#  res_adj = init$Term_Matrix_Adjust(sparsity_thresh = 0.6)
 #  
 
 ## ---- eval = F, echo = T-------------------------------------------------
+#  
+#  res_adj
+#  
 #  
 #  5 x 9 sparse Matrix of class "dgCMatrix"
-#      are     bodies discovered       four      giant     object      such  terrestrials   was
-#  [1,] .           .        .          .        .          .          .            .         .
-#  [2,] 0.009121886 0.0327246 0.0327246 .        .          0.03272467 0.01824377   .         .
-#  [3,] .           .        .          .        .          .          .            .    0.034577
-#  [4,] .           .        .          .        .          .          0.01230905   .         .
-#  [5,] 0.030048566 .        .          0.026949 0.02694973 .          .            0.0269497 .
+#            planets           by            X       solar          and          as  ......
+#  [1,] -0.005818773 -0.001939591 -0.001939591 0.004747735 -0.001939591 0.007121603  ......
+#  [2,] -0.006511484 -0.003255742 -0.003255742 0.003984706 -0.006511484 0.007969413  ......
+#  [3,] -0.006880059 -0.010320088 -0.003440029 .           -0.003440029 .            ......
+#  [4,] -0.006589936 -0.006589936 -0.002196645 .           -0.008786581 0.008065430  ......
+#  [5,] -0.013405997 -0.002681199 -0.002681199 0.003281523 -0.008043598 .            ......
 #  
 #  
 
 ## ---- eval = F, echo = T-------------------------------------------------
 #  
-#  init$term_associations(Terms = c('giant', 'terrestrials', 'INVALID'), keep_terms = NULL, verbose = TRUE)
+#  dim(res_adj)
+#  
+#  [1] 5 9
+#  
+
+## ---- eval = F, echo = T-------------------------------------------------
+#  
+#  init$term_associations(Terms = c('planets', 'by', 'INVALID'), keep_terms = NULL, verbose = TRUE)
 #  
 
 ## ---- eval = F, echo = T-------------------------------------------------
 #  
 #  the ' INVALID ' term does not exist in the terms vector
 #  
-#  total.number.variables.processed:   2	minutes.to.complete: 0.00002
+#  total.number.variables.processed:   2	minutes.to.complete: 0.00000
 #  
+#  $planets
+#       term correlation
+#   1:    as  0.65943196
+#   2:   and  0.48252671
+#   3:     X  0.07521813
+#   4:    by -0.26301349
+#   5:    of         NaN
+#   6: solar -0.11887462
+#   7:  were         NaN
+#   8:   the -0.15500900
+#   9:   in.         NaN
+#  10:  that  0.44307617
+#  11: earth -0.24226093
 #  
-#  $giant
-#           term correlation
-#    1:     then   1.0000000
-#    2:      two   1.0000000
-#    3:  divided   1.0000000
-#    4: distance   1.0000000
-#    5:    rocky   1.0000000
-#   ---
-#  209:       to  -0.4082483
-#  210:     that  -0.5590170
-#  211:       as  -0.5897678
-#  212:      the  -0.6123724
-#  213:     were  -1.0000000
-#  
-#  
-#  $terrestrials
-#               term correlation
-#    1:        there   1.0000000
-#    2:      jupiter   1.0000000
-#    3:          two   1.0000000
-#    4:      neptune   1.0000000
-#    5:        rocky   1.0000000
-#   ---
-#  209: astronomical  -0.4082483
-#  210:         that  -0.5590170
-#  211:           as  -0.5897678
-#  212:          the  -0.6123724
-#  213:         were  -1.0000000
+#  $by
+#         term correlation
+#   1:   solar   0.9092777
+#   2:       X   0.5010034
+#   3: planets  -0.2630135
+#   4:      of         NaN
+#   5:    were         NaN
+#   6:     the   0.7838436
+#   7:      as   0.3698239
+#   8:     and  -0.0594149
+#   9:     in.         NaN
+#  10:   earth  -0.6952757
+#  11:    that  -0.9338884
 #  
 
 ## ---- eval = F, echo = T-------------------------------------------------
 #  
+#  init = sparse_term_matrix$new(file_data = PATH, document_term_matrix = TRUE)
+#  
+#  tm = init$Term_Matrix(sort_terms = TRUE,
+#  
+#                        to_lower = TRUE,
+#  
+#                        trim_token = TRUE,
+#  
+#                        split_string = TRUE,
+#  
+#                        tf_idf = FALSE,            # disable tf-idf
+#  
+#                        verbose = TRUE)
+#  
+#  
 #  init$most_frequent_terms(keep_terms = 10, threads = 1, verbose = TRUE)
+#  
+
+## ---- eval = F, echo = T-------------------------------------------------
 #  
 #  minutes.to.complete: 0.00000
 #  
-#         term frequency
+#  
+#          term frequency
 #   1:     the        28
-#   2: planets        13
+#   2: planets        15
 #   3:     and        11
-#   4:      by         9
-#   5:      of         9
+#   4:      of         9
+#   5:      by         9
 #   6:      as         8
 #   7:     in.         6
 #   8:       X         5
-#   9:    that         5
-#  10:     are         5
+#   9:     are         5
+#  10:    that         5
 #  
 
 ## ---- eval = F, echo = T-------------------------------------------------

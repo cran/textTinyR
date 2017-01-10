@@ -4315,6 +4315,7 @@ fi
 
 if test x"${PKGCONFIG}" == x"yes" && pkg-config --atleast-version=1.0.0 lboost_locale; then
 	LOCALE_LIBS=`pkg-config --libs lboost_locale`
+
 else
 	#-------------------------------------------------------------
 	# Add-on macro for library check in case pkg-config test fails

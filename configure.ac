@@ -1,7 +1,7 @@
 
-#--------------------------------------------------------------------------------------------------------------
-# the "configure.ac" file is FROM : https://github.com/eddelbuettel/rcppmlpack2/blob/master/configure.ac
-#--------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------------------------
+# the "configure.ac" file is a modification of the following file : https://github.com/eddelbuettel/rcppmlpack2/blob/master/configure.ac
+#---------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -59,6 +59,7 @@ AC_PROG_PKGCONFIG
 
 if test x"${PKGCONFIG}" == x"yes" && pkg-config --atleast-version=1.0.0 lboost_locale; then
 	LOCALE_LIBS=`pkg-config --libs lboost_locale`
+
 else
 	#-------------------------------------------------------------
 	# Add-on macro for library check in case pkg-config test fails
