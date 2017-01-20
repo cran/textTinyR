@@ -1,8 +1,8 @@
 Package: textTinyR
 Type: Package
 Title: Text Processing for Small or Big Data Files
-Version: 1.0.1
-Date: 2017-01-10
+Version: 1.0.2
+Date: 2017-01-20
 Author: Lampros Mouselimis <mouselimislampros@gmail.com>
 Maintainer: Lampros Mouselimis <mouselimislampros@gmail.com>
 BugReports: https://github.com/mlampros/textTinyR/issues
@@ -14,7 +14,8 @@ SystemRequirements: The package requires the following two components :
         A C++11 compiler and on a unix OS the boost-locale headers and
         libraries ( boost >= 1.55.0 , www.boost.org ). Debian/Ubuntu:
         libboost-locale-dev, Fedora : yum install boost-devel, OSX/brew
-        : brew install boost
+        : detailed installation instructions can be found in the README
+        file
 LazyData: TRUE
 Depends: R(>= 3.2.3), Matrix
 Imports: Rcpp (>= 0.12.5), R6, data.table, utils
@@ -23,6 +24,6 @@ Suggests: testthat, covr, knitr, rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
 NeedsCompilation: yes
-Packaged: 2017-01-10 20:39:19 UTC; lampros
+Packaged: 2017-01-20 08:27:39 UTC; lampros
 Repository: CRAN
-Date/Publication: 2017-01-11 00:36:35
+Date/Publication: 2017-01-20 11:16:56

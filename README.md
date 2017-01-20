@@ -1,20 +1,133 @@
-
-
 ## textTinyR
 <br>
 
-The textTinyR package consists of text pre-processing functions for small or big data files. More details on the functionality of the textTinyR can be found in the [blog-post](http://mlampros.github.io/2017/01/05/textTinyR_package/) and in the package Vignette. The R package can be installed, in the following OS's: Linux, Mac and Windows. However, there are some limitations :
+The textTinyR package consists of text processing functions for small or big data files. More details on the functionality of the textTinyR can be found in the package Vignette. The R package can be installed, in the following OS's: Linux, Mac and Windows. However, there are some limitations :
 
 * there is no support for chinese, japanese, korean, thai or languages with ambiguous word boundaries.
 * there is no support functions for utf-locale on windows, meaning only english character strings or files can be input and pre-processed.
 
 <br>
 
-*update (06-01-2017):* On a Unix Operating System (OS) the boost library and especially the boost-locale are necessary,
+### **System Requirements ( for unix OS's )**
 
-* **Debian OS** : sudo apt-get install libboost-all-dev
-* **Fedora OS** : yum install boost-devel
-* **Mac OS**    : brew install boost
+<br>
+
+#### **Debian/Ubuntu**
+
+
+sudo apt-get install libboost-all-dev
+
+sudo apt-get update
+
+sudo apt-get install libboost-locale-dev
+
+<br>
+
+#### **Fedora**
+
+
+yum install boost-devel
+
+<br>
+
+#### **Macintosh OSX/brew**
+
+
+The boost library will be installed on Macintosh OSx using the *Homebrew package manager*, 
+
+If the boost library is already installed using **brew install boost** then it must be removed using the following command, 
+
+<br>
+
+**brew uninstall boost**
+
+<br>
+
+
+Then the **formula** for the boost library should be modified using a text editor (TextEdit, TextMate, etc). The formula is saved in:
+
+<br>
+
+**/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/boost.rb**
+
+<br>
+
+The user should open the **boost.rb** formula and replace the following code chunk beginning from line 71,
+
+<br>
+
+```R
+
+# layout should be synchronized with boost-python
+args = ["--prefix=#{prefix}",
+        "--libdir=#{lib}",
+        "-d2",
+        "-j#{ENV.make_jobs}",
+        "--layout=tagged",
+        "--user-config=user-config.jam",
+        "install"]
+
+if build.with? "single"
+  args << "threading=multi,single"
+else
+  args << "threading=multi"
+end
+
+```
+
+<br>
+
+with the following code chunk, 
+
+<br>
+
+```R
+
+# layout should be synchronized with boost-python
+args = ["--prefix=#{prefix}",
+        "--libdir=#{lib}",
+        "-d2",
+        "-j#{ENV.make_jobs}",
+        "--layout=system", 
+        "--user-config=user-config.jam",
+        "threading=multi",
+        "install"]
+
+#if build.with? "single"
+#  args << "threading=multi,single"
+#else
+#  args << "threading=multi"
+#end
+
+```
+
+<br>
+
+Then the user should save the changes, close the file and run,
+
+<br>
+
+**brew update**
+
+<br>
+
+to apply the changes.
+
+<br>
+
+Then he/she should open a new terminal (console) and type the following command, which installs the boost library using the modified formula from source, (**warning**: there are two dashes before : build-from-source)
+
+<br>
+
+**brew install /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/boost.rb -–build-from-source**
+
+<br>
+
+That's it.
+
+<br>
+
+### **Installation of the textTinyR package (CRAN, Github)**
 
 <br>
 
@@ -22,7 +135,7 @@ To install the package from CRAN use,
 
 ```R
 
-install.packages("textTinyR")
+install.packages('textTinyR', clean = TRUE)
 
 
 ```
