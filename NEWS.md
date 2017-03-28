@@ -1,4 +1,9 @@
 
+## textTinyR 1.0.4
+
+I modified the *res_token_vector()*, *res_token_list()* [ *export_all_funcs.cpp* file ] and *append_2file()* [ *tokenization.h* file ] functions, because the *tokenize_transform_vec_docs()* function returned an incorrect output in case that the *path_2folder* parameter was not the empty string.
+
+
 ## textTinyR 1.0.3
 
 I corrected the UBSAN-memory errors, which occured in the *adj_Sparsity()* function of the *term_matrix.h* header file (the errors happen, when passing empty vectors to the armadillo *batch_insertion()* function)

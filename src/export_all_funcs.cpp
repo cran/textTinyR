@@ -237,6 +237,8 @@ std::vector<std::string> res_token_vector(std::vector<std::string> &VEC, std::ve
 
   std::vector<std::string> res_vec(VEC.size());
 
+  bool FLAG_write_file = path_2file == "" ? false : true;
+
   #ifdef _OPENMP
   #pragma omp parallel for schedule(static)
   #endif
@@ -250,7 +252,7 @@ std::vector<std::string> res_token_vector(std::vector<std::string> &VEC, std::ve
 
                                                      n_gram_delimiter, concat_delimiter, path_2file, stemmer_ngram, stemmer_gamma, stemmer_truncate, stemmer_batches,
 
-                                                     1, false, false, "output_token.txt", vocabulary_path);
+                                                     1, false, FLAG_write_file, "output_token.txt", vocabulary_path, true);
 
     res_vec[f] = boost::algorithm::join(tmp_vec, " ");      // returns a vector of strings
   }
@@ -286,6 +288,8 @@ std::vector<std::vector<std::string> > res_token_list(std::vector<std::string> &
 
   std::vector<std::vector<std::string> > res_vec(VEC.size());
 
+  bool FLAG_write_file = path_2file == "" ? false : true;
+
   #ifdef _OPENMP
   #pragma omp parallel for schedule(static)
   #endif
@@ -299,7 +303,7 @@ std::vector<std::vector<std::string> > res_token_list(std::vector<std::string> &
 
                                                      n_gram_delimiter, concat_delimiter, path_2file, stemmer_ngram, stemmer_gamma, stemmer_truncate, stemmer_batches,
 
-                                                     1, false, false, "output_token.txt", vocabulary_path);
+                                                     1, false, FLAG_write_file, "output_token.txt", vocabulary_path, true);
 
     res_vec[f] = tmp_vec;                                     // returns a list of character vectors
   }

@@ -467,6 +467,11 @@ tokenize_transform_vec_docs = function(object = NULL, as_token = FALSE, to_lower
 
   gc();
 
+  if (path_2folder != "") {
+
+    res = paste(c("the data is saved in FOLDER : '", path_2folder, "' and FILE : 'output_token_single_file.txt'"), collapse = '')
+  }
+
   token_structure = structure(list(token = res), class = "tokenization and transformation")
 
   if (verbose) {
