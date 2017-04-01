@@ -10,7 +10,7 @@
  *
  * @Notes: the main class for tokenization and transformation of text files
  *
- * @last_modified: March 2017
+ * @last_modified: April 2017
  *
  **/
 
@@ -571,6 +571,11 @@ class TOKEN {
 
       int vec_size = vec.size() - n_gram + 1;
 
+      if (vec_size < 0) {                            // bug : textTinyR 1.0.5 version
+
+        vec_size = 0;
+      }
+
       std::vector<std::string> out(vec_size);
 
       #ifdef _OPENMP
@@ -601,7 +606,7 @@ class TOKEN {
 
     // build n-grams using an std::vector
 
-    void build_n_grams(int min_n_gram = 2, int max_n_gram = 2,std::string n_gram_delimiter = "_", int threads = 1) {
+    void build_n_grams(int min_n_gram = 2, int max_n_gram = 2, std::string n_gram_delimiter = "_", int threads = 1) {
 
       std::vector<std::string> insert_n_grams;
 

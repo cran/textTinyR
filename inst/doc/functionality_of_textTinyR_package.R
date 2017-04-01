@@ -951,11 +951,11 @@ matrix_sparsity(res_sp)
 #  
 #                                    language = "english",
 #  
-#                                    stemmer = "porter2_stemmer",
+#                                    stemmer = "ngram_sequential",
+#  
+#                                    stemmer_ngram = 3,
 #  
 #                                    threads = 1)
-#  
-#  
 #  
 #  
 
@@ -964,13 +964,13 @@ matrix_sparsity(res_sp)
 #  # example output :
 #  
 #  $token
-#    [1] "term"            "planet"          "ancient"         "tie"           "histori"  ...
+#    [1] "ter"          "planet"        "anci"         "ties"         "hist"  ...
 #  
-#    [9] "religion"        "planet"          "solar"           "system"        "nake"     ....
+#    [16] "early"        "cultu"        "divi"         "emissar"      "deit" ....
 #  
-#    [17] "cultur"          "divin"           "emissari"        "deiti"         "scientif" ...
+#    [31] "object"       "2006"         "internatio"   "astro"        "union" ...
 #  
-#    [25] "percept"         "planet"          "chang"           "incorpor"      "number" .....
+#    [46] "exclu"        "object"       "planet"        "mass"         "based"" ....
 #  .
 #  .
 #  .
@@ -1012,9 +1012,7 @@ matrix_sparsity(res_sp)
 #  
 #                                        language = "english",
 #  
-#                                        stemmer = "ngram_sequential",
-#  
-#                                        stemmer_ngram = 3,
+#                                        stemmer = "porter2_stemmer",
 #  
 #                                        threads = 1)
 #  
@@ -1024,15 +1022,15 @@ matrix_sparsity(res_sp)
 ## ---- eval = F, echo = T-------------------------------------------------
 #  
 #  $token
-#  [1] "term planet anci ties hist astro scien mythol relig planet solar system naked eye ....."
+#  [1] "term planet ancient tie histori astrolog scienc mytholog religion planet solar ....."
 #  
-#  [2] "planet bodies discove 1950 remain \"plane modern definit celest bodies ceres ....."
+#  [2] "planetari bodi discov 1950 remain planet modern definit celesti bodi cere palla ....."
 #  
-#  [3] "plan thou ptol orbit earth defer epicy moti idea plan orbit sun sugges times ....."
+#  [3] "planet thought ptolemi orbit earth defer epicycl motion idea planet orbit sun ....."
 #  
-#  [4] "time care analy pre-telesco observat data collec tycho brahe johan kepler  ....."
+#  [4] "time care analysi pre-telescop observ data collect tycho brahe johann kepler  ....."
 #  
-#  [5] "plan genera divi main types large low-dens giant plan smal rocky terrestri ....."
+#  [5] "planet general divid main type larg lowdens giant planet smaller rocki terrestri ....."
 #  
 #  
 #  attr(,"class")
@@ -1060,9 +1058,7 @@ matrix_sparsity(res_sp)
 #  
 #                                            language = "english",
 #  
-#                                            stemmer = "ngram_sequential",
-#  
-#                                            stemmer_ngram = 3,
+#                                            stemmer = "porter2_stemmer",
 #  
 #                                            threads = 1)
 #  
@@ -1073,13 +1069,13 @@ matrix_sparsity(res_sp)
 #  
 #  $token
 #  $token[[1]]
-#   [1] "term"       "planet"     "anci"       "ties"       "hist"       .....
+#   [1] "term"        "planet"    "ancient"  "tie"   "histori"   .....
 #  
 #  $token[[2]]
-#   [1] "planet"       "bodies"       "discove"      "1950"               .....
+#   [1] "planetari"    "bodi"     "discov"   "1950"   "remain"   .....
 #  
 #  $token[[3]]
-#   [1] "plan"      "thou"      "ptol"      "orbit"     "earth"           .....
+#   [1] "planet"       "thought"  "ptolemi"  "orbit"   "earth"   .....
 #  
 #  
 #  attr(,"class")

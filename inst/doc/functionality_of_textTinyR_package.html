@@ -12,7 +12,7 @@
 
 <meta name="author" content="Lampros Mouselimis" />
 
-<meta name="date" content="2017-03-27" />
+<meta name="date" content="2017-04-01" />
 
 <title>Functionality of the textTinyR package</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Functionality of the textTinyR package</h1>
 <h4 class="author"><em>Lampros Mouselimis</em></h4>
-<h4 class="date"><em>2017-03-27</em></h4>
+<h4 class="date"><em>2017-04-01</em></h4>
 
 
 
@@ -1054,6 +1054,10 @@ is_vec =<span class="st"> </span>init_lk$<span class="kw">look_up_table</span>(<
 
 <span class="kw">library</span>(textTinyR)</code></pre></div>
 <pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## ==========================================================================================================================================</code></pre>
+<pre><code>## The &quot;ngram_sequential&quot; and &quot;ngram_overlap&quot; stemmers were removed from the &quot;sparse_term_matrix&quot; and &quot;tokenize_transform_vec_docs&quot; functions</code></pre>
+<pre><code>## For details see the &quot;News.md&quot; file of version 1.0.5</code></pre>
+<pre><code>## ==========================================================================================================================================</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
 dsm =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">0</span>:<span class="dv">1</span>, <span class="dv">100</span>, <span class="dt">replace =</span> T), <span class="dv">10</span>, <span class="dv">10</span>)
 
@@ -1152,28 +1156,30 @@ res_txt =<span class="st"> </span><span class="kw">tokenize_transform_text</span
                                   
                                   <span class="dt">language =</span> <span class="st">&quot;english&quot;</span>,
                                   
-                                  <span class="dt">stemmer =</span> <span class="st">&quot;porter2_stemmer&quot;</span>, 
-                                  
+                                  <span class="dt">stemmer =</span> <span class="st">&quot;ngram_sequential&quot;</span>,
+                                      
+                                  <span class="dt">stemmer_ngram =</span> <span class="dv">3</span>,
+                                      
                                   <span class="dt">threads =</span> <span class="dv">1</span>)</code></pre></div>
 <p><br></p>
-<p>the output is a vector of <em>tokens</em> after the english stopwords were removed and the terms were stemmed (<em>porter2-stemming</em>),</p>
+<p>the output is a vector of <em>tokens</em> after the english stopwords were removed and the terms were stemmed (<em>ngram_sequential</em> of length 3),</p>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># example output :</span>
 
 $token
-  [<span class="dv">1</span>] <span class="st">&quot;term&quot;</span>            <span class="st">&quot;planet&quot;</span>          <span class="st">&quot;ancient&quot;</span>         <span class="st">&quot;tie&quot;</span>           <span class="st">&quot;histori&quot;</span>  ...
+  [<span class="dv">1</span>] <span class="st">&quot;ter&quot;</span>          <span class="st">&quot;planet&quot;</span>        <span class="st">&quot;anci&quot;</span>         <span class="st">&quot;ties&quot;</span>         <span class="st">&quot;hist&quot;</span>  ...
 
-  [<span class="dv">9</span>] <span class="st">&quot;religion&quot;</span>        <span class="st">&quot;planet&quot;</span>          <span class="st">&quot;solar&quot;</span>           <span class="st">&quot;system&quot;</span>        <span class="st">&quot;nake&quot;</span>     ....
+  [<span class="dv">16</span>] <span class="st">&quot;early&quot;</span>        <span class="st">&quot;cultu&quot;</span>        <span class="st">&quot;divi&quot;</span>         <span class="st">&quot;emissar&quot;</span>      <span class="st">&quot;deit&quot;</span> ....
 
-  [<span class="dv">17</span>] <span class="st">&quot;cultur&quot;</span>          <span class="st">&quot;divin&quot;</span>           <span class="st">&quot;emissari&quot;</span>        <span class="st">&quot;deiti&quot;</span>         <span class="st">&quot;scientif&quot;</span> ...  
+  [<span class="dv">31</span>] <span class="st">&quot;object&quot;</span>       <span class="st">&quot;2006&quot;</span>         <span class="st">&quot;internatio&quot;</span>   <span class="st">&quot;astro&quot;</span>        <span class="st">&quot;union&quot;</span> ...  
 
-  [<span class="dv">25</span>] <span class="st">&quot;percept&quot;</span>         <span class="st">&quot;planet&quot;</span>          <span class="st">&quot;chang&quot;</span>           <span class="st">&quot;incorpor&quot;</span>      <span class="st">&quot;number&quot;</span> .....
-.
-.
-.
+  [<span class="dv">46</span>] <span class="st">&quot;exclu&quot;</span>        <span class="st">&quot;object&quot;</span>       <span class="st">&quot;planet&quot;</span>        <span class="st">&quot;mass&quot;</span>         <span class="st">&quot;based&quot;&quot; ....</span>
+<span class="st">.</span>
+<span class="st">.</span>
+<span class="st">.</span>
 
-<span class="kw">attr</span>(,<span class="st">&quot;class&quot;</span>)
-[<span class="dv">1</span>] <span class="st">&quot;tokenization and transformation&quot;</span></code></pre></div>
+<span class="st">attr(,&quot;</span>class<span class="st">&quot;)</span>
+<span class="st">[1] &quot;</span>tokenization and transformation<span class="st">&quot;</span></code></pre></div>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#----------------------------</span>
 <span class="co"># tokenize_transform_vec_docs</span>
@@ -1205,24 +1211,22 @@ res_dct =<span class="st"> </span><span class="kw">tokenize_transform_vec_docs</
                                       
                                       <span class="dt">language =</span> <span class="st">&quot;english&quot;</span>,
                                       
-                                      <span class="dt">stemmer =</span> <span class="st">&quot;ngram_sequential&quot;</span>,
-                                      
-                                      <span class="dt">stemmer_ngram =</span> <span class="dv">3</span>,
-                                      
+                                      <span class="dt">stemmer =</span> <span class="st">&quot;porter2_stemmer&quot;</span>, 
+                                  
                                       <span class="dt">threads =</span> <span class="dv">1</span>)</code></pre></div>
 <p><br></p>
-<p>the output is a vector of <em>transformed documents</em> after the english stopwords were removed and the terms were stemmed (<em>ngram_sequential</em> of length 3),</p>
+<p>the output is a vector of <em>transformed documents</em> after the english stopwords were removed and the terms were stemmed (<em>porter2-stemming</em>),</p>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">$token
-[<span class="dv">1</span>] <span class="st">&quot;term planet anci ties hist astro scien mythol relig planet solar system naked eye .....&quot;</span>
+[<span class="dv">1</span>] <span class="st">&quot;term planet ancient tie histori astrolog scienc mytholog religion planet solar .....&quot;</span>
 
-[<span class="dv">2</span>] <span class="st">&quot;planet bodies discove 1950 remain </span><span class="ch">\&quot;</span><span class="st">plane modern definit celest bodies ceres .....&quot;</span>
+[<span class="dv">2</span>] <span class="st">&quot;planetari bodi discov 1950 remain planet modern definit celesti bodi cere palla .....&quot;</span>
 
-[<span class="dv">3</span>] <span class="st">&quot;plan thou ptol orbit earth defer epicy moti idea plan orbit sun sugges times .....&quot;</span>
+[<span class="dv">3</span>] <span class="st">&quot;planet thought ptolemi orbit earth defer epicycl motion idea planet orbit sun .....&quot;</span>
 
-[<span class="dv">4</span>] <span class="st">&quot;time care analy pre-telesco observat data collec tycho brahe johan kepler  .....&quot;</span>
+[<span class="dv">4</span>] <span class="st">&quot;time care analysi pre-telescop observ data collect tycho brahe johann kepler  .....&quot;</span>
 
-[<span class="dv">5</span>] <span class="st">&quot;plan genera divi main types large low-dens giant plan smal rocky terrestri .....&quot;</span>
+[<span class="dv">5</span>] <span class="st">&quot;planet general divid main type larg lowdens giant planet smaller rocki terrestri .....&quot;</span>
 
 
 <span class="kw">attr</span>(,<span class="st">&quot;class&quot;</span>)
@@ -1248,21 +1252,19 @@ res_dct_tok =<span class="st"> </span><span class="kw">tokenize_transform_vec_do
                                           
                                           <span class="dt">language =</span> <span class="st">&quot;english&quot;</span>,
                                           
-                                          <span class="dt">stemmer =</span> <span class="st">&quot;ngram_sequential&quot;</span>,
-                                          
-                                          <span class="dt">stemmer_ngram =</span> <span class="dv">3</span>,
-                                          
+                                          <span class="dt">stemmer =</span> <span class="st">&quot;porter2_stemmer&quot;</span>, 
+                                  
                                           <span class="dt">threads =</span> <span class="dv">1</span>)</code></pre></div>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">$token
 $token[[<span class="dv">1</span>]]
- [<span class="dv">1</span>] <span class="st">&quot;term&quot;</span>       <span class="st">&quot;planet&quot;</span>     <span class="st">&quot;anci&quot;</span>       <span class="st">&quot;ties&quot;</span>       <span class="st">&quot;hist&quot;</span>       ..... 
+ [<span class="dv">1</span>] <span class="st">&quot;term&quot;</span>        <span class="st">&quot;planet&quot;</span>    <span class="st">&quot;ancient&quot;</span>  <span class="st">&quot;tie&quot;</span>   <span class="st">&quot;histori&quot;</span>   ..... 
 
 $token[[<span class="dv">2</span>]]
- [<span class="dv">1</span>] <span class="st">&quot;planet&quot;</span>       <span class="st">&quot;bodies&quot;</span>       <span class="st">&quot;discove&quot;</span>      <span class="st">&quot;1950&quot;</span>               .....    
+ [<span class="dv">1</span>] <span class="st">&quot;planetari&quot;</span>    <span class="st">&quot;bodi&quot;</span>     <span class="st">&quot;discov&quot;</span>   <span class="st">&quot;1950&quot;</span>   <span class="st">&quot;remain&quot;</span>   .....    
 
 $token[[<span class="dv">3</span>]]
- [<span class="dv">1</span>] <span class="st">&quot;plan&quot;</span>      <span class="st">&quot;thou&quot;</span>      <span class="st">&quot;ptol&quot;</span>      <span class="st">&quot;orbit&quot;</span>     <span class="st">&quot;earth&quot;</span>           .....   
+ [<span class="dv">1</span>] <span class="st">&quot;planet&quot;</span>       <span class="st">&quot;thought&quot;</span>  <span class="st">&quot;ptolemi&quot;</span>  <span class="st">&quot;orbit&quot;</span>   <span class="st">&quot;earth&quot;</span>   .....   
 
 
 <span class="kw">attr</span>(,<span class="st">&quot;class&quot;</span>)
@@ -1281,11 +1283,11 @@ $token[[<span class="dv">3</span>]]
 <ul>
 <li>The <strong>stemmer</strong> parameter can take as input one of the <strong>porter2_stemmer</strong>, <strong>ngram_sequential</strong> or <strong>ngram_overlap</strong>.
 <ul>
-<li>The <a href="https://github.com/smassung/porter2_stemmer"><em>porter2_stemmer</em></a> is a C++ implementation of the <a href="http://snowball.tartarus.org/algorithms/english/stemmer.html">snowball-porter2</a> stemming algorithm.</li>
-<li>On the other hand, <em>n-gram stemming</em> is <em>“language independent”</em> and supported by the <strong>ngram_sequential</strong> and <strong>ngram_overlap</strong> functions.
+<li>The <a href="https://github.com/smassung/porter2_stemmer"><em>porter2_stemmer</em></a> is a C++ implementation of the <a href="http://snowball.tartarus.org/algorithms/english/stemmer.html">snowball-porter2</a> stemming algorithm. The <em>porter2_stemmer</em> applies to all functions of the <em>textTinyR</em> package.</li>
+<li>On the other hand, <em>n-gram stemming</em> is <em>“language independent”</em> and supported by the <strong>ngram_sequential</strong> and <strong>ngram_overlap</strong> functions. The <em>n-gram stemming</em> applies to all functions except for the <em>sparse_term_matrix</em> and <em>tokenize_transform_vec_docs</em> functions of the <em>textTinyR</em> package.
 <ul>
 <li><a href="http://clef.isti.cnr.it/2007/working_notes/mcnameeCLEF2007.pdf"><em>ngram_overlap</em></a> : The ngram_overlap stemming method is based on N-Gram Morphemes for Retrieval, Paul McNamee and James Mayfield</li>
-<li><a href="https://arxiv.org/pdf/1312.4824.pdf"><em>ngram_sequential</em></a> : The ngram_sequential stemming method is a modified version based on Generation, Implementation and Appraisal of an N-gram based Stemming Algorithm, B. P. Pande, Pawan Tamta, H. S. Dhami</li>
+<li><a href="https://arxiv.org/pdf/1312.4824.pdf"><em>ngram_sequential</em></a> : The ngram_sequential stemming method is a modified version based on Generation, Implementation and Appraisal of an N-gram based Stemming Algorithm, B. P. Pande, Pawan Tamta, H. S. Dhami.</li>
 </ul></li>
 </ul></li>
 </ul>

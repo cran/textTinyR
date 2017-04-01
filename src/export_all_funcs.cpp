@@ -229,6 +229,7 @@ std::vector<std::string> res_token_vector(std::vector<std::string> &VEC, std::ve
 
                                                         bool verbose = false, std::string vocabulary_path = "") {
 
+
   #ifdef _OPENMP
   omp_set_num_threads(threads);
   #endif
@@ -243,6 +244,8 @@ std::vector<std::string> res_token_vector(std::vector<std::string> &VEC, std::ve
   #pragma omp parallel for schedule(static)
   #endif
   for (unsigned long long f = 0; f < VEC.size(); f++) {
+
+    //std::cout << f << std::endl;
 
     std::vector<std::string> tmp_vec = bgf.res_TOKEN(VEC[f], language, language_spec, LOCALE_UTF, false, '\t', max_num_char, remove_char, cpp_to_lower, cpp_to_upper,
 
