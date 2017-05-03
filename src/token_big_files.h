@@ -757,9 +757,7 @@ class big_files {
 
                                  int min_num_char = 1, std::string stemmer = "NULL", int min_n_gram = 1, int max_n_gram = 1, int skip_n_gram = 1, int skip_distance = 0,
 
-                                 std::string n_gram_delimiter = " ", int stemmer_ngram = 4, double stemmer_gamma = 0.0, int stemmer_truncate = 3, int stemmer_batches = 1,
-
-                                 int threads = 1, bool verbose = false) {
+                                 std::string n_gram_delimiter = " ", int threads = 1, bool verbose = false) {
 
       arma::wall_clock timer;
 
@@ -830,9 +828,7 @@ class big_files {
 
                                                remove_punctuation_vector, cpp_remove_numbers, cpp_trim_token, cpp_tokenization_function, cpp_string_separator, cpp_remove_stopwords,
 
-                                               min_num_char, stemmer, min_n_gram, max_n_gram, skip_n_gram, skip_distance, n_gram_delimiter, "NULL", "", stemmer_ngram,
-
-                                               stemmer_gamma, stemmer_truncate, stemmer_batches, threads, false, false, "output_token.txt", "");
+                                               min_num_char, stemmer, min_n_gram, max_n_gram, skip_n_gram, skip_distance, n_gram_delimiter, "NULL", "", 4, 0.0, 3, 1, threads, false, false, "output_token.txt", "");
 
             for (unsigned int k = 0; k < tmp_vec.size(); k++) {
 

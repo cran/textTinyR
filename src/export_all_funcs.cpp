@@ -472,9 +472,7 @@ void vocabulary_counts(std::string input_path_file, std::string start_query, std
 
                        int min_num_char = 1, std::string stemmer = "NULL", int min_n_gram = 1, int max_n_gram = 1, int skip_n_gram = 1, int skip_distance = 0,
 
-                       std::string n_gram_delimiter = " ", int stemmer_ngram = 4, double stemmer_gamma = 0.0, int stemmer_truncate = 3, int stemmer_batches = 1,
-
-                       int threads = 1, bool verbose = false) {
+                       std::string n_gram_delimiter = " ", int threads = 1, bool verbose = false) {
 
   big_files bgf;
 
@@ -484,7 +482,7 @@ void vocabulary_counts(std::string input_path_file, std::string start_query, std
 
                                      cpp_tokenization_function, cpp_string_separator, cpp_remove_stopwords, min_num_char, stemmer, min_n_gram, max_n_gram, skip_n_gram, skip_distance,
 
-                                     n_gram_delimiter, stemmer_ngram, stemmer_gamma, stemmer_truncate, stemmer_batches, threads, verbose);
+                                     n_gram_delimiter, threads, verbose);
 }
 
 

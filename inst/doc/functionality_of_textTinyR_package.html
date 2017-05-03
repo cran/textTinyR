@@ -12,7 +12,7 @@
 
 <meta name="author" content="Lampros Mouselimis" />
 
-<meta name="date" content="2017-04-01" />
+<meta name="date" content="2017-05-03" />
 
 <title>Functionality of the textTinyR package</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Functionality of the textTinyR package</h1>
 <h4 class="author"><em>Lampros Mouselimis</em></h4>
-<h4 class="date"><em>2017-04-01</em></h4>
+<h4 class="date"><em>2017-05-03</em></h4>
 
 
 
@@ -1054,10 +1054,6 @@ is_vec =<span class="st"> </span>init_lk$<span class="kw">look_up_table</span>(<
 
 <span class="kw">library</span>(textTinyR)</code></pre></div>
 <pre><code>## Loading required package: Matrix</code></pre>
-<pre><code>## ==========================================================================================================================================</code></pre>
-<pre><code>## The &quot;ngram_sequential&quot; and &quot;ngram_overlap&quot; stemmers were removed from the &quot;sparse_term_matrix&quot; and &quot;tokenize_transform_vec_docs&quot; functions</code></pre>
-<pre><code>## For details see the &quot;News.md&quot; file of version 1.0.5</code></pre>
-<pre><code>## ==========================================================================================================================================</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
 dsm =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">0</span>:<span class="dv">1</span>, <span class="dv">100</span>, <span class="dt">replace =</span> T), <span class="dv">10</span>, <span class="dv">10</span>)
 
@@ -1322,7 +1318,7 @@ w2 =<span class="st"> 'word_two'</span>
 n =<span class="st"> </span><span class="dv">2</span>
 
 <span class="kw">dice_distance</span>(w1, w2, <span class="dt">n_grams =</span> n)</code></pre></div>
-<pre><code>## [1] 0.2857143</code></pre>
+<pre><code>## [1] 0.4117647</code></pre>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#---------------------------------------</span>
 <span class="co"># levenshtein distance between two words</span>

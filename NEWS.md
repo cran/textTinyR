@@ -1,4 +1,10 @@
 
+## textTinyR 1.0.6
+
+I removed the *ngram_sequential* and *ngram_overlap* stemmers from the *vocabulary_parser* function.
+I fixed a bug in the *char_n_grams* of the *token_stats.h* source file.
+
+
 ## textTinyR 1.0.5
 
 I removed the *ngram_sequential* and *ngram_overlap* stemmers from the *sparse_term_matrix* and *tokenize_transform_vec_docs* functions. I overlooked the fact that the n-gram stemming is based on the whole corpus and not on

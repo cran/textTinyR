@@ -39,7 +39,7 @@ extern SEXP textTinyR_sp_means(SEXP, SEXP);
 extern SEXP textTinyR_sp_sums(SEXP, SEXP);
 extern SEXP textTinyR_sparsity_float(SEXP);
 extern SEXP textTinyR_tf_idf_exclude(SEXP, SEXP);
-extern SEXP textTinyR_vocabulary_counts(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP textTinyR_vocabulary_counts(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP textTinyR_vocabulary_counts_big_tokenize(SEXP, SEXP, SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
@@ -74,7 +74,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"textTinyR_sp_sums",                        (DL_FUNC) &textTinyR_sp_sums,                         2},
     {"textTinyR_sparsity_float",                 (DL_FUNC) &textTinyR_sparsity_float,                  1},
     {"textTinyR_tf_idf_exclude",                 (DL_FUNC) &textTinyR_tf_idf_exclude,                  2},
-    {"textTinyR_vocabulary_counts",              (DL_FUNC) &textTinyR_vocabulary_counts,              34},
+    {"textTinyR_vocabulary_counts",              (DL_FUNC) &textTinyR_vocabulary_counts,              30},
     {"textTinyR_vocabulary_counts_big_tokenize", (DL_FUNC) &textTinyR_vocabulary_counts_big_tokenize,  4},
     {NULL, NULL, 0}
 };

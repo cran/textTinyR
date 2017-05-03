@@ -10,7 +10,7 @@
  *
  * @Notes: the main class for tokenization and transformation of text files
  *
- * @last_modified: April 2017
+ * @last_modified: March 2017
  *
  **/
 
@@ -539,7 +539,15 @@ class TOKEN {
       for (unsigned int i = 0; i < v.size(); i++) {
 
         v[i] = Porter2Stemmer::stem(v[i]);
+
+        // std::string tmp = Porter2Stemmer::stem(v[i]);
+        //
+        // std::cout << tmp << std::endl;
+        //
+        // v[i] = tmp;
       }
+
+      //std::cout << "----------------------" << std::endl;
     }
 
 
@@ -571,7 +579,7 @@ class TOKEN {
 
       int vec_size = vec.size() - n_gram + 1;
 
-      if (vec_size < 0) {                            // bug : textTinyR 1.0.5 version
+      if (vec_size < 0) {
 
         vec_size = 0;
       }
@@ -610,6 +618,12 @@ class TOKEN {
 
       std::vector<std::string> insert_n_grams;
 
+      // for (int num = 0; num < v.size(); num++) {
+      //
+      //   std::cout << v[num] << std::endl;
+      // }
+      // std::cout << "================================" << std::endl;
+
       for (int i = min_n_gram; i < max_n_gram + 1; i++) {
 
         std::vector<std::string> tmp_vec = secondary_n_grams(v, i, n_gram_delimiter, threads);
@@ -618,6 +632,12 @@ class TOKEN {
       }
 
       v = insert_n_grams;
+
+      // for (int num = 0; num < v.size(); num++) {
+      //
+      //   std::cout << v[num] << std::endl;
+      // }
+      // std::cout << "-----------------------------" << std::endl;
 
       insert_n_grams.shrink_to_fit();
     }

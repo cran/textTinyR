@@ -1,8 +1,8 @@
 Package: textTinyR
 Type: Package
 Title: Text Processing for Small or Big Data Files
-Version: 1.0.5
-Date: 2017-04-01
+Version: 1.0.6
+Date: 2017-05-03
 Author: Lampros Mouselimis <mouselimislampros@gmail.com>
 Maintainer: Lampros Mouselimis <mouselimislampros@gmail.com>
 BugReports: https://github.com/mlampros/textTinyR/issues
@@ -24,6 +24,6 @@ Suggests: testthat, covr, knitr, rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
 NeedsCompilation: yes
-Packaged: 2017-04-01 13:56:22 UTC; lampros
+Packaged: 2017-05-03 15:58:26 UTC; lampros
 Repository: CRAN
-Date/Publication: 2017-04-01 21:20:59 UTC
+Date/Publication: 2017-05-03 16:20:01 UTC

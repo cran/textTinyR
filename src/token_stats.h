@@ -497,11 +497,13 @@ class TOKEN_stats {
     std::vector<std::string> char_n_grams(std::string &x, int n_grams, bool return_word = false, bool add_prefix = false) {
 
       int x_size = x.size();
-      
+
       if (add_prefix) {
 
         x = "_" + x + "_";
       }
+
+      int n_size = add_prefix ? x_size - n_grams + 3 : x_size - n_grams + 1;
 
       if (n_grams >= x_size) {
 
@@ -516,8 +518,6 @@ class TOKEN_stats {
       }
 
       else {
-
-        int n_size = x_size - n_grams + 1;
 
         std::vector<std::string> out(n_size);
 
