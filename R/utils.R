@@ -1686,6 +1686,8 @@ cosine_distance = function(sentence1, sentence2, split_separator = " ") {
 #'
 #' the \emph{Term_Matrix} function takes either a character vector of strings or a text file and after tokenization and transformation returns either a document-term-matrix or a term-document-matrix
 #'
+#' the \emph{triplet_data} function returns the triplet data, which is used internally (in c++), to construct the Term Matrix. The triplet data could be usefull for secondary purposes, such as in word vector representations.
+#'
 #' the \emph{Term_Matrix_Adjust} function removes sparse terms from a sparse matrix using a sparsity threshold
 #'
 #' the \emph{term_associations} function finds the associations between the given terms (Terms argument) and all the other terms in the corpus by calculating their correlation. There is also the option to keep a specific number of terms from the output table using the \emph{keep_terms} parameter.
@@ -1706,6 +1708,10 @@ cosine_distance = function(sentence1, sentence2, split_separator = " ") {
 #'  \item{\code{--------------}}{}
 #'
 #'  \item{\code{Term_Matrix(sort_terms = FALSE, to_lower = FALSE, to_upper = FALSE, utf_locale = "", remove_char = "", remove_punctuation_string = FALSE, remove_punctuation_vector = FALSE, remove_numbers = FALSE, trim_token = FALSE, split_string = FALSE, split_separator = " .,;:()?!", remove_stopwords = FALSE, language = "english", min_num_char = 1, max_num_char = Inf, stemmer = NULL, min_n_gram = 1, max_n_gram = 1, skip_n_gram = 1, skip_distance = 0, n_gram_delimiter = " ", print_every_rows = 1000, normalize = NULL, tf_idf = FALSE, threads = 1, verbose = FALSE)}}{}
+#'
+#'  \item{\code{--------------}}{}
+#'
+#'  \item{\code{triplet_data()}}{}
 #'
 #'  \item{\code{--------------}}{}
 #'
@@ -1744,6 +1750,11 @@ cosine_distance = function(sentence1, sentence2, split_separator = " ") {
 #'
 #' #                stemmer = 'porter2_stemmer', threads = 1 )
 #'
+#' #---------------
+#' # triplet data :
+#' #---------------
+#'
+#' # sm$triplet_data()
 #'
 #' #-------------------------
 #' # removal of sparse terms:
@@ -1999,6 +2010,24 @@ sparse_term_matrix <- R6::R6Class("sparse_term_matrix",
                                       }
                                     },
 
+
+                                    #-----------------------------------------------------------------------------------------------------
+                                    # returns the triplet data [ the triplet data is used internally in c++ to construct the Term Matrix ]
+                                    #-----------------------------------------------------------------------------------------------------
+
+                                    triplet_data = function() {
+
+                                      if (is.null(private$tm_column_indices) || is.null(private$tm_row_indices) || is.null(private$tm_docs_counts) || is.null(private$save_terms)) {
+
+                                        stop("before calling the 'triplet_data' method you should run the 'Term_Matrix' method", call. = F)
+                                      }
+
+                                      lst = list(COLS = private$tm_column_indices, ROWS = private$tm_row_indices,
+
+                                                 COUNTS = private$tm_docs_counts, TERMS = private$save_terms)
+
+                                      return(lst)
+                                    },
 
 
                                     #-----------------------------------------------------------------

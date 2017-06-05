@@ -21,6 +21,22 @@ docs = as.vector(read.csv(PATH, header = FALSE, stringsAsFactors = F)[, 1])
 context('term matrix class')
 
 
+
+#--------------------------------
+# triplet-data [ error handling ]
+#--------------------------------
+
+
+testthat::test_that("in case that the 'triplet_data' method is called before the 'Term_Matrix' method is run, it returns an error", {
+
+  init = sparse_term_matrix$new(vector_data = docs, file_data = NULL, document_term_matrix = TRUE)
+
+  testthat::expect_error( init$triplet_data() )
+})
+
+
+
+
 #----------------------------------
 # initialization [ error handling ]
 #----------------------------------

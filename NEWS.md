@@ -1,4 +1,9 @@
 
+## textTinyR 1.0.7
+
+I added the triplet_data() method in the sparse_term_matrix R6 class
+
+
 ## textTinyR 1.0.6
 
 I removed the *ngram_sequential* and *ngram_overlap* stemmers from the *vocabulary_parser* function.
