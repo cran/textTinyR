@@ -1719,7 +1719,7 @@ cosine_distance = function(sentence1, sentence2, split_separator = " ") {
 #'
 #'  \item{\code{--------------}}{}
 #'
-#'  \item{\code{term_associations(Terms = NULL, keep_terms = NULL, threads = 1, verbose = FALSE)}}{}
+#'  \item{\code{term_associations(Terms = NULL, keep_terms = NULL, verbose = FALSE)}}{}
 #'
 #'  \item{\code{--------------}}{}
 #'
@@ -2111,7 +2111,7 @@ sparse_term_matrix <- R6::R6Class("sparse_term_matrix",
                                     # find associations between terms
                                     #---------------------------------
 
-                                    term_associations = function(Terms = NULL, keep_terms = NULL, threads = 1, verbose = FALSE) {
+                                    term_associations = function(Terms = NULL, keep_terms = NULL, verbose = FALSE) {
 
                                       if (is.null(private$tm_column_indices)) stop("first run the Term_Matrix method")
                                       if (!inherits(Terms, c('character', 'vector'))) stop("the Terms parameter should be a character vector")
@@ -2120,7 +2120,6 @@ sparse_term_matrix <- R6::R6Class("sparse_term_matrix",
                                         if (!inherits(keep_terms, c('numeric', 'integer'))) stop("the keep_terms parameter should be of type numeric")
                                         if (keep_terms < 1) stop("the minimum number of terms to keep is 1")}
                                       if (is.null(keep_terms)) keep_terms = 0
-                                      if (threads < 1) stop("the number of threads should be greater or equal to 1")
                                       if (!is.logical(verbose)) stop("the verbose parameter should be either TRUE or FALSE")
 
                                       if (!private$flag_Adjust) {
@@ -2190,7 +2189,7 @@ sparse_term_matrix <- R6::R6Class("sparse_term_matrix",
 
                                                                      mult_target_var = numeric(0), keepTerms = keep_terms, target_var = single_trgt_idx,
 
-                                                                     normalize_TF = private$normlz_tf, tf_IDF = private$TF_idf, threads, verbose)}
+                                                                     normalize_TF = private$normlz_tf, tf_IDF = private$TF_idf, verbose)}
 
                                       else {
 
@@ -2198,7 +2197,7 @@ sparse_term_matrix <- R6::R6Class("sparse_term_matrix",
 
                                                                      mult_target_var = single_trgt_idx, keepTerms = keep_terms, target_var = -1,
 
-                                                                     normalize_TF = private$normlz_tf, tf_IDF = private$TF_idf, threads, verbose)
+                                                                     normalize_TF = private$normlz_tf, tf_IDF = private$TF_idf, verbose)
                                       }
 
 

@@ -117,13 +117,14 @@ Stemming of the english language is done using the porter2-stemmer, for details 
 
  \item{\code{--------------}}{}
 
- \item{\code{term_associations(Terms = NULL, keep_terms = NULL, threads = 1, verbose = FALSE)}}{}
+ \item{\code{term_associations(Terms = NULL, keep_terms = NULL, verbose = FALSE)}}{}
 
  \item{\code{--------------}}{}
 
  \item{\code{most_frequent_terms(keep_terms = NULL, threads = 1, verbose = FALSE)}}{}
  }
 }
+
 \examples{
 
 library(textTinyR)
@@ -174,4 +175,3 @@ library(textTinyR)
 # sm$most_frequent_terms(keep_terms = 10, threads = 1)
 }
 \keyword{datasets}
-

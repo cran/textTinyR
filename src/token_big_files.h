@@ -9,7 +9,7 @@
  *
  * @Notes: Big text file tokenization and transformation
  *
- * @last-modified: January 2017
+ * @last-modified: October 2017
  *
  **/
 
@@ -38,6 +38,10 @@ class big_files {
     BATCH_TOKEN btk;
 
     SORT_2DIMENSIONAL_VEC<std::string, long long> s2dv;
+    
+    std::string retrn_inner_str;
+    
+    std::vector<std::string> retrn_inner_lst;
 
   public:
 
@@ -515,7 +519,7 @@ class big_files {
           }
         }
 
-        t.TOKENIZER(cpp_string_separator, remove_punctuation_vector, threads);
+        t.TOKENIZER(cpp_string_separator, remove_punctuation_vector);
       }
 
       if (cpp_remove_stopwords) {
@@ -1100,6 +1104,65 @@ class big_files {
         Rcpp::Rcout << "It took " << n / 60.0 << " minutes to complete tokenization" << std::endl;
       }
     }
+    
+    
+    // inner function for 'res_token_vector' [ see 'export_all_funcs.cpp' , non-template to address the ASAN errors ]
+    //
+    
+    std::string inner_res_tok_vec(unsigned long long f, std::vector<std::string>& VEC, std::vector<std::string>& language, std::string& language_spec, std::string& LOCALE_UTF, int max_num_char,
+                           
+                                   std::string& remove_char, bool cpp_to_lower, bool cpp_to_upper, bool cpp_remove_punctuation, bool remove_punctuation_vector, bool cpp_remove_numbers, 
+                                   
+                                   bool cpp_trim_token, bool cpp_tokenization_function, std::string& cpp_string_separator, bool cpp_remove_stopwords, int min_num_char, std::string& stemmer, 
+                                   
+                                   int min_n_gram, int max_n_gram, int skip_n_gram, int skip_distance, std::string& n_gram_delimiter, std::string& concat_delimiter, std::string& path_2file, 
+                                   
+                                   int stemmer_ngram, double stemmer_gamma, int stemmer_truncate, int stemmer_batches, std::string& vocabulary_path, bool FLAG_write_file) {
+      
+      
+      std::vector<std::string> tmp_vec = res_TOKEN(VEC[f], language, language_spec, LOCALE_UTF, false, '\t', max_num_char, remove_char, cpp_to_lower, cpp_to_upper,
+                                                   
+                                                   cpp_remove_punctuation, remove_punctuation_vector, cpp_remove_numbers, cpp_trim_token, cpp_tokenization_function,
+                                                   
+                                                   cpp_string_separator, cpp_remove_stopwords, min_num_char, stemmer, min_n_gram, max_n_gram, skip_n_gram, skip_distance,
+                                                   
+                                                   n_gram_delimiter, concat_delimiter, path_2file, stemmer_ngram, stemmer_gamma, stemmer_truncate, stemmer_batches,
+                                                   
+                                                   1, false, FLAG_write_file, "output_token.txt", vocabulary_path, true);
+      
+      std::string out = boost::algorithm::join(tmp_vec, " ");
+      
+      return out;
+    }
+    
+    
+    // inner function for 'res_token_list' [ see 'export_all_funcs.cpp' , non-template to address the ASAN errors ]
+    //
+    
+    std::vector<std::string> inner_res_tok_list(unsigned long long f, std::vector<std::string>& VEC, std::vector<std::string>& language, std::string& language_spec, std::string& LOCALE_UTF, int max_num_char,
+                                  
+                                                std::string& remove_char, bool cpp_to_lower, bool cpp_to_upper, bool cpp_remove_punctuation, bool remove_punctuation_vector, bool cpp_remove_numbers, 
+                                                
+                                                bool cpp_trim_token, bool cpp_tokenization_function, std::string& cpp_string_separator, bool cpp_remove_stopwords, int min_num_char, std::string& stemmer, 
+                                                
+                                                int min_n_gram, int max_n_gram, int skip_n_gram, int skip_distance, std::string& n_gram_delimiter, std::string& concat_delimiter, std::string& path_2file, 
+                                                
+                                                int stemmer_ngram, double stemmer_gamma, int stemmer_truncate, int stemmer_batches, std::string& vocabulary_path, bool FLAG_write_file) {
+      
+      
+      std::vector<std::string> tmp_vec = res_TOKEN(VEC[f], language, language_spec, LOCALE_UTF, false, '\t', max_num_char, remove_char, cpp_to_lower, cpp_to_upper,
+                                                   
+                                                   cpp_remove_punctuation, remove_punctuation_vector, cpp_remove_numbers, cpp_trim_token, cpp_tokenization_function,
+                                                   
+                                                   cpp_string_separator, cpp_remove_stopwords, min_num_char, stemmer, min_n_gram, max_n_gram, skip_n_gram, skip_distance,
+                                                   
+                                                   n_gram_delimiter, concat_delimiter, path_2file, stemmer_ngram, stemmer_gamma, stemmer_truncate, stemmer_batches,
+                                                   
+                                                   1, false, FLAG_write_file, "output_token.txt", vocabulary_path, true);
+      
+      return tmp_vec;
+    }
+    
 
     ~big_files() { }
 };

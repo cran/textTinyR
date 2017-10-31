@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -12,7 +12,7 @@
 
 <meta name="author" content="Lampros Mouselimis" />
 
-<meta name="date" content="2017-06-05" />
+<meta name="date" content="2017-10-31" />
 
 <title>Functionality of the textTinyR package</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Functionality of the textTinyR package</h1>
 <h4 class="author"><em>Lampros Mouselimis</em></h4>
-<h4 class="date"><em>2017-06-05</em></h4>
+<h4 class="date"><em>2017-10-31</em></h4>
 
 
 
@@ -223,79 +223,79 @@ subset =<span class="st"> </span><span class="kw">read_rows</span>(<span class="
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># data subset : subs_output.txt</span>
 
 
-&lt;mediawiki xmlns=<span class="st">&quot;http://www.mediawiki.org/xml/export-0.10/&quot;</span> xmlns:xsi=<span class="st">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> xsi:schemaLocation=<span class="st">&quot;http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd&quot;</span> version=<span class="st">&quot;0.10&quot;</span> xml:lang=<span class="st">&quot;en&quot;</span>&gt;
-<span class="st">  </span><span class="er">&lt;</span>siteinfo&gt;
-<span class="st">    </span><span class="er">&lt;</span>sitename&gt;Wikipedia&lt;<span class="er">/</span>sitename&gt;
-<span class="st">    </span><span class="er">&lt;</span>dbname&gt;enwiki&lt;<span class="er">/</span>dbname&gt;
-<span class="st">    </span><span class="er">&lt;</span>base&gt;https:<span class="er">//</span>en.wikipedia.org/wiki/Main_Page&lt;<span class="er">/</span>base&gt;
-<span class="st">    </span><span class="er">&lt;</span>generator&gt;MediaWiki <span class="fl">1.28.0</span>-wmf<span class="fl">.23</span>&lt;<span class="er">/</span>generator&gt;
-<span class="st">    </span><span class="er">&lt;</span>case&gt;first-letter&lt;<span class="er">/</span>case&gt;
-<span class="st">    </span><span class="er">&lt;</span>namespaces&gt;
-<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;-2&quot;</span> case=<span class="st">&quot;first-letter&quot;</span>&gt;Media&lt;<span class="er">/</span>namespace&gt;
-<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;-1&quot;</span> case=<span class="st">&quot;first-letter&quot;</span>&gt;Special&lt;<span class="er">/</span>namespace&gt;
-<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;0&quot;</span> case=<span class="st">&quot;first-letter&quot;</span> /<span class="er">&gt;</span>
-<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;1&quot;</span> case=<span class="st">&quot;first-letter&quot;</span>&gt;Talk&lt;<span class="er">/</span>namespace&gt;
-<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;2&quot;</span> case=<span class="st">&quot;first-letter&quot;</span>&gt;User&lt;<span class="er">/</span>namespace&gt;
-<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;3&quot;</span> case=<span class="st">&quot;first-letter&quot;</span>&gt;User talk&lt;<span class="er">/</span>namespace&gt;
-<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;4&quot;</span> case=<span class="st">&quot;first-letter&quot;</span>&gt;Wikipedia&lt;<span class="er">/</span>namespace&gt;
-<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;5&quot;</span> case=<span class="st">&quot;first-letter&quot;</span>&gt;Wikipedia talk&lt;<span class="er">/</span>namespace&gt;
-<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;6&quot;</span> case=<span class="st">&quot;first-letter&quot;</span>&gt;File&lt;<span class="er">/</span>namespace&gt;
-<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;7&quot;</span> case=<span class="st">&quot;first-letter&quot;</span>&gt;File talk&lt;<span class="er">/</span>namespace&gt;
-<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;8&quot;</span> case=<span class="st">&quot;first-letter&quot;</span>&gt;MediaWiki&lt;<span class="er">/</span>namespace&gt;
+<span class="op">&lt;</span>mediawiki xmlns=<span class="st">&quot;http://www.mediawiki.org/xml/export-0.10/&quot;</span> xmlns<span class="op">:</span>xsi=<span class="st">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> xsi<span class="op">:</span>schemaLocation=<span class="st">&quot;http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd&quot;</span> version=<span class="st">&quot;0.10&quot;</span> xml<span class="op">:</span>lang=<span class="st">&quot;en&quot;</span><span class="op">&gt;</span>
+<span class="st">  </span><span class="er">&lt;</span>siteinfo<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>sitename<span class="op">&gt;</span>Wikipedia<span class="op">&lt;</span><span class="er">/</span>sitename<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>dbname<span class="op">&gt;</span>enwiki<span class="op">&lt;</span><span class="er">/</span>dbname<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>base<span class="op">&gt;</span>https<span class="op">:</span><span class="er">//</span>en.wikipedia.org<span class="op">/</span>wiki<span class="op">/</span>Main_Page<span class="op">&lt;</span><span class="er">/</span>base<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>generator<span class="op">&gt;</span>MediaWiki <span class="fl">1.28</span>.<span class="dv">0</span><span class="op">-</span>wmf.<span class="dv">23</span><span class="op">&lt;</span><span class="er">/</span>generator<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>case<span class="op">&gt;</span>first<span class="op">-</span>letter<span class="op">&lt;</span><span class="er">/</span>case<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>namespaces<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;-2&quot;</span> case=<span class="st">&quot;first-letter&quot;</span><span class="op">&gt;</span>Media<span class="op">&lt;</span><span class="er">/</span>namespace<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;-1&quot;</span> case=<span class="st">&quot;first-letter&quot;</span><span class="op">&gt;</span>Special<span class="op">&lt;</span><span class="er">/</span>namespace<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;0&quot;</span> case=<span class="st">&quot;first-letter&quot;</span> <span class="op">/</span><span class="er">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;1&quot;</span> case=<span class="st">&quot;first-letter&quot;</span><span class="op">&gt;</span>Talk<span class="op">&lt;</span><span class="er">/</span>namespace<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;2&quot;</span> case=<span class="st">&quot;first-letter&quot;</span><span class="op">&gt;</span>User<span class="op">&lt;</span><span class="er">/</span>namespace<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;3&quot;</span> case=<span class="st">&quot;first-letter&quot;</span><span class="op">&gt;</span>User talk<span class="op">&lt;</span><span class="er">/</span>namespace<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;4&quot;</span> case=<span class="st">&quot;first-letter&quot;</span><span class="op">&gt;</span>Wikipedia<span class="op">&lt;</span><span class="er">/</span>namespace<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;5&quot;</span> case=<span class="st">&quot;first-letter&quot;</span><span class="op">&gt;</span>Wikipedia talk<span class="op">&lt;</span><span class="er">/</span>namespace<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;6&quot;</span> case=<span class="st">&quot;first-letter&quot;</span><span class="op">&gt;</span>File<span class="op">&lt;</span><span class="er">/</span>namespace<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;7&quot;</span> case=<span class="st">&quot;first-letter&quot;</span><span class="op">&gt;</span>File talk<span class="op">&lt;</span><span class="er">/</span>namespace<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>namespace key=<span class="st">&quot;8&quot;</span> case=<span class="st">&quot;first-letter&quot;</span><span class="op">&gt;</span>MediaWiki<span class="op">&lt;</span><span class="er">/</span>namespace<span class="op">&gt;</span>
 .
 .
 .
-    &lt;<span class="er">/</span>namespaces&gt;
-<span class="st">  </span><span class="er">&lt;/</span>siteinfo&gt;
-<span class="st">  </span><span class="er">&lt;</span>page&gt;
-<span class="st">    </span><span class="er">&lt;</span>title&gt;AccessibleComputing&lt;<span class="er">/</span>title&gt;
-<span class="st">    </span><span class="er">&lt;</span>ns&gt;<span class="dv">0</span>&lt;<span class="er">/</span>ns&gt;
-<span class="st">    </span><span class="er">&lt;</span>id&gt;<span class="dv">10</span>&lt;<span class="er">/</span>id&gt;
-<span class="st">    </span><span class="er">&lt;</span>redirect title=<span class="st">&quot;Computer accessibility&quot;</span> /<span class="er">&gt;</span>
-<span class="st">    </span><span class="er">&lt;</span>revision&gt;
-<span class="st">      </span><span class="er">&lt;</span>id&gt;<span class="dv">631144794</span>&lt;<span class="er">/</span>id&gt;
-<span class="st">      </span><span class="er">&lt;</span>parentid&gt;<span class="dv">381202555</span>&lt;<span class="er">/</span>parentid&gt;
-<span class="st">      </span><span class="er">&lt;</span>timestamp&gt;<span class="dv">2014-10</span>-26T04:<span class="dv">50</span>:23Z&lt;<span class="er">/</span>timestamp&gt;
-<span class="st">      </span><span class="er">&lt;</span>contributor&gt;
-<span class="st">        </span><span class="er">&lt;</span>username&gt;Paine Ellsworth&lt;<span class="er">/</span>username&gt;
-<span class="st">        </span><span class="er">&lt;</span>id&gt;<span class="dv">9092818</span>&lt;<span class="er">/</span>id&gt;
-<span class="st">      </span><span class="er">&lt;/</span>contributor&gt;
-<span class="st">      </span><span class="er">&lt;</span>comment&gt;add [[WP:RCAT|rcat]]s&lt;<span class="er">/</span>comment&gt;
-<span class="st">      </span><span class="er">&lt;</span>model&gt;wikitext&lt;<span class="er">/</span>model&gt;
-<span class="st">      </span><span class="er">&lt;</span>format&gt;text/x-wiki&lt;<span class="er">/</span>format&gt;
-<span class="st">      </span><span class="er">&lt;</span>text xml:space=<span class="st">&quot;preserve&quot;</span>&gt;<span class="co">#REDIRECT [[Computer accessibility]]</span>
+    <span class="op">&lt;</span><span class="er">/</span>namespaces<span class="op">&gt;</span>
+<span class="st">  </span><span class="er">&lt;/</span>siteinfo<span class="op">&gt;</span>
+<span class="st">  </span><span class="er">&lt;</span>page<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>title<span class="op">&gt;</span>AccessibleComputing<span class="op">&lt;</span><span class="er">/</span>title<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>ns<span class="op">&gt;</span><span class="dv">0</span><span class="op">&lt;</span><span class="er">/</span>ns<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>id<span class="op">&gt;</span><span class="dv">10</span><span class="op">&lt;</span><span class="er">/</span>id<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>redirect title=<span class="st">&quot;Computer accessibility&quot;</span> <span class="op">/</span><span class="er">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>revision<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>id<span class="op">&gt;</span><span class="dv">631144794</span><span class="op">&lt;</span><span class="er">/</span>id<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>parentid<span class="op">&gt;</span><span class="dv">381202555</span><span class="op">&lt;</span><span class="er">/</span>parentid<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>timestamp<span class="op">&gt;</span><span class="dv">2014</span><span class="op">-</span><span class="dv">10</span><span class="op">-</span>26T04<span class="op">:</span><span class="dv">50</span><span class="op">:</span>23Z<span class="op">&lt;</span><span class="er">/</span>timestamp<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>contributor<span class="op">&gt;</span>
+<span class="st">        </span><span class="er">&lt;</span>username<span class="op">&gt;</span>Paine Ellsworth<span class="op">&lt;</span><span class="er">/</span>username<span class="op">&gt;</span>
+<span class="st">        </span><span class="er">&lt;</span>id<span class="op">&gt;</span><span class="dv">9092818</span><span class="op">&lt;</span><span class="er">/</span>id<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;/</span>contributor<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>comment<span class="op">&gt;</span>add [[WP<span class="op">:</span>RCAT<span class="op">|</span>rcat]]s<span class="op">&lt;</span><span class="er">/</span>comment<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>model<span class="op">&gt;</span>wikitext<span class="op">&lt;</span><span class="er">/</span>model<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>format<span class="op">&gt;</span>text<span class="op">/</span>x<span class="op">-</span>wiki<span class="op">&lt;</span><span class="er">/</span>format<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>text xml<span class="op">:</span>space=<span class="st">&quot;preserve&quot;</span><span class="op">&gt;</span><span class="co">#REDIRECT [[Computer accessibility]]</span>
 
-{{Redr|move|from CamelCase|up}}&lt;<span class="er">/</span>text&gt;
-<span class="st">      </span><span class="er">&lt;</span>sha1&gt;4ro7vvppa5kmm0o1egfjztzcwd0vabw&lt;<span class="er">/</span>sha1&gt;
-<span class="st">    </span><span class="er">&lt;/</span>revision&gt;
-<span class="st">  </span><span class="er">&lt;/</span>page&gt;
-<span class="st">  </span><span class="er">&lt;</span>page&gt;
-<span class="st">    </span><span class="er">&lt;</span>title&gt;Anarchism&lt;<span class="er">/</span>title&gt;
-<span class="st">    </span><span class="er">&lt;</span>ns&gt;<span class="dv">0</span>&lt;<span class="er">/</span>ns&gt;
-<span class="st">    </span><span class="er">&lt;</span>id&gt;<span class="dv">12</span>&lt;<span class="er">/</span>id&gt;
-<span class="st">    </span><span class="er">&lt;</span>revision&gt;
-<span class="st">      </span><span class="er">&lt;</span>id&gt;<span class="dv">746687538</span>&lt;<span class="er">/</span>id&gt;
-<span class="st">      </span><span class="er">&lt;</span>parentid&gt;<span class="dv">744318951</span>&lt;<span class="er">/</span>parentid&gt;
-<span class="st">      </span><span class="er">&lt;</span>timestamp&gt;<span class="dv">2016-10</span>-28T22:<span class="dv">43</span>:19Z&lt;<span class="er">/</span>timestamp&gt;
-<span class="st">      </span><span class="er">&lt;</span>contributor&gt;
-<span class="st">        </span><span class="er">&lt;</span>username&gt;Eduen&lt;<span class="er">/</span>username&gt;
-<span class="st">        </span><span class="er">&lt;</span>id&gt;<span class="dv">7527773</span>&lt;<span class="er">/</span>id&gt;
-<span class="st">      </span><span class="er">&lt;/</span>contributor&gt;
-<span class="st">      </span><span class="er">&lt;</span>minor /<span class="er">&gt;</span>
-<span class="st">      </span><span class="er">&lt;</span>comment&gt;<span class="er">/*</span><span class="st"> </span>Free love *<span class="er">/&lt;/</span>comment&gt;
-<span class="st">      </span><span class="er">&lt;</span>model&gt;wikitext&lt;<span class="er">/</span>model&gt;
-<span class="st">      </span><span class="er">&lt;</span>format&gt;text/x-wiki&lt;<span class="er">/</span>format&gt;
-<span class="st">      </span><span class="er">&lt;</span>text xml:space=<span class="st">&quot;preserve&quot;</span>&gt;{{Redirect2|Anarchist|Anarchists|the fictional character|<span class="kw">Anarchist</span> (comics)|other uses|<span class="kw">Anarchists</span> (disambiguation)}}
-{{pp-move-indef}}
+{{Redr<span class="op">|</span>move<span class="op">|</span>from CamelCase<span class="op">|</span>up}}<span class="op">&lt;</span><span class="er">/</span>text<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>sha1<span class="op">&gt;</span>4ro7vvppa5kmm0o1egfjztzcwd0vabw<span class="op">&lt;</span><span class="er">/</span>sha1<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;/</span>revision<span class="op">&gt;</span>
+<span class="st">  </span><span class="er">&lt;/</span>page<span class="op">&gt;</span>
+<span class="st">  </span><span class="er">&lt;</span>page<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>title<span class="op">&gt;</span>Anarchism<span class="op">&lt;</span><span class="er">/</span>title<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>ns<span class="op">&gt;</span><span class="dv">0</span><span class="op">&lt;</span><span class="er">/</span>ns<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>id<span class="op">&gt;</span><span class="dv">12</span><span class="op">&lt;</span><span class="er">/</span>id<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>revision<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>id<span class="op">&gt;</span><span class="dv">746687538</span><span class="op">&lt;</span><span class="er">/</span>id<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>parentid<span class="op">&gt;</span><span class="dv">744318951</span><span class="op">&lt;</span><span class="er">/</span>parentid<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>timestamp<span class="op">&gt;</span><span class="dv">2016</span><span class="op">-</span><span class="dv">10</span><span class="op">-</span>28T22<span class="op">:</span><span class="dv">43</span><span class="op">:</span>19Z<span class="op">&lt;</span><span class="er">/</span>timestamp<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>contributor<span class="op">&gt;</span>
+<span class="st">        </span><span class="er">&lt;</span>username<span class="op">&gt;</span>Eduen<span class="op">&lt;</span><span class="er">/</span>username<span class="op">&gt;</span>
+<span class="st">        </span><span class="er">&lt;</span>id<span class="op">&gt;</span><span class="dv">7527773</span><span class="op">&lt;</span><span class="er">/</span>id<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;/</span>contributor<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>minor <span class="op">/</span><span class="er">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>comment<span class="op">&gt;</span><span class="er">/*</span><span class="st"> </span>Free love <span class="op">*</span><span class="er">/&lt;/</span>comment<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>model<span class="op">&gt;</span>wikitext<span class="op">&lt;</span><span class="er">/</span>model<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>format<span class="op">&gt;</span>text<span class="op">/</span>x<span class="op">-</span>wiki<span class="op">&lt;</span><span class="er">/</span>format<span class="op">&gt;</span>
+<span class="st">      </span><span class="er">&lt;</span>text xml<span class="op">:</span>space=<span class="st">&quot;preserve&quot;</span><span class="op">&gt;</span>{{Redirect2<span class="op">|</span>Anarchist<span class="op">|</span>Anarchists<span class="op">|</span>the fictional character<span class="op">|</span><span class="kw">Anarchist</span> (comics)<span class="op">|</span>other uses<span class="op">|</span><span class="kw">Anarchists</span> (disambiguation)}}
+{{pp<span class="op">-</span>move<span class="op">-</span>indef}}
 .
 .
 .</code></pre></div>
 <p><br></p>
 <p>In that way one has a picture of the .xml tree structure and can continue by performing queries. The initial data file is too big to fit in the memory of a PC, thus it has to be split in smaller files, pre-processed and then returned as a single file. The main aim of the <em>big_text_splitter()</em> method is to split the data in smaller files of (approx.) equal size by either using the <em>batches</em> parameter or if the file has a structure by adding the <em>end_query</em> parameter too. Here I’ll take advantage of both the <em>batches</em> and the <em>end_query</em> parameters for this task, because I’ll use queries to extract the text tree-elements, so I don’t want that the file is split arbitrarily. Each sub-element in the file begins and ends with the same key-word, i.e. text,</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">btt =<span class="st"> </span>big_tokenize_transform$<span class="kw">new</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">btt =<span class="st"> </span>big_tokenize_transform<span class="op">$</span><span class="kw">new</span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>)
 
-btt$<span class="kw">big_text_splitter</span>(<span class="dt">input_path_file =</span> PATH,             <span class="co"># path to the enwiki data file</span>
+btt<span class="op">$</span><span class="kw">big_text_splitter</span>(<span class="dt">input_path_file =</span> PATH,             <span class="co"># path to the enwiki data file</span>
                   
                   <span class="dt">output_path_folder =</span> <span class="st">&quot;/enwiki_spl_data/&quot;</span>,  <span class="co"># folder to save the files</span>
                   
@@ -304,22 +304,22 @@ btt$<span class="kw">big_text_splitter</span>(<span class="dt">input_path_file =
                   <span class="dt">batches =</span> <span class="dv">40</span>,                           <span class="co"># split file in 40 batches (files)</span>
                   
                   <span class="dt">trimmed_line =</span> <span class="ot">FALSE</span>)                   <span class="co"># the lines will be trimmed</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">approx. <span class="dv">10</span> % of data pre-processed
-approx. <span class="dv">20</span> % of data pre-processed
-approx. <span class="dv">30</span> % of data pre-processed
-approx. <span class="dv">40</span> % of data pre-processed
-approx. <span class="dv">50</span> % of data pre-processed
-approx. <span class="dv">60</span> % of data pre-processed
-approx. <span class="dv">70</span> % of data pre-processed
-approx. <span class="dv">80</span> % of data pre-processed
-approx. <span class="dv">90</span> % of data pre-processed
-approx. <span class="dv">100</span> % of data pre-processed
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">approx. <span class="dv">10</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">20</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">30</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">40</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">50</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">60</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">70</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">80</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">90</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">100</span> % of data pre<span class="op">-</span>processed
 
 It took <span class="fl">42.7098</span> minutes to complete the splitting</code></pre></div>
 <p><br></p>
 <p>After the data is split and saved in the <em>output_path_folder</em> (“/ewiki_spl_data/”) the next step is to extract the <strong>text</strong> tree-elements from the batches by using the <em>big_text_parser()</em> method. The latter takes as arguments the previously created <em>input_path_folder</em>, an <em>output_path_folder</em> to save the resulted text files, a <em>start_query</em>, an <em>end_query</em>, the <em>min_lines</em> (only subsets of text with more than or equal to this minimum will be kept) and the <em>trimmed_line</em> ( specifying if each line is already trimmed both-sides ),</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">btt$<span class="kw">big_text_parser</span>(<span class="dt">input_path_folder =</span> <span class="st">&quot;/enwiki_spl_data/&quot;</span>, <span class="co"># the previously created folder</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">btt<span class="op">$</span><span class="kw">big_text_parser</span>(<span class="dt">input_path_folder =</span> <span class="st">&quot;/enwiki_spl_data/&quot;</span>, <span class="co"># the previously created folder</span>
                     
                     <span class="dt">output_path_folder =</span> <span class="st">&quot;/enwiki_parse/&quot;</span>,  <span class="co"># folder to save the parsed files</span>
                     
@@ -330,48 +330,48 @@ It took <span class="fl">42.7098</span> minutes to complete the splitting</code>
                     <span class="dt">min_lines =</span> <span class="dv">1</span>, 
                     
                     <span class="dt">trimmed_line =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">==<span class="er">==================</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">==</span><span class="er">==================</span>
 batch <span class="dv">1</span> begins ...
-==<span class="er">==================</span>
+<span class="op">==</span><span class="er">==================</span>
 
-approx. <span class="dv">10</span> % of data pre-processed
-approx. <span class="dv">20</span> % of data pre-processed
-approx. <span class="dv">30</span> % of data pre-processed
-approx. <span class="dv">40</span> % of data pre-processed
-approx. <span class="dv">50</span> % of data pre-processed
-approx. <span class="dv">60</span> % of data pre-processed
-approx. <span class="dv">70</span> % of data pre-processed
-approx. <span class="dv">80</span> % of data pre-processed
-approx. <span class="dv">90</span> % of data pre-processed
-approx. <span class="dv">100</span> % of data pre-processed
+approx. <span class="dv">10</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">20</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">30</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">40</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">50</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">60</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">70</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">80</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">90</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">100</span> % of data pre<span class="op">-</span>processed
 
 It took <span class="fl">0.296151</span> minutes to complete the preprocessing
 
-It took <span class="fl">0.0525948</span> minutes to save the pre-processed data
+It took <span class="fl">0.0525948</span> minutes to save the pre<span class="op">-</span>processed data
 
 .
 .
 .
 .
 
-==<span class="er">==================</span>
+<span class="op">==</span><span class="er">==================</span>
 batch <span class="dv">40</span> begins ...
-==<span class="er">==================</span>
+<span class="op">==</span><span class="er">==================</span>
 
-approx. <span class="dv">10</span> % of data pre-processed
-approx. <span class="dv">20</span> % of data pre-processed
-approx. <span class="dv">30</span> % of data pre-processed
-approx. <span class="dv">40</span> % of data pre-processed
-approx. <span class="dv">50</span> % of data pre-processed
-approx. <span class="dv">60</span> % of data pre-processed
-approx. <span class="dv">70</span> % of data pre-processed
-approx. <span class="dv">80</span> % of data pre-processed
-approx. <span class="dv">90</span> % of data pre-processed
-approx. <span class="dv">100</span> % of data pre-processed
+approx. <span class="dv">10</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">20</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">30</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">40</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">50</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">60</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">70</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">80</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">90</span> % of data pre<span class="op">-</span>processed
+approx. <span class="dv">100</span> % of data pre<span class="op">-</span>processed
 
 It took <span class="fl">1.04127</span> minutes to complete the preprocessing
 
-It took <span class="fl">0.0448579</span> minutes to save the pre-processed data
+It took <span class="fl">0.0448579</span> minutes to save the pre<span class="op">-</span>processed data
 
 It took <span class="fl">40.9034</span> minutes to complete the parsing</code></pre></div>
 <p><br></p>
@@ -394,7 +394,7 @@ It took <span class="fl">40.9034</span> minutes to complete the parsing</code></
 </ul>
 <p>Each initial file will be split in additional batches to limit the memory usage during the tokenization and transformation phase,</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">btt$<span class="kw">big_text_tokenizer</span>(<span class="dt">input_path_folder =</span> <span class="st">&quot;/enwiki_parse/&quot;</span>,   <span class="co"># the previously parsed data</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">btt<span class="op">$</span><span class="kw">big_text_tokenizer</span>(<span class="dt">input_path_folder =</span> <span class="st">&quot;/enwiki_parse/&quot;</span>,   <span class="co"># the previously parsed data</span>
                        
                        <span class="dt">batches =</span> <span class="dv">4</span>,     <span class="co"># each single file will be split further in 4 batches</span>
                        
@@ -417,78 +417,78 @@ It took <span class="fl">40.9034</span> minutes to complete the parsing</code></
                        <span class="dt">vocabulary_path_folder =</span> <span class="st">&quot;/enwiki_vocab/&quot;</span>,  <span class="co"># path to vocabulary folder</span>
                        
                        <span class="dt">path_2folder=</span><span class="st">&quot;/enwiki_token/&quot;</span>)   <span class="co"># folder to save the transformed data</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">==<span class="er">==================================</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">==</span><span class="er">==================================</span>
 transformation of file <span class="dv">1</span> starts ...
-==<span class="er">==================================</span>
+<span class="op">==</span><span class="er">==================================</span>
 
--------------------
+<span class="op">-------------------</span>
 batch <span class="dv">1</span> begins ...
--------------------
+<span class="op">-------------------</span>
 
 input of the data starts ...
 conversion to lower case starts ...
 removal of numeric values starts ...
-the string-trim starts ...
-the split of the character string and simultaneously the removal of the punctuation in the vector starts ...
+the string<span class="op">-</span>trim starts ...
+the split of the character string and simultaneously the removal of the punctuation <span class="cf">in</span> the vector starts ...
 stop words of the english language will be used
-the removal of stop-words starts ...
+the removal of stop<span class="op">-</span>words starts ...
 character strings with more than or equal to <span class="dv">1</span> and less than <span class="dv">100</span> characters will be kept ...
-the vocabulary counts will be saved in:<span class="st"> </span><span class="er">/</span>enwiki_vocab/batch1.txt
-the pre-processed data will be saved in a single file in:<span class="st"> </span><span class="er">/</span>enwiki_token/
+the vocabulary counts will be saved <span class="cf">in</span><span class="op">:</span><span class="st"> </span><span class="er">/</span>enwiki_vocab<span class="op">/</span>batch1.txt
+the pre<span class="op">-</span>processed data will be saved <span class="cf">in</span> a single file <span class="cf">in</span><span class="op">:</span><span class="st"> </span><span class="er">/</span>enwiki_token<span class="op">/</span>
 
--------------------
+<span class="op">-------------------</span>
 batch <span class="dv">2</span> begins ...
--------------------
+<span class="op">-------------------</span>
 
 input of the data starts ...
 conversion to lower case starts ...
 removal of numeric values starts ...
-the string-trim starts ...
-the split of the character string and simultaneously the removal of the punctuation in the vector starts ...
+the string<span class="op">-</span>trim starts ...
+the split of the character string and simultaneously the removal of the punctuation <span class="cf">in</span> the vector starts ...
 stop words of the english language will be used
-the removal of stop-words starts ...
+the removal of stop<span class="op">-</span>words starts ...
 character strings with more than or equal to <span class="dv">1</span> and less than <span class="dv">100</span> characters will be kept ...
-the vocabulary counts will be saved in:<span class="st"> </span><span class="er">/</span>enwiki_vocab/batch1.txt
-the pre-processed data will be saved in a single file in:<span class="st"> </span><span class="er">/</span>enwiki_token/
+the vocabulary counts will be saved <span class="cf">in</span><span class="op">:</span><span class="st"> </span><span class="er">/</span>enwiki_vocab<span class="op">/</span>batch1.txt
+the pre<span class="op">-</span>processed data will be saved <span class="cf">in</span> a single file <span class="cf">in</span><span class="op">:</span><span class="st"> </span><span class="er">/</span>enwiki_token<span class="op">/</span>
 <span class="st">  </span>
 .
 .
 .
 .
 
-==<span class="er">==================================</span>
+<span class="op">==</span><span class="er">==================================</span>
 transformation of file <span class="dv">40</span> starts ...
-==<span class="er">==================================</span>
+<span class="op">==</span><span class="er">==================================</span>
 
--------------------
+<span class="op">-------------------</span>
 batch <span class="dv">1</span> begins ...
--------------------
+<span class="op">-------------------</span>
 
 input of the data starts ...
 conversion to lower case starts ...
 removal of numeric values starts ...
-the string-trim starts ...
-the split of the character string and simultaneously the removal of the punctuation in the vector starts ...
+the string<span class="op">-</span>trim starts ...
+the split of the character string and simultaneously the removal of the punctuation <span class="cf">in</span> the vector starts ...
 stop words of the english language will be used
-the removal of stop-words starts ...
+the removal of stop<span class="op">-</span>words starts ...
 character strings with more than or equal to <span class="dv">1</span> and less than <span class="dv">100</span> characters will be kept ...
-the vocabulary counts will be saved in:<span class="st"> </span><span class="er">/</span>enwiki_vocab/batch40.txt
-the pre-processed data will be saved in a single file in:<span class="st"> </span><span class="er">/</span>enwiki_token/
+the vocabulary counts will be saved <span class="cf">in</span><span class="op">:</span><span class="st"> </span><span class="er">/</span>enwiki_vocab<span class="op">/</span>batch40.txt
+the pre<span class="op">-</span>processed data will be saved <span class="cf">in</span> a single file <span class="cf">in</span><span class="op">:</span><span class="st"> </span><span class="er">/</span>enwiki_token<span class="op">/</span>
 
--------------------
+<span class="op">-------------------</span>
 batch <span class="dv">2</span> begins ...
--------------------
+<span class="op">-------------------</span>
 
 input of the data starts ...
 conversion to lower case starts ...
 removal of numeric values starts ...
-the string-trim starts ...
-the split of the character string and simultaneously the removal of the punctuation in the vector starts ...
+the string<span class="op">-</span>trim starts ...
+the split of the character string and simultaneously the removal of the punctuation <span class="cf">in</span> the vector starts ...
 stop words of the english language will be used
-the removal of stop-words starts ...
+the removal of stop<span class="op">-</span>words starts ...
 character strings with more than or equal to <span class="dv">1</span> and less than <span class="dv">100</span> characters will be kept ...
-the vocabulary counts will be saved in:<span class="st"> </span><span class="er">/</span>enwiki_vocab/batch40.txt
-the pre-processed data will be saved in a single file in:<span class="st"> </span><span class="er">/</span>enwiki_token/
+the vocabulary counts will be saved <span class="cf">in</span><span class="op">:</span><span class="st"> </span><span class="er">/</span>enwiki_vocab<span class="op">/</span>batch40.txt
+the pre<span class="op">-</span>processed data will be saved <span class="cf">in</span> a single file <span class="cf">in</span><span class="op">:</span><span class="st"> </span><span class="er">/</span>enwiki_token<span class="op">/</span>
 <span class="st">  </span>
 .
 .
@@ -503,14 +503,14 @@ It took <span class="fl">111.689</span> minutes to complete tokenization</code><
 <h4><em>word cloud</em></h4>
 <p>Having a clean single text file of all the wikipedia pages and articles one can perform many tasks. For instance, one can build a <em>wordcloud</em> (using the wordcloud package) from the accumulated words (a word of caution : the memory consumption when running the <em>vocabulary_accumulator</em> method for this kind of data size can exceed the 10 GB),</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init$<span class="kw">vocabulary_accumulator</span>(<span class="dt">input_path_folder =</span> <span class="st">&quot;/enwiki_vocab/&quot;</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init<span class="op">$</span><span class="kw">vocabulary_accumulator</span>(<span class="dt">input_path_folder =</span> <span class="st">&quot;/enwiki_vocab/&quot;</span>, 
                             
                             <span class="dt">vocabulary_path_file =</span> <span class="st">&quot;/VOCAB.txt&quot;</span>,
                             
                             <span class="dt">max_num_chars =</span> <span class="dv">50</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vocabulary.of.batch <span class="dv">40</span> will.be.merged ...   minutes.to.merge.sort.batches:<span class="st"> </span><span class="fl">4.57273</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vocabulary.of.batch <span class="dv">40</span> will.be.merged ...   minutes.to.merge.sort.batches<span class="op">:</span><span class="st"> </span><span class="fl">4.57273</span>
 
-    minutes.to.save.data:<span class="st"> </span><span class="fl">0.48584</span></code></pre></div>
+    minutes.to.save.data<span class="op">:</span><span class="st"> </span><span class="fl">0.48584</span></code></pre></div>
 <p><br></p>
 <p>The following table shows the first rows of the vocabulary counts,</p>
 <p><br></p>
@@ -558,7 +558,7 @@ It took <span class="fl">111.689</span> minutes to complete tokenization</code><
 </table>
 <p><br></p>
 <p>before plotting the wordcloud, I’ll limit the vocabulary to the first 200 words,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rdr_vocab =<span class="st"> </span>textTinyR::<span class="kw">read_rows</span>(<span class="dt">input_file =</span> <span class="st">&quot;/VOCAB.txt&quot;</span>, <span class="dt">read_delimiter =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rdr_vocab =<span class="st"> </span>textTinyR<span class="op">::</span><span class="kw">read_rows</span>(<span class="dt">input_file =</span> <span class="st">&quot;/VOCAB.txt&quot;</span>, <span class="dt">read_delimiter =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>,
                                  
                                  <span class="dt">rows =</span> <span class="dv">200</span>, 
                                  
@@ -566,7 +566,7 @@ It took <span class="fl">111.689</span> minutes to complete tokenization</code><
 
 <span class="co"># read the reduced data </span>
 
-vocab_sbs &lt;-<span class="st"> </span>readr::<span class="kw">read_delim</span>(<span class="st">&quot;/vocab_subset_200terms.txt&quot;</span>, <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>,
+vocab_sbs &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_delim</span>(<span class="st">&quot;/vocab_subset_200terms.txt&quot;</span>, <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>,
                                
                                <span class="dt">escape_double =</span> <span class="ot">FALSE</span>, <span class="dt">col_names =</span> <span class="ot">FALSE</span>, 
                                
@@ -574,9 +574,9 @@ vocab_sbs &lt;-<span class="st"> </span>readr::<span class="kw">read_delim</span
 
 <span class="co"># create the wordcloud</span>
 
-pal2 &lt;-<span class="st"> </span>RColorBrewer::<span class="kw">brewer.pal</span>(<span class="dv">8</span>, <span class="st">&quot;Dark2&quot;</span>)
+pal2 &lt;-<span class="st"> </span>RColorBrewer<span class="op">::</span><span class="kw">brewer.pal</span>(<span class="dv">8</span>, <span class="st">&quot;Dark2&quot;</span>)
 
-wordcloud::<span class="kw">wordcloud</span>(<span class="dt">words =</span> vocab_sbs$X1, <span class="dt">freq =</span> vocab_sbs$X2, 
+wordcloud<span class="op">::</span><span class="kw">wordcloud</span>(<span class="dt">words =</span> vocab_sbs<span class="op">$</span>X1, <span class="dt">freq =</span> vocab_sbs<span class="op">$</span>X2, 
                      
                      <span class="dt">scale =</span> <span class="kw">c</span>(<span class="fl">4.5</span>, <span class="fl">0.8</span>), <span class="dt">random.order =</span> <span class="ot">FALSE</span>, 
                      
@@ -601,9 +601,9 @@ skp =<span class="st"> </span><span class="kw">skipgram_cbow</span>(<span class=
                     
                     <span class="dt">output_path =</span> <span class="st">&quot;/model&quot;</span>, <span class="dt">method =</span> <span class="st">&quot;skipgram&quot;</span>, <span class="dt">verbose =</span> <span class="dv">2</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Read 4018M words
-Number of words:<span class="st">  </span><span class="dv">12827221</span>
-Number of labels:<span class="st"> </span><span class="dv">0</span>
-Progress:<span class="st"> </span><span class="fl">0.2</span>%  words/sec/thread:<span class="st"> </span><span class="dv">89664</span>  lr:<span class="st"> </span><span class="fl">0.099841</span>  loss:<span class="st"> </span><span class="fl">1.055581</span>  eta:<span class="st"> </span>15h32m  14m</code></pre></div>
+Number of words<span class="op">:</span><span class="st">  </span><span class="dv">12827221</span>
+Number of labels<span class="op">:</span><span class="st"> </span><span class="dv">0</span>
+Progress<span class="op">:</span><span class="st"> </span><span class="fl">0.2</span>%  words<span class="op">/</span>sec<span class="op">/</span>thread<span class="op">:</span><span class="st"> </span><span class="dv">89664</span>  lr<span class="op">:</span><span class="st"> </span><span class="fl">0.099841</span>  loss<span class="op">:</span><span class="st"> </span><span class="fl">1.055581</span>  eta<span class="op">:</span><span class="st"> </span>15h32m  14m</code></pre></div>
 <p><br></p>
 <p>thus, just for illustration purposes I’ll limit the train data to approx. 1 GB of the output file,</p>
 <p><br></p>
@@ -626,32 +626,32 @@ skp =<span class="st"> </span><span class="kw">skipgram_cbow</span>(<span class=
                     
                     <span class="dt">thread =</span> <span class="dv">4</span>, <span class="dt">verbose =</span> <span class="dv">2</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Read 124M words
-Number of words:<span class="st">  </span><span class="dv">5029370</span>
-Number of labels:<span class="st"> </span><span class="dv">0</span>
-Progress:<span class="st"> </span><span class="fl">100.0</span>%  words/sec/thread:<span class="st"> </span><span class="dv">94027</span>  lr:<span class="st"> </span><span class="fl">0.000000</span>  loss:<span class="st"> </span><span class="fl">0.186674</span>  eta:<span class="st"> </span>0h0m 
+Number of words<span class="op">:</span><span class="st">  </span><span class="dv">5029370</span>
+Number of labels<span class="op">:</span><span class="st"> </span><span class="dv">0</span>
+Progress<span class="op">:</span><span class="st"> </span><span class="fl">100.0</span>%  words<span class="op">/</span>sec<span class="op">/</span>thread<span class="op">:</span><span class="st"> </span><span class="dv">94027</span>  lr<span class="op">:</span><span class="st"> </span><span class="fl">0.000000</span>  loss<span class="op">:</span><span class="st"> </span><span class="fl">0.186674</span>  eta<span class="op">:</span><span class="st"> </span>0h0m 
 
-time to complete :<span class="st"> </span><span class="fl">33.53577</span> mins </code></pre></div>
+time to complete <span class="op">:</span><span class="st"> </span><span class="fl">33.53577</span> mins </code></pre></div>
 <p><br></p>
 <p>the following vector-subset is the example output of the “model.vec” file, which includes the 50-dimensional word vectors,</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lt <span class="fl">0.12207</span> <span class="fl">0.16117</span> <span class="fl">0.4641</span> <span class="fl">0.73876</span> <span class="fl">0.43968</span> <span class="fl">0.63911</span> -<span class="fl">0.53747</span> <span class="fl">0.1398</span> ..... 
-refgt -<span class="fl">0.0038898</span> -<span class="fl">0.13976</span> <span class="fl">0.26077</span> <span class="fl">0.7775</span> <span class="fl">0.2228</span> <span class="fl">0.28169</span> -<span class="fl">0.48306</span> .....
-quot <span class="fl">0.7295</span> -<span class="fl">0.12472</span> <span class="fl">0.32131</span> <span class="fl">0.46965</span> <span class="fl">0.45363</span> <span class="fl">0.85022</span> -<span class="fl">0.051471</span> ..... 
-gt <span class="fl">0.41287</span> <span class="fl">0.26584</span> <span class="fl">0.6612</span> <span class="fl">0.78185</span> <span class="fl">0.46692</span> <span class="fl">0.74092</span> -<span class="fl">0.23816</span> .....
-cite <span class="fl">0.037943</span> <span class="fl">0.095684</span> <span class="fl">0.62832</span> <span class="fl">0.93794</span> <span class="fl">0.19776</span> <span class="fl">0.44592</span> -<span class="fl">0.21641</span> .....
-www -<span class="fl">0.31855</span> <span class="fl">0.42268</span> <span class="fl">0.3875</span> <span class="fl">1.5457</span> -<span class="fl">0.23804</span> <span class="fl">0.34022</span> -<span class="fl">0.051849</span> ..... 
-ref <span class="fl">0.45236</span> -<span class="fl">0.21766</span> <span class="fl">0.6341</span> <span class="fl">0.76392</span> <span class="fl">0.53734</span> <span class="fl">0.66976</span> -<span class="fl">0.23162</span> .....
-http -<span class="fl">0.42692</span> <span class="fl">0.48637</span> <span class="fl">0.28622</span> <span class="fl">1.7019</span> -<span class="fl">0.25739</span> <span class="fl">0.25948</span> -<span class="fl">0.026582</span> ..... 
-namequot <span class="fl">0.56828</span> -<span class="fl">0.30782</span> <span class="fl">0.45707</span> <span class="fl">0.78346</span> <span class="fl">0.53727</span> <span class="fl">0.62445</span> ..... 
-– -<span class="fl">0.010281</span> <span class="fl">0.25528</span> <span class="fl">0.04708</span> <span class="fl">0.49679</span> <span class="fl">0.043934</span> <span class="fl">0.33733</span> -<span class="fl">0.42706</span> .....
-amp <span class="fl">0.06308</span> <span class="fl">0.11968</span> <span class="fl">0.11885</span> <span class="fl">0.67699</span> -<span class="fl">0.11448</span> <span class="fl">0.25183</span> -<span class="fl">0.48789</span> .....
-category -<span class="fl">1.5705</span> -<span class="fl">0.40638</span> <span class="fl">0.61064</span> <span class="fl">2.5691</span> -<span class="fl">0.52987</span> <span class="fl">0.68096</span> .....
-county -<span class="fl">0.85743</span> <span class="fl">0.071625</span> -<span class="fl">0.43393</span> <span class="fl">0.17157</span> -<span class="fl">0.32874</span> <span class="fl">1.771</span> ..... 
-org -<span class="fl">0.26974</span> <span class="fl">0.76983</span> <span class="fl">0.57599</span> <span class="fl">1.5939</span> -<span class="fl">0.1706</span> <span class="fl">0.21937</span> -<span class="fl">0.44645</span> .....
-states -<span class="fl">0.40973</span> -<span class="fl">0.48528</span> <span class="fl">0.092905</span> <span class="fl">0.011603</span> -<span class="fl">0.035727</span> <span class="fl">0.52807</span> .....
-united -<span class="fl">0.25079</span> -<span class="fl">0.49813</span> <span class="fl">0.070942</span> <span class="fl">0.16762</span> <span class="fl">0.069961</span> <span class="fl">0.56868</span> .....
-web -<span class="fl">0.066578</span> <span class="fl">0.14837</span> <span class="fl">0.23088</span> <span class="fl">1.2919</span> -<span class="fl">0.252</span> <span class="fl">0.31441</span> -<span class="fl">0.3799</span> ..... 
-census -<span class="fl">0.29033</span> -<span class="fl">0.73695</span> <span class="fl">0.35474</span> -<span class="fl">0.5237</span> -<span class="fl">0.15206</span> <span class="fl">1.7089</span> .....
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lt <span class="fl">0.12207</span> <span class="fl">0.16117</span> <span class="fl">0.4641</span> <span class="fl">0.73876</span> <span class="fl">0.43968</span> <span class="fl">0.63911</span> <span class="op">-</span><span class="fl">0.53747</span> <span class="fl">0.1398</span> ..... 
+refgt <span class="op">-</span><span class="fl">0.0038898</span> <span class="op">-</span><span class="fl">0.13976</span> <span class="fl">0.26077</span> <span class="fl">0.7775</span> <span class="fl">0.2228</span> <span class="fl">0.28169</span> <span class="op">-</span><span class="fl">0.48306</span> .....
+quot <span class="fl">0.7295</span> <span class="op">-</span><span class="fl">0.12472</span> <span class="fl">0.32131</span> <span class="fl">0.46965</span> <span class="fl">0.45363</span> <span class="fl">0.85022</span> <span class="op">-</span><span class="fl">0.051471</span> ..... 
+gt <span class="fl">0.41287</span> <span class="fl">0.26584</span> <span class="fl">0.6612</span> <span class="fl">0.78185</span> <span class="fl">0.46692</span> <span class="fl">0.74092</span> <span class="op">-</span><span class="fl">0.23816</span> .....
+cite <span class="fl">0.037943</span> <span class="fl">0.095684</span> <span class="fl">0.62832</span> <span class="fl">0.93794</span> <span class="fl">0.19776</span> <span class="fl">0.44592</span> <span class="op">-</span><span class="fl">0.21641</span> .....
+www <span class="op">-</span><span class="fl">0.31855</span> <span class="fl">0.42268</span> <span class="fl">0.3875</span> <span class="fl">1.5457</span> <span class="op">-</span><span class="fl">0.23804</span> <span class="fl">0.34022</span> <span class="op">-</span><span class="fl">0.051849</span> ..... 
+ref <span class="fl">0.45236</span> <span class="op">-</span><span class="fl">0.21766</span> <span class="fl">0.6341</span> <span class="fl">0.76392</span> <span class="fl">0.53734</span> <span class="fl">0.66976</span> <span class="op">-</span><span class="fl">0.23162</span> .....
+http <span class="op">-</span><span class="fl">0.42692</span> <span class="fl">0.48637</span> <span class="fl">0.28622</span> <span class="fl">1.7019</span> <span class="op">-</span><span class="fl">0.25739</span> <span class="fl">0.25948</span> <span class="op">-</span><span class="fl">0.026582</span> ..... 
+namequot <span class="fl">0.56828</span> <span class="op">-</span><span class="fl">0.30782</span> <span class="fl">0.45707</span> <span class="fl">0.78346</span> <span class="fl">0.53727</span> <span class="fl">0.62445</span> ..... 
+– <span class="op">-</span><span class="fl">0.010281</span> <span class="fl">0.25528</span> <span class="fl">0.04708</span> <span class="fl">0.49679</span> <span class="fl">0.043934</span> <span class="fl">0.33733</span> <span class="op">-</span><span class="fl">0.42706</span> .....
+amp <span class="fl">0.06308</span> <span class="fl">0.11968</span> <span class="fl">0.11885</span> <span class="fl">0.67699</span> <span class="op">-</span><span class="fl">0.11448</span> <span class="fl">0.25183</span> <span class="op">-</span><span class="fl">0.48789</span> .....
+category <span class="op">-</span><span class="fl">1.5705</span> <span class="op">-</span><span class="fl">0.40638</span> <span class="fl">0.61064</span> <span class="fl">2.5691</span> <span class="op">-</span><span class="fl">0.52987</span> <span class="fl">0.68096</span> .....
+county <span class="op">-</span><span class="fl">0.85743</span> <span class="fl">0.071625</span> <span class="op">-</span><span class="fl">0.43393</span> <span class="fl">0.17157</span> <span class="op">-</span><span class="fl">0.32874</span> <span class="fl">1.771</span> ..... 
+org <span class="op">-</span><span class="fl">0.26974</span> <span class="fl">0.76983</span> <span class="fl">0.57599</span> <span class="fl">1.5939</span> <span class="op">-</span><span class="fl">0.1706</span> <span class="fl">0.21937</span> <span class="op">-</span><span class="fl">0.44645</span> .....
+states <span class="op">-</span><span class="fl">0.40973</span> <span class="op">-</span><span class="fl">0.48528</span> <span class="fl">0.092905</span> <span class="fl">0.011603</span> <span class="op">-</span><span class="fl">0.035727</span> <span class="fl">0.52807</span> .....
+united <span class="op">-</span><span class="fl">0.25079</span> <span class="op">-</span><span class="fl">0.49813</span> <span class="fl">0.070942</span> <span class="fl">0.16762</span> <span class="fl">0.069961</span> <span class="fl">0.56868</span> .....
+web <span class="op">-</span><span class="fl">0.066578</span> <span class="fl">0.14837</span> <span class="fl">0.23088</span> <span class="fl">1.2919</span> <span class="op">-</span><span class="fl">0.252</span> <span class="fl">0.31441</span> <span class="op">-</span><span class="fl">0.3799</span> ..... 
+census <span class="op">-</span><span class="fl">0.29033</span> <span class="op">-</span><span class="fl">0.73695</span> <span class="fl">0.35474</span> <span class="op">-</span><span class="fl">0.5237</span> <span class="op">-</span><span class="fl">0.15206</span> <span class="fl">1.7089</span> .....
 .
 .
 .</code></pre></div>
@@ -662,15 +662,15 @@ census -<span class="fl">0.29033</span> -<span class="fl">0.73695</span> <span c
 <h2><em>sparse_term_matrix</em> class</h2>
 <p>The <em>sparse_term_matrix</em> class includes methods for building a document-term or a term-document matrix and extracting information from those matrices (it relies on RcppArmadillo and can handle large sparse matrices too). I’ll explain all the different methods using a toy text file downloaded from wikipedia,</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">The term planet is ancient, with ties to history, astrology, science, mythology, and religion. Several planets in the Solar System can be seen with the naked eye. These were regarded by many early cultures as divine, or as emissaries of deities. As scientific knowledge advanced, human perception of the planets changed, incorporating a number of disparate objects. In <span class="dv">2006</span>, the International Astronomical <span class="kw">Union</span> (IAU) officially adopted a resolution defining planets within the Solar System. This definition is controversial because it excludes many objects of planetary mass based on where or what they orbit. 
-Although eight of the planetary bodies discovered before <span class="dv">1950</span> remain planets under the modern definition, some celestial bodies, such as Ceres, Pallas, Juno and <span class="kw">Vesta</span> (each an object in the solar asteroid belt), and <span class="kw">Pluto</span> (the first trans-Neptunian object discovered), that were once considered planets by the scientific community, are no longer viewed as such.
-The planets were thought by Ptolemy to orbit Earth in deferent and epicycle motions. Although the idea that the planets orbited the Sun had been suggested many times, it was not until the 17th century that this view was supported by evidence from the first telescopic astronomical observations, performed by Galileo Galilei. 
-At about the same time, by careful analysis of pre-telescopic observation data collected by Tycho Brahe, Johannes Kepler found the planets orbits were not circular but elliptical. As observational tools improved, astronomers saw that, like Earth, the planets rotated around tilted axes, and some shared such features as ice caps and seasons. Since the dawn of the Space Age, close observation by space probes has found that Earth and the other planets share characteristics such as volcanism, hurricanes, tectonics, and even hydrology.
-Planets are generally divided into two main types:<span class="st"> </span>large low-density giant planets, and smaller rocky terrestrials. Under IAU definitions, there are eight planets in the Solar System. In order of increasing distance from the Sun, they are the four terrestrials, Mercury, Venus, Earth, and Mars, then the four giant planets, Jupiter, Saturn, Uranus, and Neptune. Six of the planets are orbited by one or more natural satellites.</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">The term planet is ancient, with ties to history, astrology, science, mythology, and religion. Several planets <span class="cf">in</span> the Solar System can be seen with the naked eye. These were regarded by many early cultures as divine, or as emissaries of deities. As scientific knowledge advanced, human perception of the planets changed, incorporating a number of disparate objects. In <span class="dv">2006</span>, the International Astronomical <span class="kw">Union</span> (IAU) officially adopted a resolution defining planets within the Solar System. This definition is controversial because it excludes many objects of planetary mass based on where or what they orbit. 
+Although eight of the planetary bodies discovered before <span class="dv">1950</span> remain planets under the modern definition, some celestial bodies, such as Ceres, Pallas, Juno and <span class="kw">Vesta</span> (each an object <span class="cf">in</span> the solar asteroid belt), and <span class="kw">Pluto</span> (the first trans<span class="op">-</span>Neptunian object discovered), that were once considered planets by the scientific community, are no longer viewed as such.
+The planets were thought by Ptolemy to orbit Earth <span class="cf">in</span> deferent and epicycle motions. Although the idea that the planets orbited the Sun had been suggested many times, it was not until the 17th century that this view was supported by evidence from the first telescopic astronomical observations, performed by Galileo Galilei. 
+At about the same time, by careful analysis of pre<span class="op">-</span>telescopic observation data collected by Tycho Brahe, Johannes Kepler found the planets orbits were not circular but elliptical. As observational tools improved, astronomers saw that, like Earth, the planets rotated around tilted axes, and some shared such features as ice caps and seasons. Since the dawn of the Space Age, close observation by space probes has found that Earth and the other planets share characteristics such as volcanism, hurricanes, tectonics, and even hydrology.
+Planets are generally divided into two main types<span class="op">:</span><span class="st"> </span>large low<span class="op">-</span>density giant planets, and smaller rocky terrestrials. Under IAU definitions, there are eight planets <span class="cf">in</span> the Solar System. In order of increasing distance from the Sun, they are the four terrestrials, Mercury, Venus, Earth, and Mars, then the four giant planets, Jupiter, Saturn, Uranus, and Neptune. Six of the planets are orbited by one or more natural satellites.</code></pre></div>
 <p><br></p>
 <p>The <em>sparse_term_matrix</em> class can be initialized using either a vector of documents or a text file. Assuming the downloaded file is saved as “planets.txt”, then a document-term-matrix can be created in the following way,</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init =<span class="st"> </span>sparse_term_matrix$<span class="kw">new</span>(<span class="dt">vector_data =</span> <span class="ot">NULL</span>,          <span class="co"># in case of vector of documents</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init =<span class="st"> </span>sparse_term_matrix<span class="op">$</span><span class="kw">new</span>(<span class="dt">vector_data =</span> <span class="ot">NULL</span>,          <span class="co"># in case of vector of documents</span>
                               
                               <span class="dt">file_data =</span> <span class="st">&quot;/planets.txt&quot;</span>,     <span class="co"># input the .txt data</span>
                               
@@ -678,7 +678,7 @@ Planets are generally divided into two main types:<span class="st"> </span>large
 
 
 
-tm =<span class="st"> </span>init$<span class="kw">Term_Matrix</span>(<span class="dt">sort_terms =</span> <span class="ot">TRUE</span>,      <span class="co"># initial terms are sorted</span>
+tm =<span class="st"> </span>init<span class="op">$</span><span class="kw">Term_Matrix</span>(<span class="dt">sort_terms =</span> <span class="ot">TRUE</span>,      <span class="co"># initial terms are sorted</span>
                  
                       <span class="dt">to_lower =</span> <span class="ot">TRUE</span>,          <span class="co"># convert to lower case</span>
                  
@@ -689,19 +689,19 @@ tm =<span class="st"> </span>init$<span class="kw">Term_Matrix</span>(<span clas
                       <span class="dt">tf_idf =</span> <span class="ot">TRUE</span>,            <span class="co"># tf-idf will be returned</span>
                       
                       <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">minutes.to.tokenize.transform.data:<span class="st"> </span><span class="fl">0.00001</span> total.time:<span class="st"> </span><span class="fl">0.00001</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">minutes.to.tokenize.transform.data<span class="op">:</span><span class="st"> </span><span class="fl">0.00001</span> total.time<span class="op">:</span><span class="st"> </span><span class="fl">0.00001</span>
 
-Warning message:
-empty character strings present in the column names they will be replaced with proper characters
+Warning message<span class="op">:</span>
+empty character strings present <span class="cf">in</span> the column names they will be replaced with proper characters
 
 <span class="dv">5</span> x <span class="dv">212</span> sparse Matrix of class <span class="st">&quot;dgCMatrix&quot;</span>
    [[ suppressing <span class="dv">91</span> column names ‘X’, ‘X17th’, ‘X1950’ ... ]]
 
-[<span class="dv">1</span>,] -<span class="fl">0.001939591</span> .         .          <span class="fl">0.009747774</span> <span class="fl">0.01949555</span>   ......         
-[<span class="dv">2</span>,] -<span class="fl">0.003255742</span> .         <span class="fl">0.01636233</span> .           .            ......         
-[<span class="dv">3</span>,] -<span class="fl">0.003440029</span> <span class="fl">0.0172885</span> .          .           .            ......         
-[<span class="dv">4</span>,] -<span class="fl">0.002196645</span> .         .          .           .            ......  
-[<span class="dv">5</span>,] -<span class="fl">0.002681199</span> .         .          .           .          . ......
+[<span class="dv">1</span>,] <span class="op">-</span><span class="fl">0.001939591</span> .         .          <span class="fl">0.009747774</span> <span class="fl">0.01949555</span>   ......         
+[<span class="dv">2</span>,] <span class="op">-</span><span class="fl">0.003255742</span> .         <span class="fl">0.01636233</span> .           .            ......         
+[<span class="dv">3</span>,] <span class="op">-</span><span class="fl">0.003440029</span> <span class="fl">0.0172885</span> .          .           .            ......         
+[<span class="dv">4</span>,] <span class="op">-</span><span class="fl">0.002196645</span> .         .          .           .            ......  
+[<span class="dv">5</span>,] <span class="op">-</span><span class="fl">0.002681199</span> .         .          .           .          . ......
 
 [<span class="dv">1</span>,] <span class="fl">0.007121603</span> .          <span class="fl">0.009747774</span> .          <span class="fl">0.005434315</span> . ......        
 [<span class="dv">2</span>,] <span class="fl">0.007969413</span> <span class="fl">0.01636233</span> .           .          .           . ......    
@@ -709,11 +709,11 @@ empty character strings present in the column names they will be replaced with p
 [<span class="dv">4</span>,] <span class="fl">0.008065430</span> .          .           <span class="fl">0.01103965</span> .             ......  
 [<span class="dv">5</span>,] .           .          .           .          .             ......
 
-[<span class="dv">1</span>,] -<span class="fl">0.001939591</span> <span class="fl">0.009747774</span> .          .          .           ......  
-[<span class="dv">2</span>,] -<span class="fl">0.003255742</span> .           .          .          <span class="fl">0.01636233</span>  ......          
-[<span class="dv">3</span>,] -<span class="fl">0.010320088</span> .           .          .          .           ......          
-[<span class="dv">4</span>,] -<span class="fl">0.006589936</span> .           <span class="fl">0.01103965</span> <span class="fl">0.01103965</span> .           ......        
-[<span class="dv">5</span>,] -<span class="fl">0.002681199</span> .           .          .          .           ......          
+[<span class="dv">1</span>,] <span class="op">-</span><span class="fl">0.001939591</span> <span class="fl">0.009747774</span> .          .          .           ......  
+[<span class="dv">2</span>,] <span class="op">-</span><span class="fl">0.003255742</span> .           .          .          <span class="fl">0.01636233</span>  ......          
+[<span class="dv">3</span>,] <span class="op">-</span><span class="fl">0.010320088</span> .           .          .          .           ......          
+[<span class="dv">4</span>,] <span class="op">-</span><span class="fl">0.006589936</span> .           <span class="fl">0.01103965</span> <span class="fl">0.01103965</span> .           ......        
+[<span class="dv">5</span>,] <span class="op">-</span><span class="fl">0.002681199</span> .           .          .          .           ......          
 .
 .
 .</code></pre></div>
@@ -729,17 +729,17 @@ empty character strings present in the column names they will be replaced with p
 <p><br></p>
 <p>To adjust the sparsity of the output matrix one can take advantage of the <em>Term_Matrix_Adjust</em> method, (by adjusting the sparsity_thresh towards 0.0 a proportion of the sparse terms will be removed)</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res_adj =<span class="st"> </span>init$<span class="kw">Term_Matrix_Adjust</span>(<span class="dt">sparsity_thresh =</span> <span class="fl">0.6</span>)    </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res_adj =<span class="st"> </span>init<span class="op">$</span><span class="kw">Term_Matrix_Adjust</span>(<span class="dt">sparsity_thresh =</span> <span class="fl">0.6</span>)    </code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res_adj
 
 
 <span class="dv">5</span> x <span class="dv">9</span> sparse Matrix of class <span class="st">&quot;dgCMatrix&quot;</span>
           planets           by            X       solar          and          as  ...... 
-[<span class="dv">1</span>,] -<span class="fl">0.005818773</span> -<span class="fl">0.001939591</span> -<span class="fl">0.001939591</span> <span class="fl">0.004747735</span> -<span class="fl">0.001939591</span> <span class="fl">0.007121603</span>  ......      
-[<span class="dv">2</span>,] -<span class="fl">0.006511484</span> -<span class="fl">0.003255742</span> -<span class="fl">0.003255742</span> <span class="fl">0.003984706</span> -<span class="fl">0.006511484</span> <span class="fl">0.007969413</span>  ......       
-[<span class="dv">3</span>,] -<span class="fl">0.006880059</span> -<span class="fl">0.010320088</span> -<span class="fl">0.003440029</span> .           -<span class="fl">0.003440029</span> .            ...... 
-[<span class="dv">4</span>,] -<span class="fl">0.006589936</span> -<span class="fl">0.006589936</span> -<span class="fl">0.002196645</span> .           -<span class="fl">0.008786581</span> <span class="fl">0.008065430</span>  ...... 
-[<span class="dv">5</span>,] -<span class="fl">0.013405997</span> -<span class="fl">0.002681199</span> -<span class="fl">0.002681199</span> <span class="fl">0.003281523</span> -<span class="fl">0.008043598</span> .            ...... </code></pre></div>
+[<span class="dv">1</span>,] <span class="op">-</span><span class="fl">0.005818773</span> <span class="op">-</span><span class="fl">0.001939591</span> <span class="op">-</span><span class="fl">0.001939591</span> <span class="fl">0.004747735</span> <span class="op">-</span><span class="fl">0.001939591</span> <span class="fl">0.007121603</span>  ......      
+[<span class="dv">2</span>,] <span class="op">-</span><span class="fl">0.006511484</span> <span class="op">-</span><span class="fl">0.003255742</span> <span class="op">-</span><span class="fl">0.003255742</span> <span class="fl">0.003984706</span> <span class="op">-</span><span class="fl">0.006511484</span> <span class="fl">0.007969413</span>  ......       
+[<span class="dv">3</span>,] <span class="op">-</span><span class="fl">0.006880059</span> <span class="op">-</span><span class="fl">0.010320088</span> <span class="op">-</span><span class="fl">0.003440029</span> .           <span class="op">-</span><span class="fl">0.003440029</span> .            ...... 
+[<span class="dv">4</span>,] <span class="op">-</span><span class="fl">0.006589936</span> <span class="op">-</span><span class="fl">0.006589936</span> <span class="op">-</span><span class="fl">0.002196645</span> .           <span class="op">-</span><span class="fl">0.008786581</span> <span class="fl">0.008065430</span>  ...... 
+[<span class="dv">5</span>,] <span class="op">-</span><span class="fl">0.013405997</span> <span class="op">-</span><span class="fl">0.002681199</span> <span class="op">-</span><span class="fl">0.002681199</span> <span class="fl">0.003281523</span> <span class="op">-</span><span class="fl">0.008043598</span> .            ...... </code></pre></div>
 <p><br></p>
 <p>The <em>term_associations</em> method returns the correlation of specific terms (<em>Terms</em>) with all the other terms in the output matrix. The dimensions of the output matrix can vary depending on which one of the <em>Term_Matrix</em>, <em>Term_Matrix_Adjust</em> is run previously. In the previous step I adjusted the initial sparse matrix using a sparsity_thresh of 0.6, thus the new dimensions will be,</p>
 <p><br></p>
@@ -749,44 +749,44 @@ empty character strings present in the column names they will be replaced with p
 <p><br></p>
 <p>and the resulted terms,</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init$<span class="kw">term_associations</span>(<span class="dt">Terms =</span> <span class="kw">c</span>(<span class="st">'planets'</span>, <span class="st">'by'</span>, <span class="st">'INVALID'</span>), <span class="dt">keep_terms =</span> <span class="ot">NULL</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">the <span class="st">' INVALID '</span> term does not exist in the terms vector 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init<span class="op">$</span><span class="kw">term_associations</span>(<span class="dt">Terms =</span> <span class="kw">c</span>(<span class="st">'planets'</span>, <span class="st">'by'</span>, <span class="st">'INVALID'</span>), <span class="dt">keep_terms =</span> <span class="ot">NULL</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">the <span class="st">' INVALID '</span> term does not exist <span class="cf">in</span> the terms vector 
 
-total.number.variables.processed:<span class="st">   </span><span class="dv">2</span>   minutes.to.complete:<span class="st"> </span><span class="fl">0.00000</span>
+total.number.variables.processed<span class="op">:</span><span class="st">   </span><span class="dv">2</span>   minutes.to.complete<span class="op">:</span><span class="st"> </span><span class="fl">0.00000</span>
 
-$planets
+<span class="op">$</span>planets
      term correlation
- <span class="dv">1</span>:<span class="st">    </span>as  <span class="fl">0.65943196</span>
- <span class="dv">2</span>:<span class="st">   </span>and  <span class="fl">0.48252671</span>
- <span class="dv">3</span>:<span class="st">     </span>X  <span class="fl">0.07521813</span>
- <span class="dv">4</span>:<span class="st">    </span>by -<span class="fl">0.26301349</span>
- <span class="dv">5</span>:<span class="st">    </span>of         <span class="ot">NaN</span>
- <span class="dv">6</span>:<span class="st"> </span>solar -<span class="fl">0.11887462</span>
- <span class="dv">7</span>:<span class="st">  </span>were         <span class="ot">NaN</span>
- <span class="dv">8</span>:<span class="st">   </span>the -<span class="fl">0.15500900</span>
- <span class="dv">9</span>:<span class="st">   </span>in.         <span class="ot">NaN</span>
-<span class="dv">10</span>:<span class="st">  </span>that  <span class="fl">0.44307617</span>
-<span class="dv">11</span>:<span class="st"> </span>earth -<span class="fl">0.24226093</span>
+ <span class="dv">1</span><span class="op">:</span><span class="st">    </span>as  <span class="fl">0.65943196</span>
+ <span class="dv">2</span><span class="op">:</span><span class="st">   </span>and  <span class="fl">0.48252671</span>
+ <span class="dv">3</span><span class="op">:</span><span class="st">     </span>X  <span class="fl">0.07521813</span>
+ <span class="dv">4</span><span class="op">:</span><span class="st">    </span>by <span class="op">-</span><span class="fl">0.26301349</span>
+ <span class="dv">5</span><span class="op">:</span><span class="st">    </span>of         <span class="ot">NaN</span>
+ <span class="dv">6</span><span class="op">:</span><span class="st"> </span>solar <span class="op">-</span><span class="fl">0.11887462</span>
+ <span class="dv">7</span><span class="op">:</span><span class="st">  </span>were         <span class="ot">NaN</span>
+ <span class="dv">8</span><span class="op">:</span><span class="st">   </span>the <span class="op">-</span><span class="fl">0.15500900</span>
+ <span class="dv">9</span><span class="op">:</span><span class="st">   </span>in.         <span class="ot">NaN</span>
+<span class="dv">10</span><span class="op">:</span><span class="st">  </span>that  <span class="fl">0.44307617</span>
+<span class="dv">11</span><span class="op">:</span><span class="st"> </span>earth <span class="op">-</span><span class="fl">0.24226093</span>
 
-$by
+<span class="op">$</span>by
        term correlation
- <span class="dv">1</span>:<span class="st">   </span>solar   <span class="fl">0.9092777</span>
- <span class="dv">2</span>:<span class="st">       </span>X   <span class="fl">0.5010034</span>
- <span class="dv">3</span>:<span class="st"> </span>planets  -<span class="fl">0.2630135</span>
- <span class="dv">4</span>:<span class="st">      </span>of         <span class="ot">NaN</span>
- <span class="dv">5</span>:<span class="st">    </span>were         <span class="ot">NaN</span>
- <span class="dv">6</span>:<span class="st">     </span>the   <span class="fl">0.7838436</span>
- <span class="dv">7</span>:<span class="st">      </span>as   <span class="fl">0.3698239</span>
- <span class="dv">8</span>:<span class="st">     </span>and  -<span class="fl">0.0594149</span>
- <span class="dv">9</span>:<span class="st">     </span>in.         <span class="ot">NaN</span>
-<span class="dv">10</span>:<span class="st">   </span>earth  -<span class="fl">0.6952757</span>
-<span class="dv">11</span>:<span class="st">    </span>that  -<span class="fl">0.9338884</span></code></pre></div>
+ <span class="dv">1</span><span class="op">:</span><span class="st">   </span>solar   <span class="fl">0.9092777</span>
+ <span class="dv">2</span><span class="op">:</span><span class="st">       </span>X   <span class="fl">0.5010034</span>
+ <span class="dv">3</span><span class="op">:</span><span class="st"> </span>planets  <span class="op">-</span><span class="fl">0.2630135</span>
+ <span class="dv">4</span><span class="op">:</span><span class="st">      </span>of         <span class="ot">NaN</span>
+ <span class="dv">5</span><span class="op">:</span><span class="st">    </span>were         <span class="ot">NaN</span>
+ <span class="dv">6</span><span class="op">:</span><span class="st">     </span>the   <span class="fl">0.7838436</span>
+ <span class="dv">7</span><span class="op">:</span><span class="st">      </span>as   <span class="fl">0.3698239</span>
+ <span class="dv">8</span><span class="op">:</span><span class="st">     </span>and  <span class="op">-</span><span class="fl">0.0594149</span>
+ <span class="dv">9</span><span class="op">:</span><span class="st">     </span>in.         <span class="ot">NaN</span>
+<span class="dv">10</span><span class="op">:</span><span class="st">   </span>earth  <span class="op">-</span><span class="fl">0.6952757</span>
+<span class="dv">11</span><span class="op">:</span><span class="st">    </span>that  <span class="op">-</span><span class="fl">0.9338884</span></code></pre></div>
 <p><br></p>
 <p>Lastly, the <em>most_frequent_terms</em> method gives the frequency of the terms in the corpus. However, the function returns only if the <em>normalize</em> parameter is NULL and the <em>tf_idf</em> parameter is FALSE ( the latter two parameters belong to the <em>init$Term_Matrix()</em> method ),</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init =<span class="st"> </span>sparse_term_matrix$<span class="kw">new</span>(<span class="dt">file_data =</span> PATH, <span class="dt">document_term_matrix =</span> <span class="ot">TRUE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init =<span class="st"> </span>sparse_term_matrix<span class="op">$</span><span class="kw">new</span>(<span class="dt">file_data =</span> PATH, <span class="dt">document_term_matrix =</span> <span class="ot">TRUE</span>)
 
-tm =<span class="st"> </span>init$<span class="kw">Term_Matrix</span>(<span class="dt">sort_terms =</span> <span class="ot">TRUE</span>,     
+tm =<span class="st"> </span>init<span class="op">$</span><span class="kw">Term_Matrix</span>(<span class="dt">sort_terms =</span> <span class="ot">TRUE</span>,     
                  
                       <span class="dt">to_lower =</span> <span class="ot">TRUE</span>,          
                  
@@ -799,20 +799,20 @@ tm =<span class="st"> </span>init$<span class="kw">Term_Matrix</span>(<span clas
                       <span class="dt">verbose =</span> <span class="ot">TRUE</span>)
 
 
-init$<span class="kw">most_frequent_terms</span>(<span class="dt">keep_terms =</span> <span class="dv">10</span>, <span class="dt">threads =</span> <span class="dv">1</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">minutes.to.complete:<span class="st"> </span><span class="fl">0.00000</span>
+init<span class="op">$</span><span class="kw">most_frequent_terms</span>(<span class="dt">keep_terms =</span> <span class="dv">10</span>, <span class="dt">threads =</span> <span class="dv">1</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">minutes.to.complete<span class="op">:</span><span class="st"> </span><span class="fl">0.00000</span>
 
         term frequency
- <span class="dv">1</span>:<span class="st">     </span>the        <span class="dv">28</span>
- <span class="dv">2</span>:<span class="st"> </span>planets        <span class="dv">15</span>
- <span class="dv">3</span>:<span class="st">     </span>and        <span class="dv">11</span>
- <span class="dv">4</span>:<span class="st">      </span>of         <span class="dv">9</span>
- <span class="dv">5</span>:<span class="st">      </span>by         <span class="dv">9</span>
- <span class="dv">6</span>:<span class="st">      </span>as         <span class="dv">8</span>
- <span class="dv">7</span>:<span class="st">     </span>in.         <span class="dv">6</span>
- <span class="dv">8</span>:<span class="st">       </span>X         <span class="dv">5</span>
- <span class="dv">9</span>:<span class="st">     </span>are         <span class="dv">5</span>
-<span class="dv">10</span>:<span class="st">    </span>that         <span class="dv">5</span></code></pre></div>
+ <span class="dv">1</span><span class="op">:</span><span class="st">     </span>the        <span class="dv">28</span>
+ <span class="dv">2</span><span class="op">:</span><span class="st"> </span>planets        <span class="dv">15</span>
+ <span class="dv">3</span><span class="op">:</span><span class="st">     </span>and        <span class="dv">11</span>
+ <span class="dv">4</span><span class="op">:</span><span class="st">      </span>of         <span class="dv">9</span>
+ <span class="dv">5</span><span class="op">:</span><span class="st">      </span>by         <span class="dv">9</span>
+ <span class="dv">6</span><span class="op">:</span><span class="st">      </span>as         <span class="dv">8</span>
+ <span class="dv">7</span><span class="op">:</span><span class="st">     </span>in.         <span class="dv">6</span>
+ <span class="dv">8</span><span class="op">:</span><span class="st">       </span>X         <span class="dv">5</span>
+ <span class="dv">9</span><span class="op">:</span><span class="st">     </span>are         <span class="dv">5</span>
+<span class="dv">10</span><span class="op">:</span><span class="st">    </span>that         <span class="dv">5</span></code></pre></div>
 <p><br></p>
 <p>More information about the <em>sparse_term_matrix</em> class can be found in the package documentation.</p>
 <p><br></p>
@@ -824,9 +824,9 @@ init$<span class="kw">most_frequent_terms</span>(<span class="dt">keep_terms =</
 <ul>
 <li><strong>path_2vector</strong> : is a helper method which takes a path to a file or folder of files and returns the content in form of a vector, <br></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init =<span class="st"> </span>token_stats$<span class="kw">new</span>(<span class="dt">path_2file =</span> <span class="st">&quot;/planets.txt&quot;</span>)    <span class="co"># input the 'planets.txt' file</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init =<span class="st"> </span>token_stats<span class="op">$</span><span class="kw">new</span>(<span class="dt">path_2file =</span> <span class="st">&quot;/planets.txt&quot;</span>)    <span class="co"># input the 'planets.txt' file</span>
 
-vec =<span class="st"> </span>init$<span class="kw">path_2vector</span>()</code></pre></div>
+vec =<span class="st"> </span>init<span class="op">$</span><span class="kw">path_2vector</span>()</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">[<span class="dv">1</span>] <span class="st">&quot;The term planet is ancient, with ties to history, astrology, science, mythology, and religion. Several planets in the Solar System can be seen with the naked eye. These were regarded by many early cultures as divine, or as emissaries of deities. As scientific knowledge advanced, human perception of the planets changed, incorporating a number of disparate objects&quot;</span> ....
 
 [<span class="dv">2</span>] <span class="st">&quot;Although eight of the planetary bodies discovered before 1950 remain&quot;</span> ....
@@ -854,7 +854,7 @@ and
 religion
 several
 planets
-in
+<span class="cf">in</span>
 the
 solar
 system
@@ -870,38 +870,38 @@ were</code></pre></div>
 <p><br></p>
 <p>this method would return,</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init =<span class="st"> </span>token_stats$<span class="kw">new</span>(<span class="dt">path_2file =</span> <span class="st">'freq_vocab.txt'</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init =<span class="st"> </span>token_stats<span class="op">$</span><span class="kw">new</span>(<span class="dt">path_2file =</span> <span class="st">'freq_vocab.txt'</span>)
 
-init$<span class="kw">freq_distribution</span>()
+init<span class="op">$</span><span class="kw">freq_distribution</span>()
 
-init$<span class="kw">print_frequency</span>(<span class="dt">subset =</span> <span class="ot">NULL</span>)</code></pre></div>
+init<span class="op">$</span><span class="kw">print_frequency</span>(<span class="dt">subset =</span> <span class="ot">NULL</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">        words freq
- <span class="dv">1</span>:<span class="st">       </span>the    <span class="dv">3</span>
- <span class="dv">2</span>:<span class="st">      </span>with    <span class="dv">2</span>
- <span class="dv">3</span>:<span class="st">   </span>ancient    <span class="dv">1</span>
- <span class="dv">4</span>:<span class="st">       </span>and    <span class="dv">1</span>
- <span class="dv">5</span>:<span class="st"> </span>astrology    <span class="dv">1</span>
- <span class="dv">6</span>:<span class="st">        </span>be    <span class="dv">1</span>
- <span class="dv">7</span>:<span class="st">       </span>can    <span class="dv">1</span>
- <span class="dv">8</span>:<span class="st">       </span>eye    <span class="dv">1</span>
- <span class="dv">9</span>:<span class="st">   </span>history    <span class="dv">1</span>
-<span class="dv">10</span>:<span class="st">        </span>in    <span class="dv">1</span>
-<span class="dv">11</span>:<span class="st">        </span>is    <span class="dv">1</span>
-<span class="dv">12</span>:<span class="st"> </span>mythology    <span class="dv">1</span>
-<span class="dv">13</span>:<span class="st">     </span>naked    <span class="dv">1</span>
-<span class="dv">14</span>:<span class="st">    </span>planet    <span class="dv">1</span>
-<span class="dv">15</span>:<span class="st">   </span>planets    <span class="dv">1</span>
-<span class="dv">16</span>:<span class="st">  </span>religion    <span class="dv">1</span>
-<span class="dv">17</span>:<span class="st">   </span>science    <span class="dv">1</span>
-<span class="dv">18</span>:<span class="st">      </span>seen    <span class="dv">1</span>
-<span class="dv">19</span>:<span class="st">   </span>several    <span class="dv">1</span>
-<span class="dv">20</span>:<span class="st">     </span>solar    <span class="dv">1</span>
-<span class="dv">21</span>:<span class="st">    </span>system    <span class="dv">1</span>
-<span class="dv">22</span>:<span class="st">      </span>term    <span class="dv">1</span>
-<span class="dv">23</span>:<span class="st">     </span>these    <span class="dv">1</span>
-<span class="dv">24</span>:<span class="st">      </span>ties    <span class="dv">1</span>
-<span class="dv">25</span>:<span class="st">        </span>to    <span class="dv">1</span>
-<span class="dv">26</span>:<span class="st">      </span>were    <span class="dv">1</span>
+ <span class="dv">1</span><span class="op">:</span><span class="st">       </span>the    <span class="dv">3</span>
+ <span class="dv">2</span><span class="op">:</span><span class="st">      </span>with    <span class="dv">2</span>
+ <span class="dv">3</span><span class="op">:</span><span class="st">   </span>ancient    <span class="dv">1</span>
+ <span class="dv">4</span><span class="op">:</span><span class="st">       </span>and    <span class="dv">1</span>
+ <span class="dv">5</span><span class="op">:</span><span class="st"> </span>astrology    <span class="dv">1</span>
+ <span class="dv">6</span><span class="op">:</span><span class="st">        </span>be    <span class="dv">1</span>
+ <span class="dv">7</span><span class="op">:</span><span class="st">       </span>can    <span class="dv">1</span>
+ <span class="dv">8</span><span class="op">:</span><span class="st">       </span>eye    <span class="dv">1</span>
+ <span class="dv">9</span><span class="op">:</span><span class="st">   </span>history    <span class="dv">1</span>
+<span class="dv">10</span><span class="op">:</span><span class="st">        </span><span class="cf">in</span>    <span class="dv">1</span>
+<span class="dv">11</span><span class="op">:</span><span class="st">        </span>is    <span class="dv">1</span>
+<span class="dv">12</span><span class="op">:</span><span class="st"> </span>mythology    <span class="dv">1</span>
+<span class="dv">13</span><span class="op">:</span><span class="st">     </span>naked    <span class="dv">1</span>
+<span class="dv">14</span><span class="op">:</span><span class="st">    </span>planet    <span class="dv">1</span>
+<span class="dv">15</span><span class="op">:</span><span class="st">   </span>planets    <span class="dv">1</span>
+<span class="dv">16</span><span class="op">:</span><span class="st">  </span>religion    <span class="dv">1</span>
+<span class="dv">17</span><span class="op">:</span><span class="st">   </span>science    <span class="dv">1</span>
+<span class="dv">18</span><span class="op">:</span><span class="st">      </span>seen    <span class="dv">1</span>
+<span class="dv">19</span><span class="op">:</span><span class="st">   </span>several    <span class="dv">1</span>
+<span class="dv">20</span><span class="op">:</span><span class="st">     </span>solar    <span class="dv">1</span>
+<span class="dv">21</span><span class="op">:</span><span class="st">    </span>system    <span class="dv">1</span>
+<span class="dv">22</span><span class="op">:</span><span class="st">      </span>term    <span class="dv">1</span>
+<span class="dv">23</span><span class="op">:</span><span class="st">     </span>these    <span class="dv">1</span>
+<span class="dv">24</span><span class="op">:</span><span class="st">      </span>ties    <span class="dv">1</span>
+<span class="dv">25</span><span class="op">:</span><span class="st">        </span>to    <span class="dv">1</span>
+<span class="dv">26</span><span class="op">:</span><span class="st">      </span>were    <span class="dv">1</span>
         words freq</code></pre></div>
 <p><br></p>
 <ul>
@@ -910,11 +910,11 @@ init$<span class="kw">print_frequency</span>(<span class="dt">subset =</span> <s
 <p><br></p>
 <p>for the previously mentioned <em>‘freq_vocab.txt’</em> it would output,</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  init =<span class="st"> </span>token_stats$<span class="kw">new</span>(<span class="dt">path_2file =</span> <span class="st">'freq_vocab.txt'</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  init =<span class="st"> </span>token_stats<span class="op">$</span><span class="kw">new</span>(<span class="dt">path_2file =</span> <span class="st">'freq_vocab.txt'</span>)
 
-  vec_tmp =<span class="st"> </span>init$<span class="kw">count_character</span>()
+  vec_tmp =<span class="st"> </span>init<span class="op">$</span><span class="kw">count_character</span>()
   
-  init$<span class="kw">print_count_character</span>(<span class="dt">number =</span> <span class="dv">3</span>)</code></pre></div>
+  init<span class="op">$</span><span class="kw">print_count_character</span>(<span class="dt">number =</span> <span class="dv">3</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># words with number of characters equal to 3</span>
 
 [<span class="dv">1</span>] <span class="st">&quot;the&quot;</span> <span class="st">&quot;and&quot;</span> <span class="st">&quot;the&quot;</span> <span class="st">&quot;can&quot;</span> <span class="st">&quot;the&quot;</span> <span class="st">&quot;eye&quot;</span></code></pre></div>
@@ -938,9 +938,9 @@ tok =<span class="st"> </span><span class="kw">tokenize_transform_text</span>(<s
                               
                               <span class="dt">n_gram_delimiter =</span> <span class="st">&quot;_&quot;</span>)
 
-init =<span class="st"> </span>token_stats$<span class="kw">new</span>(<span class="dt">x_vec =</span> tok$token)      <span class="co"># vector data as input</span>
+init =<span class="st"> </span>token_stats<span class="op">$</span><span class="kw">new</span>(<span class="dt">x_vec =</span> tok<span class="op">$</span>token)      <span class="co"># vector data as input</span>
 
-vec_tmp =<span class="st"> </span>init$<span class="kw">collocation_words</span>()</code></pre></div>
+vec_tmp =<span class="st"> </span>init<span class="op">$</span><span class="kw">collocation_words</span>()</code></pre></div>
 <p><br></p>
 <p>the example output of the <em>vec_tmp</em> vector is,</p>
 <p><br></p>
@@ -952,7 +952,7 @@ vec_tmp =<span class="st"> </span>init$<span class="kw">collocation_words</span>
 <p><br></p>
 <p>and the <em>print_collocations</em> method returns the coolocations for the example word <em>ancient</em>,</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res =<span class="st"> </span>init$<span class="kw">print_collocations</span>(<span class="dt">word =</span> <span class="st">&quot;ancient&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res =<span class="st"> </span>init<span class="op">$</span><span class="kw">print_collocations</span>(<span class="dt">word =</span> <span class="st">&quot;ancient&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    is   with   ties planet 
  <span class="fl">0.333</span>  <span class="fl">0.333</span>  <span class="fl">0.167</span>  <span class="fl">0.167</span> </code></pre></div>
 <p><br></p>
@@ -964,16 +964,16 @@ vec_tmp =<span class="st"> </span>init$<span class="kw">collocation_words</span>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first initialization of token_stats </span>
 
-init =<span class="st"> </span>token_stats$<span class="kw">new</span>(<span class="dt">path_2file =</span> <span class="st">'freq_vocab.txt'</span>)
+init =<span class="st"> </span>token_stats<span class="op">$</span><span class="kw">new</span>(<span class="dt">path_2file =</span> <span class="st">'freq_vocab.txt'</span>)
 
-tmp_vec =<span class="st"> </span>init$<span class="kw">path_2vector</span>()      <span class="co"># convert to vector</span>
+tmp_vec =<span class="st"> </span>init<span class="op">$</span><span class="kw">path_2vector</span>()      <span class="co"># convert to vector</span>
 
 
 <span class="co"># second initialization to compute the dissimilarity matrix </span>
 
-init_tok =<span class="st"> </span>token_stats$<span class="kw">new</span>(<span class="dt">x_vec =</span> tmp_vec)
+init_tok =<span class="st"> </span>token_stats<span class="op">$</span><span class="kw">new</span>(<span class="dt">x_vec =</span> tmp_vec)
 
-res =<span class="st"> </span>init_tok$<span class="kw">string_dissimilarity_matrix</span>(<span class="dt">dice_n_gram =</span> <span class="dv">2</span>, <span class="dt">method =</span> <span class="st">&quot;dice&quot;</span>, 
+res =<span class="st"> </span>init_tok<span class="op">$</span><span class="kw">string_dissimilarity_matrix</span>(<span class="dt">dice_n_gram =</span> <span class="dv">2</span>, <span class="dt">method =</span> <span class="st">&quot;dice&quot;</span>, 
                                          
                                           <span class="dt">split_separator =</span> <span class="st">&quot; &quot;</span>, <span class="dt">dice_thresh =</span> <span class="fl">1.0</span>, 
                                          
@@ -1018,16 +1018,16 @@ science   <span class="fl">1.0000000</span>    <span class="dv">1</span> <span c
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first initialization of token_stats </span>
 
-init =<span class="st"> </span>token_stats$<span class="kw">new</span>(<span class="dt">path_2file =</span> <span class="st">'freq_vocab.txt'</span>)
+init =<span class="st"> </span>token_stats<span class="op">$</span><span class="kw">new</span>(<span class="dt">path_2file =</span> <span class="st">'freq_vocab.txt'</span>)
 
-tmp_vec =<span class="st"> </span>init$<span class="kw">path_2vector</span>()    <span class="co"># convert to vector</span>
+tmp_vec =<span class="st"> </span>init<span class="op">$</span><span class="kw">path_2vector</span>()    <span class="co"># convert to vector</span>
 
 
 <span class="co"># second initialization to compute the look-up-table</span>
 
-init_lk =<span class="st"> </span>token_stats$<span class="kw">new</span>(<span class="dt">x_vec =</span> tmp_vec)
+init_lk =<span class="st"> </span>token_stats<span class="op">$</span><span class="kw">new</span>(<span class="dt">x_vec =</span> tmp_vec)
 
-is_vec =<span class="st"> </span>init_lk$<span class="kw">look_up_table</span>(<span class="dt">n_grams =</span> <span class="dv">3</span>)</code></pre></div>
+is_vec =<span class="st"> </span>init_lk<span class="op">$</span><span class="kw">look_up_table</span>(<span class="dt">n_grams =</span> <span class="dv">3</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># example output for the 'is_vec' vector</span>
 
 [<span class="dv">1</span>] <span class="st">&quot;&quot;</span>    <span class="st">&quot;ake&quot;</span> <span class="st">&quot;_an&quot;</span> <span class="st">&quot;anc&quot;</span> <span class="st">&quot;ane&quot;</span> <span class="st">&quot;_as&quot;</span> <span class="st">&quot;ast&quot;</span> <span class="st">&quot;cie&quot;</span> <span class="st">&quot;eli&quot;</span> <span class="st">&quot;enc&quot;</span> <span class="st">&quot;era&quot;</span> <span class="st">&quot;eve&quot;</span> ..... 
@@ -1036,7 +1036,7 @@ is_vec =<span class="st"> </span>init_lk$<span class="kw">look_up_table</span>(<
 <p><br></p>
 <p>then retrieve words with same n-grams,</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init_lk$<span class="kw">print_words_lookup_tbl</span>(<span class="dt">n_gram =</span> <span class="st">&quot;log&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">init_lk<span class="op">$</span><span class="kw">print_words_lookup_tbl</span>(<span class="dt">n_gram =</span> <span class="st">&quot;log&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;_astrology_&quot;</span> <span class="st">&quot;_mythology_&quot;</span></code></pre></div>
 <p><br></p>
 <p>the underscores are necessary to distinguish the begin and end of each word when computing the n-grams.</p>
@@ -1055,7 +1055,7 @@ is_vec =<span class="st"> </span>init_lk$<span class="kw">look_up_table</span>(<
 <span class="kw">library</span>(textTinyR)</code></pre></div>
 <pre><code>## Loading required package: Matrix</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
-dsm =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">0</span>:<span class="dv">1</span>, <span class="dv">100</span>, <span class="dt">replace =</span> T), <span class="dv">10</span>, <span class="dv">10</span>)
+dsm =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, <span class="dv">100</span>, <span class="dt">replace =</span> T), <span class="dv">10</span>, <span class="dv">10</span>)
 
 res_sp =<span class="st"> </span><span class="kw">dense_2sparse</span>(dsm)
 
@@ -1162,7 +1162,7 @@ res_txt =<span class="st"> </span><span class="kw">tokenize_transform_text</span
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># example output :</span>
 
-$token
+<span class="op">$</span>token
   [<span class="dv">1</span>] <span class="st">&quot;ter&quot;</span>          <span class="st">&quot;planet&quot;</span>        <span class="st">&quot;anci&quot;</span>         <span class="st">&quot;ties&quot;</span>         <span class="st">&quot;hist&quot;</span>  ...
 
   [<span class="dv">16</span>] <span class="st">&quot;early&quot;</span>        <span class="st">&quot;cultu&quot;</span>        <span class="st">&quot;divi&quot;</span>         <span class="st">&quot;emissar&quot;</span>      <span class="st">&quot;deit&quot;</span> ....
@@ -1184,9 +1184,9 @@ $token
 
 <span class="co"># the input should be a vector of documents</span>
 
-init =<span class="st"> </span>token_stats$<span class="kw">new</span>(<span class="dt">path_2file =</span> <span class="st">&quot;/planets.txt&quot;</span>)
+init =<span class="st"> </span>token_stats<span class="op">$</span><span class="kw">new</span>(<span class="dt">path_2file =</span> <span class="st">&quot;/planets.txt&quot;</span>)
 
-inp =<span class="st"> </span>init$<span class="kw">path_2vector</span>()   <span class="co"># convert text file to character vector</span>
+inp =<span class="st"> </span>init<span class="op">$</span><span class="kw">path_2vector</span>()   <span class="co"># convert text file to character vector</span>
 
 
 <span class="co"># run the function using the input-vector</span>
@@ -1213,7 +1213,7 @@ res_dct =<span class="st"> </span><span class="kw">tokenize_transform_vec_docs</
 <p><br></p>
 <p>the output is a vector of <em>transformed documents</em> after the english stopwords were removed and the terms were stemmed (<em>porter2-stemming</em>),</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">$token
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span>token
 [<span class="dv">1</span>] <span class="st">&quot;term planet ancient tie histori astrolog scienc mytholog religion planet solar .....&quot;</span>
 
 [<span class="dv">2</span>] <span class="st">&quot;planetari bodi discov 1950 remain planet modern definit celesti bodi cere palla .....&quot;</span>
@@ -1252,14 +1252,14 @@ res_dct_tok =<span class="st"> </span><span class="kw">tokenize_transform_vec_do
                                   
                                           <span class="dt">threads =</span> <span class="dv">1</span>)</code></pre></div>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">$token
-$token[[<span class="dv">1</span>]]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span>token
+<span class="op">$</span>token[[<span class="dv">1</span>]]
  [<span class="dv">1</span>] <span class="st">&quot;term&quot;</span>        <span class="st">&quot;planet&quot;</span>    <span class="st">&quot;ancient&quot;</span>  <span class="st">&quot;tie&quot;</span>   <span class="st">&quot;histori&quot;</span>   ..... 
 
-$token[[<span class="dv">2</span>]]
+<span class="op">$</span>token[[<span class="dv">2</span>]]
  [<span class="dv">1</span>] <span class="st">&quot;planetari&quot;</span>    <span class="st">&quot;bodi&quot;</span>     <span class="st">&quot;discov&quot;</span>   <span class="st">&quot;1950&quot;</span>   <span class="st">&quot;remain&quot;</span>   .....    
 
-$token[[<span class="dv">3</span>]]
+<span class="op">$</span>token[[<span class="dv">3</span>]]
  [<span class="dv">1</span>] <span class="st">&quot;planet&quot;</span>       <span class="st">&quot;thought&quot;</span>  <span class="st">&quot;ptolemi&quot;</span>  <span class="st">&quot;orbit&quot;</span>   <span class="st">&quot;earth&quot;</span>   .....   
 
 
@@ -1358,20 +1358,20 @@ PATH =<span class="st"> &quot;/planets.txt&quot;</span>
 
 <span class="co"># example input &quot;example_file.xml&quot; file :</span>
 
-&lt;?xml version=<span class="st">&quot;1.0&quot;</span>?&gt;
-<span class="er">&lt;</span>sked&gt;
-<span class="st">  </span><span class="er">&lt;</span>version&gt;<span class="dv">2</span>&lt;<span class="er">/</span>version&gt;
-<span class="st">  </span><span class="er">&lt;</span>flight&gt;
-<span class="st">    </span><span class="er">&lt;</span>carrier&gt;BA&lt;<span class="er">/</span>carrier&gt;
-<span class="st">    </span><span class="er">&lt;</span>number&gt;<span class="dv">4001</span>&lt;<span class="er">/</span>number&gt;
-<span class="st">    </span><span class="er">&lt;</span>date&gt;<span class="dv">2011-07-21</span>&lt;<span class="er">/</span>date&gt;
-<span class="st">  </span><span class="er">&lt;/</span>flight&gt;
-<span class="st">  </span><span class="er">&lt;</span>flight cancelled=<span class="st">&quot;true&quot;</span>&gt;
-<span class="st">    </span><span class="er">&lt;</span>carrier&gt;BA&lt;<span class="er">/</span>carrier&gt;
-<span class="st">    </span><span class="er">&lt;</span>number&gt;<span class="dv">4002</span>&lt;<span class="er">/</span>number&gt;
-<span class="st">    </span><span class="er">&lt;</span>date&gt;<span class="dv">2011-07-21</span>&lt;<span class="er">/</span>date&gt;
-<span class="st">  </span><span class="er">&lt;/</span>flight&gt;
-<span class="er">&lt;/</span>sked&gt;</code></pre></div>
+<span class="op">&lt;</span>?xml version=<span class="st">&quot;1.0&quot;</span>?<span class="op">&gt;</span>
+<span class="er">&lt;</span>sked<span class="op">&gt;</span>
+<span class="st">  </span><span class="er">&lt;</span>version<span class="op">&gt;</span><span class="dv">2</span><span class="op">&lt;</span><span class="er">/</span>version<span class="op">&gt;</span>
+<span class="st">  </span><span class="er">&lt;</span>flight<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>carrier<span class="op">&gt;</span>BA<span class="op">&lt;</span><span class="er">/</span>carrier<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>number<span class="op">&gt;</span><span class="dv">4001</span><span class="op">&lt;</span><span class="er">/</span>number<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>date<span class="op">&gt;</span><span class="dv">2011</span><span class="op">-</span><span class="dv">07</span><span class="op">-</span><span class="dv">21</span><span class="op">&lt;</span><span class="er">/</span>date<span class="op">&gt;</span>
+<span class="st">  </span><span class="er">&lt;/</span>flight<span class="op">&gt;</span>
+<span class="st">  </span><span class="er">&lt;</span>flight cancelled=<span class="st">&quot;true&quot;</span><span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>carrier<span class="op">&gt;</span>BA<span class="op">&lt;</span><span class="er">/</span>carrier<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>number<span class="op">&gt;</span><span class="dv">4002</span><span class="op">&lt;</span><span class="er">/</span>number<span class="op">&gt;</span>
+<span class="st">    </span><span class="er">&lt;</span>date<span class="op">&gt;</span><span class="dv">2011</span><span class="op">-</span><span class="dv">07</span><span class="op">-</span><span class="dv">21</span><span class="op">&lt;</span><span class="er">/</span>date<span class="op">&gt;</span>
+<span class="st">  </span><span class="er">&lt;/</span>flight<span class="op">&gt;</span>
+<span class="er">&lt;/</span>sked<span class="op">&gt;</span></code></pre></div>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fp =<span class="st"> </span><span class="kw">text_file_parser</span>(<span class="dt">input_path_file =</span> <span class="st">&quot;example_file.xml&quot;</span>, 
                       
@@ -1380,7 +1380,7 @@ PATH =<span class="st"> &quot;/planets.txt&quot;</span>
                       <span class="dt">start_query =</span> <span class="st">'&lt;number&gt;'</span>, <span class="dt">end_query =</span> <span class="st">'&lt;/number&gt;'</span>,
                       
                       <span class="dt">min_lines =</span> <span class="dv">1</span>, <span class="dt">trimmed_line =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;example_output_file.txt&quot;</span> :
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;example_output_file.txt&quot;</span> <span class="op">:</span>
 <span class="st">  </span>
 <span class="dv">4001</span>
 <span class="dv">4002</span></code></pre></div>
@@ -1412,7 +1412,7 @@ pars_dat =<span class="st"> </span><span class="kw">vocabulary_parser</span>(<sp
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

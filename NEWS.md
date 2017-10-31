@@ -1,4 +1,11 @@
 
+
+## textTinyR 1.0.8
+
+I removed the *threads* parameter from the *term_associations* method of the *sparse_term_matrix* R6-class.
+I modified the *OpenMP* clauses of the .cpp files to address the ASAN errors.
+
+
 ## textTinyR 1.0.7
 
 I added the triplet_data() method in the sparse_term_matrix R6 class

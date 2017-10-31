@@ -100,4 +100,3 @@ library(textTinyR)
 
 #                         to_lower = TRUE, split_string = TRUE)
 }
-
