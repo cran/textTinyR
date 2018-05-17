@@ -1,4 +1,11 @@
 
+## textTinyR 1.1.1
+
+* I added an id number to each test case in the tests folder in order to spot and address the clang-UBSAN error
+* I removed the *-lboost_system* flag from the *Makevars* file
+* I modified the *text_file_parser* function (the documentation and examples too) due to an error
+
+
 ## textTinyR 1.1.0
 
 * *boost-locale* is no longer a system requirement for the textTinyR package

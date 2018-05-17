@@ -2,7 +2,7 @@
 ## textTinyR
 <br>
 
-The textTinyR package consists of text pre-processing functions for small or big data files. More details on the functionality of the textTinyR can be found in the package Vignette. The R package can be installed, in the following OS's: Linux, Mac and Windows. However, there is one limitation : *chinese*, *japanese*, *korean*, *thai* or *languages with ambiguous word boundaries* are not supported.
+The *textTinyR* package consists of text processing functions for small or big data files. More details on the functionality of textTinyR can be found in the package Documentation and Vignettes. The R package can be installed, in the following Operating Systems: Linux, Mac and Windows. However, there is one limitation : *chinese*, *japanese*, *korean*, *thai* or *languages with ambiguous word boundaries* are not supported.
 
 
 <br>
