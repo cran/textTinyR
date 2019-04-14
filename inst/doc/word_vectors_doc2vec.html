@@ -12,14 +12,14 @@
 
 <meta name="author" content="Lampros Mouselimis" />
 
-<meta name="date" content="2018-07-25" />
+<meta name="date" content="2019-04-14" />
 
 <title>Word vectors - doc2vec - text clustering</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -55,7 +55,29 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -70,7 +92,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Word vectors - doc2vec - text clustering</h1>
 <h4 class="author"><em>Lampros Mouselimis</em></h4>
-<h4 class="date"><em>2018-07-25</em></h4>
+<h4 class="date"><em>2019-04-14</em></h4>
 
 
 
@@ -196,8 +218,11 @@ gl_term_w =<span class="st"> </span>utl<span class="op">$</span><span class="kw"
                                                    <span class="dt">remove_stopwords =</span> T, <span class="dt">language =</span> <span class="st">&quot;english&quot;</span>, 
                                                    <span class="dt">min_num_char =</span> <span class="dv">3</span>, <span class="dt">max_num_char =</span> <span class="dv">100</span>, 
                                                    <span class="dt">stemmer =</span> <span class="st">&quot;porter2_stemmer&quot;</span>, 
-                                                   <span class="dt">path_2folder =</span> <span class="st">&quot;/path_to_your_folder/&quot;</span>, 
-                                                   <span class="dt">threads =</span> <span class="dv">4</span>, <span class="dt">verbose =</span> T)</code></pre></div>
+                                                   <span class="dt">path_2folder =</span> <span class="st">&quot;/path_to_your_folder/&quot;</span>,
+                                                   <span class="dt">threads =</span> <span class="dv">1</span>,                     <span class="co"># whenever I save data to file set the number threads to 1</span>
+                                                   <span class="dt">verbose =</span> T)</code></pre></div>
+<p><br></p>
+<p><strong>UPDATE 11-04-2019</strong>: There is an <a href="https://github.com/mlampros/fastText">updated version of the fastText R package</a> which includes all the features of the ported <a href="https://github.com/facebookresearch/fastText">fasttext library</a>. Therefore the old <strong>fastTextR</strong> repository <strong>is archived</strong>. See also the corresponding <a href="http://mlampros.github.io/2019/04/11/fastText_updated_version/">blog-post</a>.</p>
 <p><br></p>
 <p>Then, I’ll load the previously saved data and I’ll use <a href="https://github.com/mlampros/fastTextR">fastTextR</a> to build the word-vectors,</p>
 <p><br></p>
@@ -240,7 +265,7 @@ total.number.lines.processed.output<span class="op">:</span><span class="st"> </
 <span class="co"># </span>
 <span class="co"># str(res_wv)</span></code></pre></div>
 <p><br></p>
-<p>Then, I can use one of the three methods (<em>sum_sqrt</em>, <em>min_max_norm</em>, <em>idf</em>) to receive the transformed vectors. These methods are based on the following <em>blog-posts</em> (see <a href="https://www.linkedin.com/pulse/duplicate-quora-question-abhishek-thakur">here</a> and <a href="http://www.erogol.com/duplicate-question-detection-deep-learning/">here</a> for references),</p>
+<p>Then, I can use one of the three methods (<em>sum_sqrt</em>, <em>min_max_norm</em>, <em>idf</em>) to receive the transformed vectors. These methods are based on the following <em>blog-posts</em> (see especially <strong><span></span>www.linkedin.com/pulse/duplicate-quora-question-abhishek-thakur</strong> and <strong><span></span>www.erogol.com/duplicate-question-detection-deep-learning</strong> ),</p>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">doc2_sum =<span class="st"> </span>init<span class="op">$</span><span class="kw">doc2vec_methods</span>(<span class="dt">method =</span> <span class="st">&quot;sum_sqrt&quot;</span>, <span class="dt">threads =</span> <span class="dv">6</span>)
 doc2_norm =<span class="st"> </span>init<span class="op">$</span><span class="kw">doc2vec_methods</span>(<span class="dt">method =</span> <span class="st">&quot;min_max_norm&quot;</span>, <span class="dt">threads =</span> <span class="dv">6</span>)
@@ -391,7 +416,7 @@ Time difference of <span class="fl">0.1685851</span> secs</code></pre></div>
 <p><em>References</em>:</p>
 <ul>
 <li><a href="https://miguelmalvarez.com/2015/03/20/classifying-reuters-21578-collection-with-python-representing-the-data/" class="uri">https://miguelmalvarez.com/2015/03/20/classifying-reuters-21578-collection-with-python-representing-the-data/</a></li>
-<li><a href="https://www.linkedin.com/pulse/duplicate-quora-question-abhishek-thakur" class="uri">https://www.linkedin.com/pulse/duplicate-quora-question-abhishek-thakur</a></li>
+<li><span></span>www.linkedin.com/pulse/duplicate-quora-question-abhishek-thakur</li>
 <li><a href="http://www.erogol.com/duplicate-question-detection-deep-learning/" class="uri">http://www.erogol.com/duplicate-question-detection-deep-learning/</a></li>
 <li><a href="https://www.tidytextmining.com/ngrams.html#visualizing-bigrams-in-other-texts" class="uri">https://www.tidytextmining.com/ngrams.html#visualizing-bigrams-in-other-texts</a></li>
 </ul>

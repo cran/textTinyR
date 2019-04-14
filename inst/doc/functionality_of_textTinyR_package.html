@@ -12,14 +12,14 @@
 
 <meta name="author" content="Lampros Mouselimis" />
 
-<meta name="date" content="2018-07-25" />
+<meta name="date" content="2019-04-14" />
 
 <title>Functionality of the textTinyR package</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -55,7 +55,29 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -70,7 +92,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Functionality of the textTinyR package</h1>
 <h4 class="author"><em>Lampros Mouselimis</em></h4>
-<h4 class="date"><em>2018-07-25</em></h4>
+<h4 class="date"><em>2019-04-14</em></h4>
 
 
 
@@ -591,6 +613,9 @@ wordcloud<span class="op">::</span><span class="kw">wordcloud</span>(<span class
 </div>
 <div id="word-vectors" class="section level4">
 <h4><em>word vectors</em></h4>
+<p><br></p>
+<p><strong>UPDATE 11-04-2019</strong>: There is an <a href="https://github.com/mlampros/fastText">updated version of the fastText R package</a> which includes all the features of the ported <a href="https://github.com/facebookresearch/fastText">fasttext library</a>. Therefore the old <strong>fastTextR</strong> repository <strong>is archived</strong>. See also the corresponding <a href="http://mlampros.github.io/2019/04/11/fastText_updated_version/">blog-post</a>.</p>
+<p><br></p>
 <p>I’m currently also interested in word vectors and that’s why I also made R-wrappers for the <a href="http://nlp.stanford.edu/projects/glove/">GloVe</a> and the <a href="https://github.com/facebookresearch/fastText">fastText</a> word representation algorithms. The latter two reside in my Github account as separate repositories (<a href="https://github.com/mlampros/GloveR">GloveR</a> and <a href="https://github.com/mlampros/fastTextR">fastTextR</a>) and can be installed using the <em>install_github</em> function of the devtools package (devtools::install_github(‘mlampros/GloveR’), devtools::install_github(‘mlampros/fastTextR’)). <br> “A <a href="http://www.iro.umontreal.ca/~lisa/pointeurs/turian-wordrepresentations-acl10.pdf">word representation</a> is a mathematical object associated with each word, often a vector. Each dimension’s value corresponds to a feature and might even have a semantic or grammatical interpretation, so we call it a word feature. Conventionally, supervised lexicalized NLP approaches take a word and convert it to a symbolic ID, which is then transformed into a feature vector using a one-hot representation: The feature vector has the same length as the size of the vocabulary, and only one dimension is on.” <br></p>
 <p>Currently, there are many resources on the web on how to use <a href="https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html">pre-trained word vectors (embeddings) as input to neural networks</a>.</p>
 <p>In this vignette I’ll use only the <em>fastTextR</em> word representation algorithm, however detailed documentation and system requirements on how to use either the <em>GloveR</em> or the <em>fastTextR</em> can be found in the corresponding repository. If I would train the whole data file (32.2 GB) using the <em>fastTextR</em> wrapper, it would take (approx.) 15 hours,</p>
@@ -643,7 +668,7 @@ www <span class="op">-</span><span class="fl">0.31855</span> <span class="fl">0.
 ref <span class="fl">0.45236</span> <span class="op">-</span><span class="fl">0.21766</span> <span class="fl">0.6341</span> <span class="fl">0.76392</span> <span class="fl">0.53734</span> <span class="fl">0.66976</span> <span class="op">-</span><span class="fl">0.23162</span> .....
 http <span class="op">-</span><span class="fl">0.42692</span> <span class="fl">0.48637</span> <span class="fl">0.28622</span> <span class="fl">1.7019</span> <span class="op">-</span><span class="fl">0.25739</span> <span class="fl">0.25948</span> <span class="op">-</span><span class="fl">0.026582</span> ..... 
 namequot <span class="fl">0.56828</span> <span class="op">-</span><span class="fl">0.30782</span> <span class="fl">0.45707</span> <span class="fl">0.78346</span> <span class="fl">0.53727</span> <span class="fl">0.62445</span> ..... 
-– <span class="op">-</span><span class="fl">0.010281</span> <span class="fl">0.25528</span> <span class="fl">0.04708</span> <span class="fl">0.49679</span> <span class="fl">0.043934</span> <span class="fl">0.33733</span> <span class="op">-</span><span class="fl">0.42706</span> .....
+<span class="op">-</span><span class="st"> </span><span class="op">-</span><span class="fl">0.010281</span> <span class="fl">0.25528</span> <span class="fl">0.04708</span> <span class="fl">0.49679</span> <span class="fl">0.043934</span> <span class="fl">0.33733</span> <span class="op">-</span><span class="fl">0.42706</span> .....
 amp <span class="fl">0.06308</span> <span class="fl">0.11968</span> <span class="fl">0.11885</span> <span class="fl">0.67699</span> <span class="op">-</span><span class="fl">0.11448</span> <span class="fl">0.25183</span> <span class="op">-</span><span class="fl">0.48789</span> .....
 category <span class="op">-</span><span class="fl">1.5705</span> <span class="op">-</span><span class="fl">0.40638</span> <span class="fl">0.61064</span> <span class="fl">2.5691</span> <span class="op">-</span><span class="fl">0.52987</span> <span class="fl">0.68096</span> .....
 county <span class="op">-</span><span class="fl">0.85743</span> <span class="fl">0.071625</span> <span class="op">-</span><span class="fl">0.43393</span> <span class="fl">0.17157</span> <span class="op">-</span><span class="fl">0.32874</span> <span class="fl">1.771</span> ..... 
@@ -695,7 +720,7 @@ Warning message<span class="op">:</span>
 empty character strings present <span class="cf">in</span> the column names they will be replaced with proper characters
 
 <span class="dv">5</span> x <span class="dv">212</span> sparse Matrix of class <span class="st">&quot;dgCMatrix&quot;</span>
-   [[ suppressing <span class="dv">91</span> column names ‘X’, ‘X17th’, ‘X1950’ ... ]]
+   [[ suppressing <span class="dv">91</span> column names <span class="st">'X'</span>, <span class="st">'X17th'</span>, <span class="st">'X1950'</span> ... ]]
 
 [<span class="dv">1</span>,] <span class="op">-</span><span class="fl">0.001939591</span> .         .          <span class="fl">0.009747774</span> <span class="fl">0.01949555</span>   ......         
 [<span class="dv">2</span>,] <span class="op">-</span><span class="fl">0.003255742</span> .         <span class="fl">0.01636233</span> .           .            ......         
