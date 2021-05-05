@@ -4,42 +4,26 @@
 \name{Doc2Vec}
 \alias{Doc2Vec}
 \title{Conversion of text documents to word-vector-representation features ( Doc2Vec )}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
 \usage{
-# utl <- Doc2Vec$new(token_list = NULL, word_vector_FILE = NULL, 
+# utl <- Doc2Vec$new(token_list = NULL, word_vector_FILE = NULL,
 
        #                    print_every_rows = 10000, verbose = FALSE,
-       
+
        #                    copy_data = FALSE)
-}
-\arguments{
-\item{token_list}{either NULL or a list of tokenized text documents}
-
-\item{word_vector_FILE}{a valid path to a text file, where the word-vectors are saved}
-
-\item{print_every_rows}{a numeric value greater than 1 specifying the print intervals. Frequent output in the R session can slow down the function especially in case of big files.}
-
-\item{verbose}{either TRUE or FALSE. If TRUE then information will be printed out in the R session.}
-
-\item{method}{a character string specifying the method to use. One of \emph{sum_sqrt}, \emph{min_max_norm} or \emph{idf}. See the details section for more information.}
-
-\item{global_term_weights}{either NULL or the output of the \emph{global_term_weights} method of the textTinyR package. See the details section for more information.}
-
-\item{threads}{a numeric value specifying the number of cores to run in parallel}
-
-\item{copy_data}{either TRUE or FALSE. If FALSE then a pointer will be created and no copy of the initial data takes place (memory efficient especially for big datasets). This is an alternative way to pre-process the data.}
 }
 \value{
 a matrix
 }
 \description{
 Conversion of text documents to word-vector-representation features ( Doc2Vec )
+
+Conversion of text documents to word-vector-representation features ( Doc2Vec )
 }
 \details{
 the \emph{pre_processed_wv} method should be used after the initialization of the \emph{Doc2Vec} class, if the \emph{copy_data} parameter is set to TRUE, in order to inspect the pre-processed word-vectors.
 
-The \emph{global_term_weights} method is part of the \emph{sparse_term_matrix} R6 class of the \emph{textTinyR package}. One can come to the correct \emph{global_term_weights} by using the 
-\emph{sparse_term_matrix} class and by setting the \emph{tf_idf} parameter to FALSE and the \emph{normalize} parameter to NULL. In \emph{Doc2Vec} class, if method equals to \emph{idf} then the \emph{global_term_weights} parameter should not be equal to NULL. 
+The \emph{global_term_weights} method is part of the \emph{sparse_term_matrix} R6 class of the \emph{textTinyR package}. One can come to the correct \emph{global_term_weights} by using the
+\emph{sparse_term_matrix} class and by setting the \emph{tf_idf} parameter to FALSE and the \emph{normalize} parameter to NULL. In \emph{Doc2Vec} class, if method equals to \emph{idf} then the \emph{global_term_weights} parameter should not be equal to NULL.
 
 Explanation of the various \emph{methods} :
 
@@ -47,7 +31,7 @@ Explanation of the various \emph{methods} :
  \item{sum_sqrt}{Assuming that a single sublist of the token list will be taken into consideration : the wordvectors of each word of the sublist of tokens will be accumulated to a vector equal to the length of the wordvector (INITIAL_WORD_VECTOR). Then a scalar will be computed using this INITIAL_WORD_VECTOR in the following way : the INITIAL_WORD_VECTOR will be raised to the power of 2.0, then the resulted wordvector will be summed and the square-root will be calculated. The INITIAL_WORD_VECTOR will be divided by the resulted scalar}
  \item{min_max_norm}{Assuming that a single sublist of the token list will be taken into consideration : the wordvectors of each word of the sublist of tokens will be first \emph{min-max} normalized and then will be accumulated to a vector equal to the length of the initial wordvector}
  \item{idf}{Assuming that a single sublist of the token list will be taken into consideration : the word-vector of each term in the sublist will be multiplied with the corresponding \emph{idf} of the \emph{global weights term}}
- 
+
  There might be slight differences in the output data for each method depending on the input value of the \emph{copy_data} parameter (if it's either TRUE or FALSE).
 }
 }
@@ -89,4 +73,93 @@ init = Doc2Vec$new(token_list = tok_text, word_vector_FILE = PATH)
 
 out = init$doc2vec_methods(method = "sum_sqrt")
 }
-\keyword{datasets}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Doc2Vec$new()}}
+\item \href{#method-doc2vec_methods}{\code{Doc2Vec$doc2vec_methods()}}
+\item \href{#method-pre_processed_wv}{\code{Doc2Vec$pre_processed_wv()}}
+\item \href{#method-clone}{\code{Doc2Vec$clone()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Doc2Vec$new(
+  token_list = NULL,
+  word_vector_FILE = NULL,
+  print_every_rows = 10000,
+  verbose = FALSE,
+  copy_data = FALSE
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{token_list}}{either NULL or a list of tokenized text documents}
+
+\item{\code{word_vector_FILE}}{a valid path to a text file, where the word-vectors are saved}
+
+\item{\code{print_every_rows}}{a numeric value greater than 1 specifying the print intervals. Frequent output in the R session can slow down the function especially in case of big files.}
+
+\item{\code{verbose}}{either TRUE or FALSE. If TRUE then information will be printed out in the R session.}
+
+\item{\code{copy_data}}{either TRUE or FALSE. If FALSE then a pointer will be created and no copy of the initial data takes place (memory efficient especially for big datasets). This is an alternative way to pre-process the data.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-doc2vec_methods"></a>}}
+\if{latex}{\out{\hypertarget{method-doc2vec_methods}{}}}
+\subsection{Method \code{doc2vec_methods()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Doc2Vec$doc2vec_methods(
+  method = "sum_sqrt",
+  global_term_weights = NULL,
+  threads = 1
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{method}}{a character string specifying the method to use. One of \emph{sum_sqrt}, \emph{min_max_norm} or \emph{idf}. See the details section for more information.}
+
+\item{\code{global_term_weights}}{either NULL or the output of the \emph{global_term_weights} method of the textTinyR package. See the details section for more information.}
+
+\item{\code{threads}}{a numeric value specifying the number of cores to run in parallel}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pre_processed_wv"></a>}}
+\if{latex}{\out{\hypertarget{method-pre_processed_wv}{}}}
+\subsection{Method \code{pre_processed_wv()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Doc2Vec$pre_processed_wv()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Doc2Vec$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

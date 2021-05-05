@@ -1,12 +1,12 @@
-## ---- eval = T, echo = F-------------------------------------------------
+## ---- eval = T, echo = F------------------------------------------------------
 
  knitr::kable(data.frame(big_tokenize_transform = c('big_text_splitter()', 'big_text_parser()', 'big_text_tokenizer()', 'vocabulary_accumulator()', '',  '',  '',  '',  '',  ''), sparse_term_matrix = c('Term_Matrix()', 'Term_Matrix_Adjust()', 'term_associations()', 'most_frequent_terms()',  '',  '',  '',  '',  '',  ''), token_stats = c('path_2vector()', 'freq_distribution()',  'print_frequency()',  'count_character()',  'print_count_character()',  'collocation_words()',  'print_collocations()',  'string_dissimilarity_matrix()',  'look_up_table()',  'print_words_lookup_tbl()')))
 
-## ---- eval = T, echo = F-------------------------------------------------
+## ---- eval = T, echo = F------------------------------------------------------
 
  knitr::kable(data.frame(sparse_matrices = c('dense_2sparse()', 'load_sparse_binary()', 'matrix_sparsity()',  'save_sparse_binary()',  'sparse_Means()',  'sparse_Sums()', '', '', ''), tokenization = c('tokenize_transform_text()',  'tokenize_transform_vec_docs()', '',  '',  '',  '', '',   '',  ''), utilities = c('bytes_converter()',  'cosine_distance()',  'dice_distance()',  'levenshtein_distance()',  'read_characters()',  'read_rows()', 'text_file_parser()',  'utf_locale()',  'vocabulary_parser()')))
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  
 #  library(textTinyR)
@@ -22,7 +22,7 @@
 #                     write_2file = "/subs_output.txt")
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  # data subset : subs_output.txt
 #  
@@ -96,7 +96,7 @@
 #  .
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  
 #  btt = big_tokenize_transform$new(verbose = TRUE)
@@ -111,7 +111,7 @@
 #  
 #                    trimmed_line = FALSE)                   # the lines will be trimmed
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  approx. 10 % of data pre-processed
 #  approx. 20 % of data pre-processed
@@ -127,7 +127,7 @@
 #  It took 42.7098 minutes to complete the splitting
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  btt$big_text_parser(input_path_folder = "/enwiki_spl_data/", # the previously created folder
 #  
@@ -141,7 +141,7 @@
 #  
 #                      trimmed_line = TRUE)
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  ====================
 #  batch 1 begins ...
@@ -189,7 +189,7 @@
 #  It took 40.9034 minutes to complete the parsing
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  btt$big_text_tokenizer(input_path_folder = "/enwiki_parse/",   # the previously parsed data
 #  
@@ -216,7 +216,7 @@
 #                         path_2folder="/enwiki_token/")   # folder to save the transformed data
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  
 #  ====================================
@@ -300,7 +300,7 @@
 #  It took 111.689 minutes to complete tokenization
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  init$vocabulary_accumulator(input_path_folder = "/enwiki_vocab/",
 #  
@@ -308,21 +308,21 @@
 #  
 #                              max_num_chars = 50)
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  vocabulary.of.batch 40 will.be.merged ...	minutes.to.merge.sort.batches: 4.57273
 #  
 #  	minutes.to.save.data: 0.48584
 #  
 
-## ---- eval = T, echo = F-------------------------------------------------
+## ---- eval = T, echo = F------------------------------------------------------
 
  knitr::kable(data.frame(terms = c("lt", "refgt", "quot", "gt", "user", "category", 
 "www", "http"), frequency = c(111408435L, 49197149L, 48688082L, 47466149L, 
 32042007L, 30619748L, 25358252L, 23008243L)))
 
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  rdr_vocab = textTinyR::read_rows(input_file = "/VOCAB.txt", read_delimiter = "\n",
 #  
@@ -349,7 +349,7 @@
 #                       rot.per = .15, colors = pal2)
 #  
 
-## ---- fig.width = 5.0, fig.height = 5.0, eval = F, echo = F--------------
+## ---- fig.width = 5.0, fig.height = 5.0, eval = F, echo = F-------------------
 #  
 #  # to reproduce the wordcloud (dependencies : readr, RColorBrewer, wordcloud)
 #  
@@ -371,7 +371,7 @@
 #  wordcloud::wordcloud(words = vocab_sbs$X1, freq = vocab_sbs$X2, scale = c(4.5, 0.8), random.order = FALSE, rot.per = .15, colors = pal2)
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  library(fastTextR)
 #  
@@ -380,7 +380,7 @@
 #                      output_path = "/model", method = "skipgram", verbose = 2)
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  Read 4018M words
 #  Number of words:  12827221
@@ -388,7 +388,7 @@
 #  Progress: 0.2%  words/sec/thread: 89664  lr: 0.099841  loss: 1.055581  eta: 15h32m  14m
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  
 #  reduced_data = read_characters(input_file = "/output_token_single_file.txt",
@@ -410,7 +410,7 @@
 #  
 #                      thread = 4, verbose = 2)
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  Read 124M words
 #  Number of words:  5029370
@@ -420,7 +420,7 @@
 #  time to complete : 33.53577 mins
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  
 #  lt 0.12207 0.16117 0.4641 0.73876 0.43968 0.63911 -0.53747 0.1398 .....
@@ -445,7 +445,7 @@
 #  .
 #  .
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  The term planet is ancient, with ties to history, astrology, science, mythology, and religion. Several planets in the Solar System can be seen with the naked eye. These were regarded by many early cultures as divine, or as emissaries of deities. As scientific knowledge advanced, human perception of the planets changed, incorporating a number of disparate objects. In 2006, the International Astronomical Union (IAU) officially adopted a resolution defining planets within the Solar System. This definition is controversial because it excludes many objects of planetary mass based on where or what they orbit.
 #  Although eight of the planetary bodies discovered before 1950 remain planets under the modern definition, some celestial bodies, such as Ceres, Pallas, Juno and Vesta (each an object in the solar asteroid belt), and Pluto (the first trans-Neptunian object discovered), that were once considered planets by the scientific community, are no longer viewed as such.
@@ -454,7 +454,7 @@
 #  Planets are generally divided into two main types: large low-density giant planets, and smaller rocky terrestrials. Under IAU definitions, there are eight planets in the Solar System. In order of increasing distance from the Sun, they are the four terrestrials, Mercury, Venus, Earth, and Mars, then the four giant planets, Jupiter, Saturn, Uranus, and Neptune. Six of the planets are orbited by one or more natural satellites.
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  init = sparse_term_matrix$new(vector_data = NULL,          # in case of vector of documents
 #  
@@ -477,7 +477,7 @@
 #                        verbose = TRUE)
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  minutes.to.tokenize.transform.data: 0.00001	total.time: 0.00001
 #  
@@ -509,12 +509,12 @@
 #  .
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  res_adj = init$Term_Matrix_Adjust(sparsity_thresh = 0.6)
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  res_adj
 #  
@@ -529,19 +529,19 @@
 #  
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  dim(res_adj)
 #  
 #  [1] 5 9
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  init$term_associations(Terms = c('planets', 'by', 'INVALID'), keep_terms = NULL, verbose = TRUE)
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  the ' INVALID ' term does not exist in the terms vector
 #  
@@ -576,7 +576,7 @@
 #  11:    that  -0.9338884
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  init = sparse_term_matrix$new(file_data = PATH, document_term_matrix = TRUE)
 #  
@@ -596,7 +596,7 @@
 #  init$most_frequent_terms(keep_terms = 10, threads = 1, verbose = TRUE)
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  minutes.to.complete: 0.00000
 #  
@@ -614,14 +614,14 @@
 #  10:    that         5
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  init = token_stats$new(path_2file = "/planets.txt")    # input the 'planets.txt' file
 #  
 #  vec = init$path_2vector()
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  [1] "The term planet is ancient, with ties to history, astrology, science, mythology, and religion. Several planets in the Solar System can be seen with the naked eye. These were regarded by many early cultures as divine, or as emissaries of deities. As scientific knowledge advanced, human perception of the planets changed, incorporating a number of disparate objects" ....
 #  
@@ -630,7 +630,7 @@
 #  .
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  # assuming the following 'freq_vocab.txt'
 #  
@@ -665,7 +665,7 @@
 #  were
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  init = token_stats$new(path_2file = 'freq_vocab.txt')
 #  
@@ -674,7 +674,7 @@
 #  init$print_frequency(subset = NULL)
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #          words freq
 #   1:       the    3
 #   2:      with    2
@@ -705,7 +705,7 @@
 #          words freq
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #    init = token_stats$new(path_2file = 'freq_vocab.txt')
 #  
@@ -714,14 +714,14 @@
 #    init$print_count_character(number = 3)
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  # words with number of characters equal to 3
 #  
 #  [1] "the" "and" "the" "can" "the" "eye"
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  # the data needs to be n-grams thus first tokenize and build the n-grams using
 #  # the 'tokenize_transform_text' function ( the "planets.txt" file as input )
@@ -743,7 +743,7 @@
 #  vec_tmp = init$collocation_words()
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  [1] ""       "17th"       "1950"    "2006"    "a"     "about"   "adopted"   "advanced"
 #  [9] "age"    "although" ....
@@ -752,18 +752,18 @@
 #  .
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  res = init$print_collocations(word = "ancient")
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #      is   with   ties planet
 #   0.333  0.333  0.167  0.167
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  # first initialization of token_stats
 #  
@@ -783,7 +783,7 @@
 #                                            upper = TRUE, diagonal = TRUE, threads = 1)
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #                  the      term     planet is   ancient      with      ties to   history  ....
 #  the       0.0000000 0.6000000 1.00000000  1 1.0000000 1.0000000 0.6000000  1 1.0000000  ....
@@ -801,7 +801,7 @@
 #  .
 #  .
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #                  the term     planet is   ancient with ties to history astrology   science ....
 #  the       0.0000000    1 1.00000000  1 1.0000000    1    1  1       1         1 1.0000000 ....
@@ -819,7 +819,7 @@
 #  .
 #  .
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  # first initialization of token_stats
 #  
@@ -836,7 +836,7 @@
 #  
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  # example output for the 'is_vec' vector
 #  
@@ -846,17 +846,17 @@
 #  
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  init_lk$print_words_lookup_tbl(n_gram = "log")
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  "_astrology_" "_mythology_"
 #  
 
-## ---- eval = T, echo = T-------------------------------------------------
+## ---- eval = T, echo = T------------------------------------------------------
 
 #---------------------------------
 # conversion from dense to sparse
@@ -872,7 +872,7 @@ res_sp = dense_2sparse(dsm)
 res_sp
 
 
-## ---- eval = T, echo = T-------------------------------------------------
+## ---- eval = T, echo = T------------------------------------------------------
 
 #---------------------
 # row- or column- sums
@@ -888,7 +888,7 @@ sm_rows = sparse_Sums(res_sp, rowSums = TRUE)        # row-sums
 sm_rows
 
 
-## ---- eval = T, echo = T-------------------------------------------------
+## ---- eval = T, echo = T------------------------------------------------------
 
 #----------------------
 # row- or column- means
@@ -905,7 +905,7 @@ mn_rows
 
 
 
-## ---- eval = T, echo = T-------------------------------------------------
+## ---- eval = T, echo = T------------------------------------------------------
 
 #-------------------------------------
 # sparsity of a matrix (as percentage)
@@ -915,7 +915,7 @@ matrix_sparsity(res_sp)
 
 
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  #------------------------------------------------------
 #  # saving and loading sparse matrices (in binary format)
@@ -926,7 +926,7 @@ matrix_sparsity(res_sp)
 #  load_sp = load_sparse_binary(file_name = "save_sparse.mat")
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  
 #  #------------------------
@@ -959,7 +959,7 @@ matrix_sparsity(res_sp)
 #  
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  # example output :
 #  
@@ -980,7 +980,7 @@ matrix_sparsity(res_sp)
 #  
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  #----------------------------
 #  # tokenize_transform_vec_docs
@@ -1019,7 +1019,7 @@ matrix_sparsity(res_sp)
 #  
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  $token
 #  [1] "term planet ancient tie histori astrolog scienc mytholog religion planet solar ....."
@@ -1037,7 +1037,7 @@ matrix_sparsity(res_sp)
 #  [1] "tokenization and transformation"
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  
 #  # run the function using the input-vector
@@ -1065,7 +1065,7 @@ matrix_sparsity(res_sp)
 #  
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  $token
 #  $token[[1]]
@@ -1081,7 +1081,7 @@ matrix_sparsity(res_sp)
 #  attr(,"class")
 #  [1] "tokenization and transformation"
 
-## ---- eval = T, echo = T-------------------------------------------------
+## ---- eval = T, echo = T------------------------------------------------------
 
 #---------------------------------------
 # cosine distance between word sentences
@@ -1096,7 +1096,7 @@ sep = " "
 cosine_distance(s1, s2, split_separator = sep)
 
 
-## ---- eval = T, echo = T-------------------------------------------------
+## ---- eval = T, echo = T------------------------------------------------------
 
 #------------------------------------------------------------------------
 # dice distance between two words (using n-grams -- the lower the better)
@@ -1112,7 +1112,7 @@ dice_distance(w1, w2, n_grams = n)
 
 
 
-## ---- eval = T, echo = T-------------------------------------------------
+## ---- eval = T, echo = T------------------------------------------------------
 
 #---------------------------------------
 # levenshtein distance between two words
@@ -1125,7 +1125,7 @@ w2 = 'word_one'
 levenshtein_distance(w1, w2)
 
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  #---------------------------------------------
 #  # bytes converter (returns the size of a file)
@@ -1136,12 +1136,12 @@ levenshtein_distance(w1, w2)
 #  bytes_converter(input_path_file = PATH, unit = "KB" )
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  ## [1] 2.213867
 #  
 
-## ---- eval = T, echo = T-------------------------------------------------
+## ---- eval = T, echo = T------------------------------------------------------
 
 #---------------------------------------------------
 # returns the utf-locale for the available languages
@@ -1151,7 +1151,7 @@ levenshtein_distance(w1, w2)
 utf_locale(language = "english")
 
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  #-----------------
 #  # text file parser
@@ -1181,7 +1181,7 @@ utf_locale(language = "english")
 #  
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  fp = text_file_parser(input_path_file = "example_file.xml",
 #  
@@ -1192,7 +1192,7 @@ utf_locale(language = "english")
 #                        min_lines = 1, trimmed_line = FALSE)
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  "example_output_file.txt" :
 #  
@@ -1200,7 +1200,7 @@ utf_locale(language = "english")
 #  4002
 #  
 
-## ---- eval = F, echo = T-------------------------------------------------
+## ---- eval = F, echo = T------------------------------------------------------
 #  
 #  #------------------
 #  # vocabulary parser

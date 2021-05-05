@@ -4,18 +4,40 @@
 \alias{tokenize_transform_text}
 \title{String tokenization and transformation  ( character string or path to a file )}
 \usage{
-tokenize_transform_text(object = NULL, batches = NULL,
-  read_file_delimiter = "\\n", to_lower = FALSE, to_upper = FALSE,
-  utf_locale = "", remove_char = "",
-  remove_punctuation_string = FALSE, remove_punctuation_vector = FALSE,
-  remove_numbers = FALSE, trim_token = FALSE, split_string = FALSE,
-  split_separator = " \\r\\n\\t.,;:()?!//", remove_stopwords = FALSE,
-  language = "english", min_num_char = 1, max_num_char = Inf,
-  stemmer = NULL, min_n_gram = 1, max_n_gram = 1, skip_n_gram = 1,
-  skip_distance = 0, n_gram_delimiter = " ", concat_delimiter = NULL,
-  path_2folder = "", stemmer_ngram = 4, stemmer_gamma = 0,
-  stemmer_truncate = 3, stemmer_batches = 1, threads = 1,
-  vocabulary_path_file = NULL, verbose = FALSE)
+tokenize_transform_text(
+  object = NULL,
+  batches = NULL,
+  read_file_delimiter = "\\n",
+  to_lower = FALSE,
+  to_upper = FALSE,
+  utf_locale = "",
+  remove_char = "",
+  remove_punctuation_string = FALSE,
+  remove_punctuation_vector = FALSE,
+  remove_numbers = FALSE,
+  trim_token = FALSE,
+  split_string = FALSE,
+  split_separator = " \\r\\n\\t.,;:()?!//",
+  remove_stopwords = FALSE,
+  language = "english",
+  min_num_char = 1,
+  max_num_char = Inf,
+  stemmer = NULL,
+  min_n_gram = 1,
+  max_n_gram = 1,
+  skip_n_gram = 1,
+  skip_distance = 0,
+  n_gram_delimiter = " ",
+  concat_delimiter = NULL,
+  path_2folder = "",
+  stemmer_ngram = 4,
+  stemmer_gamma = 0,
+  stemmer_truncate = 3,
+  stemmer_batches = 1,
+  threads = 1,
+  vocabulary_path_file = NULL,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{object}{either a character string (text data) or a character-string-path to a file (for big .txt files it's recommended to use a path to a file).}
@@ -101,7 +123,7 @@ It is memory efficient to give a \emph{path_2folder} in case that a big file sho
 
 The \emph{skip-grams} are a generalization of n-grams in which the components (typically words) need not to be consecutive in the text under consideration, but may leave gaps that are skipped over. They provide one way of overcoming the \emph{data sparsity problem} found with conventional n-gram analysis.
 
-Many character string pre-processing functions (such as the \emph{utf-locale} or the \emph{split-string} function ) are based on the \emph{boost} library ( \url{http://www.boost.org/} ).
+Many character string pre-processing functions (such as the \emph{utf-locale} or the \emph{split-string} function ) are based on the \emph{boost} library ( \url{https://www.boost.org/} ).
 
 Stemming of the english language is done using the porter2-stemmer, for details see \url{https://github.com/smassung/porter2_stemmer}
 
