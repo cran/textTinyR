@@ -135,7 +135,7 @@ If you use the code of this repository in your paper or research please cite bot
   title = {{textTinyR}: Text Processing for Small or Big Data Files},
   author = {Lampros Mouselimis},
   year = {2021},
-  note = {R package version 1.1.5},
+  note = {R package version 1.1.6},
   url = {https://CRAN.R-project.org/package=textTinyR},
 }
 ```
