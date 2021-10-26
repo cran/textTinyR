@@ -1,6 +1,6 @@
-4dc304a99a5b8b9ac75766c74a972a5a *DESCRIPTION
+0db798ab38b363d562d43ec37021cdf1 *DESCRIPTION
 c99538769d1ea563f91918025d1c547b *NAMESPACE
-e450008df9208830ed9a0f1e4fcb47e9 *NEWS.md
+466d30951ae7cc37f0f012d0ff6dd1da *NEWS.md
 d656c8a380d307e4e1501578f3233ac7 *R/RcppExports.R
 c131154aa720a940a810a6aead12bb29 *R/textTinyR.R
 607fe5ba02cfcf16f9f6da39b4251eca *R/utils.R
@@ -10,10 +10,10 @@ eeb6c968037791e21c810bbc529b393e *build/vignette.rds
 c7363b6dbc7480f518d5183ac2356d85 *inst/COPYRIGHTS
 2ff3623b01153e7829889d1e7de7e20e *inst/doc/functionality_of_textTinyR_package.R
 b042f05efd77b06670763591ba23191a *inst/doc/functionality_of_textTinyR_package.Rmd
-cb725891b0ff4b912a4abda23482e3ff *inst/doc/functionality_of_textTinyR_package.html
+22ded28043a2c712ee75d7ebcd0510b7 *inst/doc/functionality_of_textTinyR_package.html
 5e67d0c1806fcf9234aa070f9a7be4d1 *inst/doc/word_vectors_doc2vec.R
 25cd95e93f124e23c68393d5473f9f6b *inst/doc/word_vectors_doc2vec.Rmd
-67ac72b33792151fc94f65cff0d2d33f *inst/doc/word_vectors_doc2vec.html
+3223d10ab94966f0d135d4b58329919c *inst/doc/word_vectors_doc2vec.html
 fa261701d59dfc230bcb3948706083dd *inst/example_files/word_vecs.txt
 55d5c5d5ee77991df43dd6b97648f9eb *inst/locale/locale_stopword_encoding.csv
 becc2e5c2f5f0487727b261a94523e37 *inst/stopwords/afrikaans.txt
@@ -128,7 +128,7 @@ cedf8da05466bb54708268b3c694a78f *tests/testthat/WRITE_TOKEN/batch4.txt
 0f2864395d0d240fec6f89e6f816973a *tests/testthat/WRITE_VOCAB_single/vocab.txt
 862fe64fdb99ba5778aee3761abba2ab *tests/testthat/demo_text.xml
 fa261701d59dfc230bcb3948706083dd *tests/testthat/example_word_vecs.txt
-1970cb9dd7012b92981ab997117060fb *tests/testthat/helper-function_for_tests.R
+022740cacc52dce87a9fc38c5d7bb6da *tests/testthat/helper-function_for_tests.R
 32884b15870fab39c2dcc0f38b8af9db *tests/testthat/read_CHARS_ROWS/write_rows_chars.txt
 c1544e71090749bf798d95cf0cc1d36d *tests/testthat/subset_big.txt
 4f087ce51df6ac3966d73c625a04fc11 *tests/testthat/term_matrix_file.csv
@@ -139,14 +139,14 @@ f9253a762464f2e52728afa4ca5fc45f *tests/testthat/test-cluster_frequency.R
 8ed62e8ea1c241e0cbfa795390e15a8d *tests/testthat/test-cosine.R
 43092c9ab66e0260eca924403662cbae *tests/testthat/test-count_rows.R
 4d1c8cbbe252c356f83321726bb9d605 *tests/testthat/test-dims.R
-44a5b7d020b7ca37ab8cd9ee4a0853c3 *tests/testthat/test-doc2vec.R
+55cc575a085c610978f54ceb571c5328 *tests/testthat/test-doc2vec.R
 f18757b917064eda2c76c490f9c64f00 *tests/testthat/test-jaccard_dice.R
 a147bb9c6dce0979f807a85fa85935e0 *tests/testthat/test-select_predictors.R
 a357b2b07092e3753ae6342273c97889 *tests/testthat/test-sparse_functions_AND_read_text.R
 a1c6c016aa68681665ec678c486d09c3 *tests/testthat/test-term_matrix_triplet_data_global_term_weights.R
 546a734680788a9c839eba4401ea9f92 *tests/testthat/test-text_intersect.R
 f3cabc1b2237ed85614dcc56f18b34de *tests/testthat/test-token_statistics.R
-44f0e5409bbcf2aeb1d8c29b6d73fc93 *tests/testthat/test-tokenization_transformation.R
+b084fe1b488e3be998a02f4a50ebf127 *tests/testthat/test-tokenization_transformation.R
 02593ea145894c22f1f41742073a971c *tests/testthat/test-tokenization_transformation_vec_documents.R
 fc64c47b9d9a31f45a4eae30aa7e295b *tests/testthat/test-utf_locale.R
 759c92244f84c9e488a18a6faa41d6eb *tests/testthat/test-vocab_file_parser_bytes_converter_dice_levenstein_cosine.R

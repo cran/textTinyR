@@ -1,7 +1,13 @@
 
+
+## textTinyR 1.1.7
+
+* I've included a function to omit a test for the Solaris OS during checking because I can not reproduce the error with the rhub solaris patched image
+
+
 ## textTinyR 1.1.6
 
-* I've included a function to omit a test for the Solaris OS during testing
+* I've included a function to omit a test for the Solaris OS during checking
 
 
 ## textTinyR 1.1.5
