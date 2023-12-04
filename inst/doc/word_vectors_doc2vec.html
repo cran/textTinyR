@@ -12,29 +12,42 @@
 
 <meta name="author" content="Lampros Mouselimis" />
 
-<meta name="date" content="2021-10-24" />
+<meta name="date" content="2023-12-04" />
 
 <title>Word vectors - doc2vec - text clustering</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
 
 
 <style type="text/css">
-  code {
-    white-space: pre;
-  }
-  .sourceCode {
-    overflow: visible;
-  }
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -52,55 +65,54 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-  { counter-reset: source-line 0; }
+{ counter-reset: source-line 0; }
 pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
+{ position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
 div.sourceCode
-  {   }
+{ }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -109,13 +121,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -127,7 +146,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -139,69 +338,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<h1 class="title toc-ignore">Word vectors - doc2vec - text clustering</h1>
+<h1 class="title toc-ignore">Word vectors - doc2vec - text
+clustering</h1>
 <h4 class="author">Lampros Mouselimis</h4>
-<h4 class="date">2021-10-24</h4>
+<h4 class="date">2023-12-04</h4>
 
 
 
-<p>This vignette discuss the new functionality, which is added in the textTinyR package (version 1.1.0). I’ll explain some of the functions by using the data and pre-processing steps of <a href="https://miguelmalvarez.com/2015/03/20/classifying-reuters-21578-collection-with-python-representing-the-data/">this blog-post</a>.</p>
+<p>This vignette discuss the new functionality, which is added in the
+textTinyR package (version 1.1.0). I’ll explain some of the functions by
+using the data and pre-processing steps of <a href="https://miguelmalvarez.com/2015/03/20/classifying-reuters-21578-collection-with-python-representing-the-data/">this
+blog-post</a>.</p>
 <p><br></p>
-<p>The following code chunks assume that the <em>nltk-corpus</em> is already downloaded and the <em>reticulate</em> package is installed,</p>
+<p>The following code chunks assume that the <em>nltk-corpus</em> is
+already downloaded and the <em>reticulate</em> package is installed,</p>
 <p><br></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>NLTK <span class="ot">=</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">&quot;nltk.corpus&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>text_reuters <span class="ot">=</span> NLTK<span class="sc">$</span>reuters </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>nltk <span class="ot">=</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">&quot;nltk&quot;</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># if the &#39;reuters&#39; data is not already available then it can be downloaded from within R</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>nltk<span class="sc">$</span><span class="fu">download</span>(<span class="st">&#39;reuters&#39;</span>)               </span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>NLTK <span class="ot">=</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">&quot;nltk.corpus&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>text_reuters <span class="ot">=</span> NLTK<span class="sc">$</span>reuters </span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>nltk <span class="ot">=</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">&quot;nltk&quot;</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># if the &#39;reuters&#39; data is not already available then it can be downloaded from within R</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>nltk<span class="sc">$</span><span class="fu">download</span>(<span class="st">&#39;reuters&#39;</span>)               </span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>documents <span class="ot">=</span> text_reuters<span class="sc">$</span><span class="fu">fileids</span>()</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(documents)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># List of categories</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>categories <span class="ot">=</span> text_reuters<span class="sc">$</span><span class="fu">categories</span>()</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(categories)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Documents in a category</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>category_docs <span class="ot">=</span> text_reuters<span class="sc">$</span><span class="fu">fileids</span>(<span class="st">&quot;acq&quot;</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(category_docs)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>one_doc <span class="ot">=</span> text_reuters<span class="sc">$</span><span class="fu">raw</span>(<span class="st">&quot;test/14843&quot;</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>one_doc</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>documents <span class="ot">=</span> text_reuters<span class="sc">$</span><span class="fu">fileids</span>()</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">str</span>(documents)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co"># List of categories</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>categories <span class="ot">=</span> text_reuters<span class="sc">$</span><span class="fu">categories</span>()</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="fu">str</span>(categories)</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co"># Documents in a category</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>category_docs <span class="ot">=</span> text_reuters<span class="sc">$</span><span class="fu">fileids</span>(<span class="st">&quot;acq&quot;</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="fu">str</span>(category_docs)</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>one_doc <span class="ot">=</span> text_reuters<span class="sc">$</span><span class="fu">raw</span>(<span class="st">&quot;test/14843&quot;</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>one_doc</span></code></pre></div>
 <p><br></p>
-<p>The collection originally consisted of 21,578 documents but a subset and split is traditionally used. The most common split is <em>Mod-Apte</em> which only considers categories that have at least one document in the training set and the test set. The <em>Mod-Apte</em> split has 90 categories with a training set of 7769 documents and a test set of 3019 documents.</p>
+<p>The collection originally consisted of 21,578 documents but a subset
+and split is traditionally used. The most common split is
+<em>Mod-Apte</em> which only considers categories that have at least one
+document in the training set and the test set. The <em>Mod-Apte</em>
+split has 90 categories with a training set of 7769 documents and a test
+set of 3019 documents.</p>
 <p><br></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>documents <span class="ot">=</span> text_reuters<span class="sc">$</span><span class="fu">fileids</span>()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># document ids for train - test</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>train_docs_id <span class="ot">=</span> documents[<span class="fu">as.vector</span>(<span class="fu">sapply</span>(documents, <span class="cf">function</span>(i) <span class="fu">substr</span>(i, <span class="dv">1</span>, <span class="dv">5</span>) <span class="sc">==</span> <span class="st">&quot;train&quot;</span>))]</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>test_docs_id <span class="ot">=</span> documents[<span class="fu">as.vector</span>(<span class="fu">sapply</span>(documents, <span class="cf">function</span>(i) <span class="fu">substr</span>(i, <span class="dv">1</span>, <span class="dv">4</span>) <span class="sc">==</span> <span class="st">&quot;test&quot;</span>))]</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>train_docs <span class="ot">=</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(train_docs_id), <span class="cf">function</span>(x) text_reuters<span class="sc">$</span><span class="fu">raw</span>(train_docs_id[x]))</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>test_docs <span class="ot">=</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(test_docs_id), <span class="cf">function</span>(x) text_reuters<span class="sc">$</span><span class="fu">raw</span>(test_docs_id[x]))</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(train_docs)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(test_docs)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># train - test labels  [ some categories might have more than one label (overlapping) ]</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>train_labels <span class="ot">=</span> <span class="fu">as.vector</span>(<span class="fu">sapply</span>(train_docs_id, <span class="cf">function</span>(x) text_reuters<span class="sc">$</span><span class="fu">categories</span>(x)))         </span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>test_labels <span class="ot">=</span> <span class="fu">as.vector</span>(<span class="fu">sapply</span>(test_docs_id, <span class="cf">function</span>(x) text_reuters<span class="sc">$</span><span class="fu">categories</span>(x)))  </span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>documents <span class="ot">=</span> text_reuters<span class="sc">$</span><span class="fu">fileids</span>()</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># document ids for train - test</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>train_docs_id <span class="ot">=</span> documents[<span class="fu">as.vector</span>(<span class="fu">sapply</span>(documents, <span class="cf">function</span>(i) <span class="fu">substr</span>(i, <span class="dv">1</span>, <span class="dv">5</span>) <span class="sc">==</span> <span class="st">&quot;train&quot;</span>))]</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>test_docs_id <span class="ot">=</span> documents[<span class="fu">as.vector</span>(<span class="fu">sapply</span>(documents, <span class="cf">function</span>(i) <span class="fu">substr</span>(i, <span class="dv">1</span>, <span class="dv">4</span>) <span class="sc">==</span> <span class="st">&quot;test&quot;</span>))]</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>train_docs <span class="ot">=</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(train_docs_id), <span class="cf">function</span>(x) text_reuters<span class="sc">$</span><span class="fu">raw</span>(train_docs_id[x]))</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>test_docs <span class="ot">=</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(test_docs_id), <span class="cf">function</span>(x) text_reuters<span class="sc">$</span><span class="fu">raw</span>(test_docs_id[x]))</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="fu">str</span>(train_docs)</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="fu">str</span>(test_docs)</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co"># train - test labels  [ some categories might have more than one label (overlapping) ]</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>train_labels <span class="ot">=</span> <span class="fu">as.vector</span>(<span class="fu">sapply</span>(train_docs_id, <span class="cf">function</span>(x) text_reuters<span class="sc">$</span><span class="fu">categories</span>(x)))         </span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>test_labels <span class="ot">=</span> <span class="fu">as.vector</span>(<span class="fu">sapply</span>(test_docs_id, <span class="cf">function</span>(x) text_reuters<span class="sc">$</span><span class="fu">categories</span>(x)))  </span></code></pre></div>
 <p><br></p>
 <div id="texttinyr---fasttextr---doc2vec---kmeans---cluster_medoids" class="section level3">
 <h3>textTinyR - fastTextR - doc2vec - kmeans - cluster_medoids</h3>
@@ -215,256 +424,291 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>keep words with minimum number of characters equal to 3</li>
 </ul>
 <p><br></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>concat <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">unlist</span>(train_docs), <span class="fu">unlist</span>(test_docs))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(concat)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>clust_vec <span class="ot">=</span> textTinyR<span class="sc">::</span><span class="fu">tokenize_transform_vec_docs</span>(<span class="at">object =</span> concat, <span class="at">as_token =</span> T,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">to_lower =</span> T, </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">remove_punctuation_vector =</span> F,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">remove_numbers =</span> F, </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">trim_token =</span> T,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">split_string =</span> T,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">split_separator =</span> <span class="st">&quot; </span><span class="sc">\r\n\t</span><span class="st">.,;:()?!//&quot;</span>, </span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">remove_stopwords =</span> T,</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">language =</span> <span class="st">&quot;english&quot;</span>, </span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">min_num_char =</span> <span class="dv">3</span>, </span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">max_num_char =</span> <span class="dv">100</span>,</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">stemmer =</span> <span class="st">&quot;porter2_stemmer&quot;</span>, </span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">threads =</span> <span class="dv">4</span>,</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">verbose =</span> T)</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>unq <span class="ot">=</span> <span class="fu">unique</span>(<span class="fu">unlist</span>(clust_vec<span class="sc">$</span>token, <span class="at">recursive =</span> F))</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(unq)</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co"># I&#39;ll build also the term matrix as I&#39;ll need the global-term-weights</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>utl <span class="ot">=</span> textTinyR<span class="sc">::</span>sparse_term_matrix<span class="sc">$</span><span class="fu">new</span>(<span class="at">vector_data =</span> concat, <span class="at">file_data =</span> <span class="cn">NULL</span>,</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">document_term_matrix =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>tm <span class="ot">=</span> utl<span class="sc">$</span><span class="fu">Term_Matrix</span>(<span class="at">sort_terms =</span> <span class="cn">FALSE</span>, <span class="at">to_lower =</span> T, <span class="at">remove_punctuation_vector =</span> F,</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>                     <span class="at">remove_numbers =</span> F, <span class="at">trim_token =</span> T, <span class="at">split_string =</span> T, </span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>                     <span class="at">stemmer =</span> <span class="st">&quot;porter2_stemmer&quot;</span>,</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>                     <span class="at">split_separator =</span> <span class="st">&quot; </span><span class="sc">\r\n\t</span><span class="st">.,;:()?!//&quot;</span>, <span class="at">remove_stopwords =</span> T,</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>                     <span class="at">language =</span> <span class="st">&quot;english&quot;</span>, <span class="at">min_num_char =</span> <span class="dv">3</span>, <span class="at">max_num_char =</span> <span class="dv">100</span>,</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>                     <span class="at">print_every_rows =</span> <span class="dv">100000</span>, <span class="at">normalize =</span> <span class="cn">NULL</span>, <span class="at">tf_idf =</span> F, </span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>                     <span class="at">threads =</span> <span class="dv">6</span>, <span class="at">verbose =</span> T)</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>gl_term_w <span class="ot">=</span> utl<span class="sc">$</span><span class="fu">global_term_weights</span>()</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(gl_term_w)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>concat <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">unlist</span>(train_docs), <span class="fu">unlist</span>(test_docs))</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">length</span>(concat)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>clust_vec <span class="ot">=</span> textTinyR<span class="sc">::</span><span class="fu">tokenize_transform_vec_docs</span>(<span class="at">object =</span> concat, <span class="at">as_token =</span> T,</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>                                                   <span class="at">to_lower =</span> T, </span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>                                                   <span class="at">remove_punctuation_vector =</span> F,</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>                                                   <span class="at">remove_numbers =</span> F, </span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>                                                   <span class="at">trim_token =</span> T,</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>                                                   <span class="at">split_string =</span> T,</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>                                                   <span class="at">split_separator =</span> <span class="st">&quot; </span><span class="sc">\r\n\t</span><span class="st">.,;:()?!//&quot;</span>, </span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>                                                   <span class="at">remove_stopwords =</span> T,</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>                                                   <span class="at">language =</span> <span class="st">&quot;english&quot;</span>, </span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>                                                   <span class="at">min_num_char =</span> <span class="dv">3</span>, </span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>                                                   <span class="at">max_num_char =</span> <span class="dv">100</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>                                                   <span class="at">stemmer =</span> <span class="st">&quot;porter2_stemmer&quot;</span>, </span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>                                                   <span class="at">threads =</span> <span class="dv">4</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>                                                   <span class="at">verbose =</span> T)</span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>unq <span class="ot">=</span> <span class="fu">unique</span>(<span class="fu">unlist</span>(clust_vec<span class="sc">$</span>token, <span class="at">recursive =</span> F))</span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="fu">length</span>(unq)</span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co"># I&#39;ll build also the term matrix as I&#39;ll need the global-term-weights</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>utl <span class="ot">=</span> textTinyR<span class="sc">::</span>sparse_term_matrix<span class="sc">$</span><span class="fu">new</span>(<span class="at">vector_data =</span> concat, <span class="at">file_data =</span> <span class="cn">NULL</span>,</span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>                                        <span class="at">document_term_matrix =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>tm <span class="ot">=</span> utl<span class="sc">$</span><span class="fu">Term_Matrix</span>(<span class="at">sort_terms =</span> <span class="cn">FALSE</span>, <span class="at">to_lower =</span> T, <span class="at">remove_punctuation_vector =</span> F,</span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>                     <span class="at">remove_numbers =</span> F, <span class="at">trim_token =</span> T, <span class="at">split_string =</span> T, </span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a>                     <span class="at">stemmer =</span> <span class="st">&quot;porter2_stemmer&quot;</span>,</span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a>                     <span class="at">split_separator =</span> <span class="st">&quot; </span><span class="sc">\r\n\t</span><span class="st">.,;:()?!//&quot;</span>, <span class="at">remove_stopwords =</span> T,</span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a>                     <span class="at">language =</span> <span class="st">&quot;english&quot;</span>, <span class="at">min_num_char =</span> <span class="dv">3</span>, <span class="at">max_num_char =</span> <span class="dv">100</span>,</span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a>                     <span class="at">print_every_rows =</span> <span class="dv">100000</span>, <span class="at">normalize =</span> <span class="cn">NULL</span>, <span class="at">tf_idf =</span> F, </span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a>                     <span class="at">threads =</span> <span class="dv">6</span>, <span class="at">verbose =</span> T)</span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a>gl_term_w <span class="ot">=</span> utl<span class="sc">$</span><span class="fu">global_term_weights</span>()</span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="fu">str</span>(gl_term_w)</span></code></pre></div>
 <p><br></p>
-<p>For simplicity, I’ll use the <em>Reuters</em> data as input to the <em>fastTextR::skipgram_cbow</em> function. The data has to be first pre-processed and then saved to a file,</p>
+<p>For simplicity, I’ll use the <em>Reuters</em> data as input to the
+<em>fastTextR::skipgram_cbow</em> function. The data has to be first
+pre-processed and then saved to a file,</p>
 <p><br></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a> save_dat <span class="ot">=</span> textTinyR<span class="sc">::</span><span class="fu">tokenize_transform_vec_docs</span>(<span class="at">object =</span> concat, <span class="at">as_token =</span> T, </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">to_lower =</span> T, </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">remove_punctuation_vector =</span> F,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">remove_numbers =</span> F, <span class="at">trim_token =</span> T, </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">split_string =</span> T, </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">split_separator =</span> <span class="st">&quot; </span><span class="sc">\r\n\t</span><span class="st">.,;:()?!//&quot;</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">remove_stopwords =</span> T, <span class="at">language =</span> <span class="st">&quot;english&quot;</span>, </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">min_num_char =</span> <span class="dv">3</span>, <span class="at">max_num_char =</span> <span class="dv">100</span>, </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">stemmer =</span> <span class="st">&quot;porter2_stemmer&quot;</span>, </span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">path_2folder =</span> <span class="st">&quot;/path_to_your_folder/&quot;</span>,</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">threads =</span> <span class="dv">1</span>,                     <span class="co"># whenever I save data to file set the number threads to 1</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                                                   <span class="at">verbose =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a> save_dat <span class="ot">=</span> textTinyR<span class="sc">::</span><span class="fu">tokenize_transform_vec_docs</span>(<span class="at">object =</span> concat, <span class="at">as_token =</span> T, </span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>                                                   <span class="at">to_lower =</span> T, </span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>                                                   <span class="at">remove_punctuation_vector =</span> F,</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>                                                   <span class="at">remove_numbers =</span> F, <span class="at">trim_token =</span> T, </span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>                                                   <span class="at">split_string =</span> T, </span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>                                                   <span class="at">split_separator =</span> <span class="st">&quot; </span><span class="sc">\r\n\t</span><span class="st">.,;:()?!//&quot;</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>                                                   <span class="at">remove_stopwords =</span> T, <span class="at">language =</span> <span class="st">&quot;english&quot;</span>, </span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>                                                   <span class="at">min_num_char =</span> <span class="dv">3</span>, <span class="at">max_num_char =</span> <span class="dv">100</span>, </span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>                                                   <span class="at">stemmer =</span> <span class="st">&quot;porter2_stemmer&quot;</span>, </span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>                                                   <span class="at">path_2folder =</span> <span class="st">&quot;/path_to_your_folder/&quot;</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>                                                   <span class="at">threads =</span> <span class="dv">1</span>,                     <span class="co"># whenever I save data to file set the number threads to 1</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>                                                   <span class="at">verbose =</span> T)</span></code></pre></div>
 <p><br></p>
-<p><strong>UPDATE 11-04-2019</strong>: There is an <a href="https://github.com/mlampros/fastText">updated version of the fastText R package</a> which includes all the features of the ported <a href="https://github.com/facebookresearch/fastText">fasttext library</a>. Therefore the old <strong>fastTextR</strong> repository <strong>is archived</strong>. See also the corresponding <a href="http://mlampros.github.io/2019/04/11/fastText_updated_version/">blog-post</a>.</p>
+<p><strong>UPDATE 11-04-2019</strong>: There is an <a href="https://github.com/mlampros/fastText">updated version of the
+fastText R package</a> which includes all the features of the ported <a href="https://github.com/facebookresearch/fastText">fasttext
+library</a>. Therefore the old <strong>fastTextR</strong> repository
+<strong>is archived</strong>. See also the corresponding <a href="http://mlampros.github.io/2019/04/11/fastText_updated_version/">blog-post</a>.</p>
 <p><br></p>
-<p>Then, I’ll load the previously saved data and I’ll use <a href="https://github.com/mlampros/fastTextR">fastTextR</a> to build the word-vectors,</p>
+<p>Then, I’ll load the previously saved data and I’ll use <a href="https://github.com/mlampros/fastTextR">fastTextR</a> to build the
+word-vectors,</p>
 <p><br></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>PATH_INPUT <span class="ot">=</span> <span class="st">&quot;/path_to_your_folder/output_token_single_file.txt&quot;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>PATH_OUT <span class="ot">=</span> <span class="st">&quot;/path_to_your_folder/rt_fst_model&quot;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>vecs <span class="ot">=</span> fastTextR<span class="sc">::</span><span class="fu">skipgram_cbow</span>(<span class="at">input_path =</span> PATH_INPUT, <span class="at">output_path =</span> PATH_OUT, </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">method =</span> <span class="st">&quot;skipgram&quot;</span>, <span class="at">lr =</span> <span class="fl">0.075</span>, <span class="at">lrUpdateRate =</span> <span class="dv">100</span>, </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                <span class="at">dim =</span> <span class="dv">300</span>, <span class="at">ws =</span> <span class="dv">5</span>, <span class="at">epoch =</span> <span class="dv">5</span>, <span class="at">minCount =</span> <span class="dv">1</span>, <span class="at">neg =</span> <span class="dv">5</span>, </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                                <span class="at">wordNgrams =</span> <span class="dv">2</span>, <span class="at">loss =</span> <span class="st">&quot;ns&quot;</span>, <span class="at">bucket =</span> <span class="fl">2e+06</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                                <span class="at">minn =</span> <span class="dv">0</span>, <span class="at">maxn =</span> <span class="dv">0</span>, <span class="at">thread =</span> <span class="dv">6</span>, <span class="at">t =</span> <span class="fl">1e-04</span>, <span class="at">verbose =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>PATH_INPUT <span class="ot">=</span> <span class="st">&quot;/path_to_your_folder/output_token_single_file.txt&quot;</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>PATH_OUT <span class="ot">=</span> <span class="st">&quot;/path_to_your_folder/rt_fst_model&quot;</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>vecs <span class="ot">=</span> fastTextR<span class="sc">::</span><span class="fu">skipgram_cbow</span>(<span class="at">input_path =</span> PATH_INPUT, <span class="at">output_path =</span> PATH_OUT, </span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>                                <span class="at">method =</span> <span class="st">&quot;skipgram&quot;</span>, <span class="at">lr =</span> <span class="fl">0.075</span>, <span class="at">lrUpdateRate =</span> <span class="dv">100</span>, </span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>                                <span class="at">dim =</span> <span class="dv">300</span>, <span class="at">ws =</span> <span class="dv">5</span>, <span class="at">epoch =</span> <span class="dv">5</span>, <span class="at">minCount =</span> <span class="dv">1</span>, <span class="at">neg =</span> <span class="dv">5</span>, </span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>                                <span class="at">wordNgrams =</span> <span class="dv">2</span>, <span class="at">loss =</span> <span class="st">&quot;ns&quot;</span>, <span class="at">bucket =</span> <span class="fl">2e+06</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>                                <span class="at">minn =</span> <span class="dv">0</span>, <span class="at">maxn =</span> <span class="dv">0</span>, <span class="at">thread =</span> <span class="dv">6</span>, <span class="at">t =</span> <span class="fl">1e-04</span>, <span class="at">verbose =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><br></p>
-<p>Before using one of the three methods, it would be better to reduce the initial dimensions of the word-vectors (rows of the matrix). So, I’ll keep the word-vectors for which the terms appear in the <em>Reuters</em> data set - <em>clust_vec$token</em> ( although it’s not applicable in this case, if the resulted word-vectors were based on external data - say the Wikipedia data - then their dimensions would be way larger and many of the terms would be redundant for the <em>Reuters</em> data set increasing that way the computation time considerably when invoking one of the doc2vec methods),</p>
+<p>Before using one of the three methods, it would be better to reduce
+the initial dimensions of the word-vectors (rows of the matrix). So,
+I’ll keep the word-vectors for which the terms appear in the
+<em>Reuters</em> data set - <em>clust_vec$token</em> ( although it’s not
+applicable in this case, if the resulted word-vectors were based on
+external data - say the Wikipedia data - then their dimensions would be
+way larger and many of the terms would be redundant for the
+<em>Reuters</em> data set increasing that way the computation time
+considerably when invoking one of the doc2vec methods),</p>
 <p><br></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>init <span class="ot">=</span> textTinyR<span class="sc">::</span>Doc2Vec<span class="sc">$</span><span class="fu">new</span>(<span class="at">token_list =</span> clust_vec<span class="sc">$</span>token, </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                              </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">word_vector_FILE =</span> <span class="st">&quot;path_to_your_folder/rt_fst_model.vec&quot;</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                              </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">print_every_rows =</span> <span class="dv">5000</span>, </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                              </span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">verbose =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                              </span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">copy_data =</span> <span class="cn">FALSE</span>)                  <span class="co"># use of external pointer</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>pre<span class="sc">-</span>processing of input data starts ...</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>File is successfully opened</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>total.number.lines.processed.input<span class="sc">:</span> <span class="dv">25000</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>creation of index starts ...</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>intersection of tokens and wordvec character strings starts ...</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>modification of indices starts ...</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>final processing of data starts ...</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>File is successfully opened</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>total.number.lines.processed.output<span class="sc">:</span> <span class="dv">25000</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>init <span class="ot">=</span> textTinyR<span class="sc">::</span>Doc2Vec<span class="sc">$</span><span class="fu">new</span>(<span class="at">token_list =</span> clust_vec<span class="sc">$</span>token, </span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>                              </span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>                              <span class="at">word_vector_FILE =</span> <span class="st">&quot;path_to_your_folder/rt_fst_model.vec&quot;</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>                              </span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>                              <span class="at">print_every_rows =</span> <span class="dv">5000</span>, </span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>                              </span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>                              <span class="at">verbose =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>                              </span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>                              <span class="at">copy_data =</span> <span class="cn">FALSE</span>)                  <span class="co"># use of external pointer</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>pre<span class="sc">-</span>processing of input data starts ...</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>File is successfully opened</span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>total.number.lines.processed.input<span class="sc">:</span> <span class="dv">25000</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>creation of index starts ...</span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>intersection of tokens and wordvec character strings starts ...</span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>modification of indices starts ...</span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>final processing of data starts ...</span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>File is successfully opened</span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>total.number.lines.processed.output<span class="sc">:</span> <span class="dv">25000</span></span></code></pre></div>
 <p><br></p>
-<p>In case that <em>copy_data = TRUE</em> then the pre-processed data can be observed before invoking one of the ‘doc2vec’ methods,</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># res_wv = init$pre_processed_wv()                           </span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># str(res_wv)</span></span></code></pre></div>
+<p>In case that <em>copy_data = TRUE</em> then the pre-processed data
+can be observed before invoking one of the ‘doc2vec’ methods,</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># res_wv = init$pre_processed_wv()                           </span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co"># str(res_wv)</span></span></code></pre></div>
 <p><br></p>
-<p>Then, I can use one of the three methods (<em>sum_sqrt</em>, <em>min_max_norm</em>, <em>idf</em>) to receive the transformed vectors. These methods are based on the following <em>blog-posts</em> , see especially:</p>
+<p>Then, I can use one of the three methods (<em>sum_sqrt</em>,
+<em>min_max_norm</em>, <em>idf</em>) to receive the transformed vectors.
+These methods are based on the following <em>blog-posts</em> , see
+especially:</p>
 <ul>
 <li><code>www.linkedin.com/pulse/duplicate-quora-question-abhishek-thakur</code></li>
 <li><code>https://erogol.com/duplicate-question-detection-deep-learning/</code></li>
 </ul>
 <p><br></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>doc2_sum <span class="ot">=</span> init<span class="sc">$</span><span class="fu">doc2vec_methods</span>(<span class="at">method =</span> <span class="st">&quot;sum_sqrt&quot;</span>, <span class="at">threads =</span> <span class="dv">6</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>doc2_norm <span class="ot">=</span> init<span class="sc">$</span><span class="fu">doc2vec_methods</span>(<span class="at">method =</span> <span class="st">&quot;min_max_norm&quot;</span>, <span class="at">threads =</span> <span class="dv">6</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>doc2_idf <span class="ot">=</span> init<span class="sc">$</span><span class="fu">doc2vec_methods</span>(<span class="at">method =</span> <span class="st">&quot;idf&quot;</span>, <span class="at">global_term_weights =</span> gl_term_w, <span class="at">threads =</span> <span class="dv">6</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>rows_cols <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>doc2_sum[rows_cols, rows_cols]</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>doc2_norm[rows_cols, rows_cols]</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>doc2_idf[rows_cols, rows_cols]</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">dim</span>(doc2_sum)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">10788</span>   <span class="dv">300</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">dim</span>(doc2_norm)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">10788</span>   <span class="dv">300</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">dim</span>(doc2_idf)</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">10788</span>   <span class="dv">300</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>doc2_sum <span class="ot">=</span> init<span class="sc">$</span><span class="fu">doc2vec_methods</span>(<span class="at">method =</span> <span class="st">&quot;sum_sqrt&quot;</span>, <span class="at">threads =</span> <span class="dv">6</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>doc2_norm <span class="ot">=</span> init<span class="sc">$</span><span class="fu">doc2vec_methods</span>(<span class="at">method =</span> <span class="st">&quot;min_max_norm&quot;</span>, <span class="at">threads =</span> <span class="dv">6</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>doc2_idf <span class="ot">=</span> init<span class="sc">$</span><span class="fu">doc2vec_methods</span>(<span class="at">method =</span> <span class="st">&quot;idf&quot;</span>, <span class="at">global_term_weights =</span> gl_term_w, <span class="at">threads =</span> <span class="dv">6</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>rows_cols <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>doc2_sum[rows_cols, rows_cols]</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>doc2_norm[rows_cols, rows_cols]</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>doc2_idf[rows_cols, rows_cols]</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">dim</span>(doc2_sum)</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">10788</span>   <span class="dv">300</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">dim</span>(doc2_norm)</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">10788</span>   <span class="dv">300</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">dim</span>(doc2_idf)</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">10788</span>   <span class="dv">300</span></span></code></pre></div>
 <p><br></p>
-<p>For illustration, I’ll use the resulted word-vectors of the <em>sum_sqrt</em> method. The approach described can be used as an alternative to <em>Latent semantic indexing (LSI)</em> or <em>topic-modeling</em> in order to discover categories in text data (documents).</p>
+<p>For illustration, I’ll use the resulted word-vectors of the
+<em>sum_sqrt</em> method. The approach described can be used as an
+alternative to <em>Latent semantic indexing (LSI)</em> or
+<em>topic-modeling</em> in order to discover categories in text data
+(documents).</p>
 <p><br></p>
-<p>First, someone can seach for the optimal number of clusters using the <em>Optimal_Clusters_KMeans</em> function of the <em>ClusterR</em> package,</p>
+<p>First, someone can seach for the optimal number of clusters using the
+<em>Optimal_Clusters_KMeans</em> function of the <em>ClusterR</em>
+package,</p>
 <p><br></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>scal_dat <span class="ot">=</span> ClusterR<span class="sc">::</span><span class="fu">center_scale</span>(doc2_sum)     <span class="co"># center and scale the data</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>opt_cl <span class="ot">=</span> ClusterR<span class="sc">::</span><span class="fu">Optimal_Clusters_KMeans</span>(scal_dat, <span class="at">max_clusters =</span> <span class="dv">15</span>, </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">criterion =</span> <span class="st">&quot;distortion_fK&quot;</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">fK_threshold =</span> <span class="fl">0.85</span>, <span class="at">num_init =</span> <span class="dv">3</span>, </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">max_iters =</span> <span class="dv">50</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">initializer =</span> <span class="st">&quot;kmeans++&quot;</span>, <span class="at">tol =</span> <span class="fl">1e-04</span>, </span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">plot_clusters =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">verbose =</span> T, <span class="at">tol_optimal_init =</span> <span class="fl">0.3</span>, </span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">seed =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>scal_dat <span class="ot">=</span> ClusterR<span class="sc">::</span><span class="fu">center_scale</span>(doc2_sum)     <span class="co"># center and scale the data</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>opt_cl <span class="ot">=</span> ClusterR<span class="sc">::</span><span class="fu">Optimal_Clusters_KMeans</span>(scal_dat, <span class="at">max_clusters =</span> <span class="dv">15</span>, </span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>                                           <span class="at">criterion =</span> <span class="st">&quot;distortion_fK&quot;</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>                                           <span class="at">fK_threshold =</span> <span class="fl">0.85</span>, <span class="at">num_init =</span> <span class="dv">3</span>, </span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>                                           <span class="at">max_iters =</span> <span class="dv">50</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>                                           <span class="at">initializer =</span> <span class="st">&quot;kmeans++&quot;</span>, <span class="at">tol =</span> <span class="fl">1e-04</span>, </span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>                                           <span class="at">plot_clusters =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>                                           <span class="at">verbose =</span> T, <span class="at">tol_optimal_init =</span> <span class="fl">0.3</span>, </span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>                                           <span class="at">seed =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><br></p>
-<p>Based on the output of the <em>Optimal_Clusters_KMeans</em> function, I’ll pick 5 as the optimal number of clusters in order to perform <em>k-means clustering</em>,</p>
+<p>Based on the output of the <em>Optimal_Clusters_KMeans</em> function,
+I’ll pick 5 as the optimal number of clusters in order to perform
+<em>k-means clustering</em>,</p>
 <p><br></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>num_clust <span class="ot">=</span> <span class="dv">5</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>km <span class="ot">=</span> ClusterR<span class="sc">::</span><span class="fu">KMeans_rcpp</span>(scal_dat, <span class="at">clusters =</span> num_clust, <span class="at">num_init =</span> <span class="dv">3</span>, <span class="at">max_iters =</span> <span class="dv">50</span>,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">initializer =</span> <span class="st">&quot;kmeans++&quot;</span>, <span class="at">fuzzy =</span> T, <span class="at">verbose =</span> F,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">CENTROIDS =</span> <span class="cn">NULL</span>, <span class="at">tol =</span> <span class="fl">1e-04</span>, <span class="at">tol_optimal_init =</span> <span class="fl">0.3</span>, <span class="at">seed =</span> <span class="dv">2</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(km<span class="sc">$</span>clusters)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>   <span class="dv">1</span>    <span class="dv">2</span>    <span class="dv">3</span>    <span class="dv">4</span>    <span class="dv">5</span> </span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">713</span> <span class="dv">2439</span> <span class="dv">2393</span> <span class="dv">2607</span> <span class="dv">2636</span> </span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>num_clust <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>km <span class="ot">=</span> ClusterR<span class="sc">::</span><span class="fu">KMeans_rcpp</span>(scal_dat, <span class="at">clusters =</span> num_clust, <span class="at">num_init =</span> <span class="dv">3</span>, <span class="at">max_iters =</span> <span class="dv">50</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>                           <span class="at">initializer =</span> <span class="st">&quot;kmeans++&quot;</span>, <span class="at">fuzzy =</span> T, <span class="at">verbose =</span> F,</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>                           <span class="at">CENTROIDS =</span> <span class="cn">NULL</span>, <span class="at">tol =</span> <span class="fl">1e-04</span>, <span class="at">tol_optimal_init =</span> <span class="fl">0.3</span>, <span class="at">seed =</span> <span class="dv">2</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="fu">table</span>(km<span class="sc">$</span>clusters)</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>   <span class="dv">1</span>    <span class="dv">2</span>    <span class="dv">3</span>    <span class="dv">4</span>    <span class="dv">5</span> </span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a> <span class="dv">713</span> <span class="dv">2439</span> <span class="dv">2393</span> <span class="dv">2607</span> <span class="dv">2636</span> </span></code></pre></div>
 <p><br></p>
-<p>As a follow up, someone can also perform <em>cluster-medoids</em> clustering using the <em>pearson-correlation</em> metric, which resembles the <em>cosine</em> distance ( the latter is frequently used for text clustering ),</p>
+<p>As a follow up, someone can also perform <em>cluster-medoids</em>
+clustering using the <em>pearson-correlation</em> metric, which
+resembles the <em>cosine</em> distance ( the latter is frequently used
+for text clustering ),</p>
 <p><br></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>kmed <span class="ot">=</span> ClusterR<span class="sc">::</span><span class="fu">Cluster_Medoids</span>(scal_dat, <span class="at">clusters =</span> num_clust, </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">distance_metric =</span> <span class="st">&quot;pearson_correlation&quot;</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">minkowski_p =</span> <span class="dv">1</span>, <span class="at">threads =</span> <span class="dv">6</span>, <span class="at">swap_phase =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">fuzzy =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> F, <span class="at">seed =</span> <span class="dv">1</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(kmed<span class="sc">$</span>clusters)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>   <span class="dv">1</span>    <span class="dv">2</span>    <span class="dv">3</span>    <span class="dv">4</span>    <span class="dv">5</span> </span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="dv">2396</span> <span class="dv">2293</span> <span class="dv">2680</span>  <span class="dv">875</span> <span class="dv">2544</span> </span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>kmed <span class="ot">=</span> ClusterR<span class="sc">::</span><span class="fu">Cluster_Medoids</span>(scal_dat, <span class="at">clusters =</span> num_clust, </span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>                                 <span class="at">distance_metric =</span> <span class="st">&quot;pearson_correlation&quot;</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>                                 <span class="at">minkowski_p =</span> <span class="dv">1</span>, <span class="at">threads =</span> <span class="dv">6</span>, <span class="at">swap_phase =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>                                 <span class="at">fuzzy =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> F, <span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="fu">table</span>(kmed<span class="sc">$</span>clusters)</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>   <span class="dv">1</span>    <span class="dv">2</span>    <span class="dv">3</span>    <span class="dv">4</span>    <span class="dv">5</span> </span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="dv">2396</span> <span class="dv">2293</span> <span class="dv">2680</span>  <span class="dv">875</span> <span class="dv">2544</span> </span></code></pre></div>
 <p><br></p>
-<p>Finally, the word-frequencies of the documents can be obtained using the <em>cluster_frequency</em> function, which groups the tokens (words) of the documents based on which cluster each document appears,</p>
+<p>Finally, the word-frequencies of the documents can be obtained using
+the <em>cluster_frequency</em> function, which groups the tokens (words)
+of the documents based on which cluster each document appears,</p>
 <p><br></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>freq_clust <span class="ot">=</span> textTinyR<span class="sc">::</span><span class="fu">cluster_frequency</span>(<span class="at">tokenized_list_text =</span> clust_vec<span class="sc">$</span>token, </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">cluster_vector =</span> km<span class="sc">$</span>clusters, <span class="at">verbose =</span> T)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>Time difference of <span class="fl">0.1762383</span> secs</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>freq_clust <span class="ot">=</span> textTinyR<span class="sc">::</span><span class="fu">cluster_frequency</span>(<span class="at">tokenized_list_text =</span> clust_vec<span class="sc">$</span>token, </span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>                                          <span class="at">cluster_vector =</span> km<span class="sc">$</span>clusters, <span class="at">verbose =</span> T)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>Time difference of <span class="fl">0.1762383</span> secs</span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> freq_clust</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span><span class="st">`</span><span class="at">3</span><span class="st">`</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>         WORDS COUNTS</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>   <span class="dv">1</span><span class="sc">:</span>      mln   <span class="dv">8701</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>   <span class="dv">2</span><span class="sc">:</span>      <span class="dv">000</span>   <span class="dv">6741</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>   <span class="dv">3</span><span class="sc">:</span>      cts   <span class="dv">6260</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>   <span class="dv">4</span><span class="sc">:</span>      net   <span class="dv">5949</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>   <span class="dv">5</span><span class="sc">:</span>     loss   <span class="dv">4628</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="sc">---</span>                </span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="dv">6417</span><span class="sc">:</span>    vira<span class="sc">&gt;</span>      <span class="dv">1</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="dv">6418</span><span class="sc">:</span>    gain<span class="sc">&gt;</span>      <span class="dv">1</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="dv">6419</span><span class="sc">:</span>     pwj<span class="sc">&gt;</span>      <span class="dv">1</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="dv">6420</span><span class="sc">:</span> drummond      <span class="dv">1</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="dv">6421</span><span class="sc">:</span> parisian      <span class="dv">1</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span><span class="st">`</span><span class="at">1</span><span class="st">`</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>         WORDS COUNTS</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>   <span class="dv">1</span><span class="sc">:</span>      cts   <span class="dv">1303</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>   <span class="dv">2</span><span class="sc">:</span>   record    <span class="dv">696</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>   <span class="dv">3</span><span class="sc">:</span>    april    <span class="dv">669</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>   <span class="dv">4</span><span class="sc">:</span>      <span class="er">&amp;</span>lt    <span class="dv">652</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>   <span class="dv">5</span><span class="sc">:</span> dividend    <span class="dv">554</span></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="sc">---</span>                </span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="dv">1833</span><span class="sc">:</span>     hvt<span class="sc">&gt;</span>      <span class="dv">1</span></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="dv">1834</span><span class="sc">:</span>    bang<span class="sc">&gt;</span>      <span class="dv">1</span></span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="dv">1835</span><span class="sc">:</span>   replac      <span class="dv">1</span></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="dv">1836</span><span class="sc">:</span>    stbk<span class="sc">&gt;</span>      <span class="dv">1</span></span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="dv">1837</span><span class="sc">:</span>     bic<span class="sc">&gt;</span>      <span class="dv">1</span></span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span><span class="st">`</span><span class="at">4</span><span class="st">`</span></span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>         WORDS COUNTS</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span><span class="sc">:</span>     mln   <span class="dv">6137</span></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span><span class="sc">:</span>     pct   <span class="dv">5084</span></span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span><span class="sc">:</span>    dlrs   <span class="dv">4024</span></span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span><span class="sc">:</span>    year   <span class="dv">3397</span></span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span><span class="sc">:</span> billion   <span class="dv">3390</span></span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>   <span class="sc">---</span>               </span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="dv">10968</span><span class="sc">:</span>   heijn      <span class="dv">1</span></span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="dv">10969</span><span class="sc">:</span> <span class="st">&quot;behind      1</span></span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="st">10970:    myo&gt;      1</span></span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="st">10971:  &quot;</span>favor      <span class="dv">1</span></span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a><span class="dv">10972</span><span class="sc">:</span> wonder<span class="sc">&gt;</span>      <span class="dv">1</span></span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span><span class="st">`</span><span class="at">5</span><span class="st">`</span></span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>                  WORDS COUNTS</span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span><span class="sc">:</span>              <span class="er">&amp;</span>lt   <span class="dv">4244</span></span>
-<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span><span class="sc">:</span>            share   <span class="dv">3748</span></span>
-<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span><span class="sc">:</span>             dlrs   <span class="dv">3274</span></span>
-<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span><span class="sc">:</span>          compani   <span class="dv">3184</span></span>
-<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span><span class="sc">:</span>              mln   <span class="dv">2659</span></span>
-<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>   <span class="sc">---</span>                        </span>
-<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a><span class="dv">13059</span><span class="sc">:</span>        often<span class="sc">-</span>fat      <span class="dv">1</span></span>
-<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a><span class="dv">13060</span><span class="sc">:</span> computerknowledg      <span class="dv">1</span></span>
-<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a><span class="dv">13061</span><span class="sc">:</span>       fibrinolyt      <span class="dv">1</span></span>
-<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="dv">13062</span><span class="sc">:</span>           hercul      <span class="dv">1</span></span>
-<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a><span class="dv">13063</span><span class="sc">:</span>           ceroni      <span class="dv">1</span></span>
-<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span><span class="st">`</span><span class="at">2</span><span class="st">`</span></span>
-<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>             WORDS COUNTS</span>
-<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span><span class="sc">:</span>       trade   <span class="dv">3077</span></span>
-<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span><span class="sc">:</span>        bank   <span class="dv">2578</span></span>
-<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span><span class="sc">:</span>      market   <span class="dv">2535</span></span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span><span class="sc">:</span>         pct   <span class="dv">2416</span></span>
-<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span><span class="sc">:</span>        rate   <span class="dv">2308</span></span>
-<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>   <span class="sc">---</span>                   </span>
-<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a><span class="dv">13702</span><span class="sc">:</span>        <span class="st">&quot;mfn      1</span></span>
-<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a><span class="st">13703:         uk&gt;      1</span></span>
-<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a><span class="st">13704:    honolulu      1</span></span>
-<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a><span class="st">13705:        arap      1</span></span>
-<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a><span class="st">13706: infinitesim      1</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="sc">&gt;</span> freq_clust</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="sc">$</span><span class="st">`</span><span class="at">3</span><span class="st">`</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>         WORDS COUNTS</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>   <span class="dv">1</span><span class="sc">:</span>      mln   <span class="dv">8701</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>   <span class="dv">2</span><span class="sc">:</span>      <span class="dv">000</span>   <span class="dv">6741</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>   <span class="dv">3</span><span class="sc">:</span>      cts   <span class="dv">6260</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>   <span class="dv">4</span><span class="sc">:</span>      net   <span class="dv">5949</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>   <span class="dv">5</span><span class="sc">:</span>     loss   <span class="dv">4628</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>  <span class="sc">---</span>                </span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="dv">6417</span><span class="sc">:</span>    vira<span class="sc">&gt;</span>      <span class="dv">1</span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="dv">6418</span><span class="sc">:</span>    gain<span class="sc">&gt;</span>      <span class="dv">1</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="dv">6419</span><span class="sc">:</span>     pwj<span class="sc">&gt;</span>      <span class="dv">1</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="dv">6420</span><span class="sc">:</span> drummond      <span class="dv">1</span></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="dv">6421</span><span class="sc">:</span> parisian      <span class="dv">1</span></span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="sc">$</span><span class="st">`</span><span class="at">1</span><span class="st">`</span></span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>         WORDS COUNTS</span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a>   <span class="dv">1</span><span class="sc">:</span>      cts   <span class="dv">1303</span></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a>   <span class="dv">2</span><span class="sc">:</span>   record    <span class="dv">696</span></span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a>   <span class="dv">3</span><span class="sc">:</span>    april    <span class="dv">669</span></span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a>   <span class="dv">4</span><span class="sc">:</span>      <span class="er">&amp;</span>lt    <span class="dv">652</span></span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a>   <span class="dv">5</span><span class="sc">:</span> dividend    <span class="dv">554</span></span>
+<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a>  <span class="sc">---</span>                </span>
+<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a><span class="dv">1833</span><span class="sc">:</span>     hvt<span class="sc">&gt;</span>      <span class="dv">1</span></span>
+<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a><span class="dv">1834</span><span class="sc">:</span>    bang<span class="sc">&gt;</span>      <span class="dv">1</span></span>
+<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a><span class="dv">1835</span><span class="sc">:</span>   replac      <span class="dv">1</span></span>
+<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a><span class="dv">1836</span><span class="sc">:</span>    stbk<span class="sc">&gt;</span>      <span class="dv">1</span></span>
+<span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a><span class="dv">1837</span><span class="sc">:</span>     bic<span class="sc">&gt;</span>      <span class="dv">1</span></span>
+<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a></span>
+<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a><span class="sc">$</span><span class="st">`</span><span class="at">4</span><span class="st">`</span></span>
+<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a>         WORDS COUNTS</span>
+<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a>    <span class="dv">1</span><span class="sc">:</span>     mln   <span class="dv">6137</span></span>
+<span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a>    <span class="dv">2</span><span class="sc">:</span>     pct   <span class="dv">5084</span></span>
+<span id="cb14-35"><a href="#cb14-35" tabindex="-1"></a>    <span class="dv">3</span><span class="sc">:</span>    dlrs   <span class="dv">4024</span></span>
+<span id="cb14-36"><a href="#cb14-36" tabindex="-1"></a>    <span class="dv">4</span><span class="sc">:</span>    year   <span class="dv">3397</span></span>
+<span id="cb14-37"><a href="#cb14-37" tabindex="-1"></a>    <span class="dv">5</span><span class="sc">:</span> billion   <span class="dv">3390</span></span>
+<span id="cb14-38"><a href="#cb14-38" tabindex="-1"></a>   <span class="sc">---</span>               </span>
+<span id="cb14-39"><a href="#cb14-39" tabindex="-1"></a><span class="dv">10968</span><span class="sc">:</span>   heijn      <span class="dv">1</span></span>
+<span id="cb14-40"><a href="#cb14-40" tabindex="-1"></a><span class="dv">10969</span><span class="sc">:</span> <span class="st">&quot;behind      1</span></span>
+<span id="cb14-41"><a href="#cb14-41" tabindex="-1"></a><span class="st">10970:    myo&gt;      1</span></span>
+<span id="cb14-42"><a href="#cb14-42" tabindex="-1"></a><span class="st">10971:  &quot;</span>favor      <span class="dv">1</span></span>
+<span id="cb14-43"><a href="#cb14-43" tabindex="-1"></a><span class="dv">10972</span><span class="sc">:</span> wonder<span class="sc">&gt;</span>      <span class="dv">1</span></span>
+<span id="cb14-44"><a href="#cb14-44" tabindex="-1"></a></span>
+<span id="cb14-45"><a href="#cb14-45" tabindex="-1"></a><span class="sc">$</span><span class="st">`</span><span class="at">5</span><span class="st">`</span></span>
+<span id="cb14-46"><a href="#cb14-46" tabindex="-1"></a>                  WORDS COUNTS</span>
+<span id="cb14-47"><a href="#cb14-47" tabindex="-1"></a>    <span class="dv">1</span><span class="sc">:</span>              <span class="er">&amp;</span>lt   <span class="dv">4244</span></span>
+<span id="cb14-48"><a href="#cb14-48" tabindex="-1"></a>    <span class="dv">2</span><span class="sc">:</span>            share   <span class="dv">3748</span></span>
+<span id="cb14-49"><a href="#cb14-49" tabindex="-1"></a>    <span class="dv">3</span><span class="sc">:</span>             dlrs   <span class="dv">3274</span></span>
+<span id="cb14-50"><a href="#cb14-50" tabindex="-1"></a>    <span class="dv">4</span><span class="sc">:</span>          compani   <span class="dv">3184</span></span>
+<span id="cb14-51"><a href="#cb14-51" tabindex="-1"></a>    <span class="dv">5</span><span class="sc">:</span>              mln   <span class="dv">2659</span></span>
+<span id="cb14-52"><a href="#cb14-52" tabindex="-1"></a>   <span class="sc">---</span>                        </span>
+<span id="cb14-53"><a href="#cb14-53" tabindex="-1"></a><span class="dv">13059</span><span class="sc">:</span>        often<span class="sc">-</span>fat      <span class="dv">1</span></span>
+<span id="cb14-54"><a href="#cb14-54" tabindex="-1"></a><span class="dv">13060</span><span class="sc">:</span> computerknowledg      <span class="dv">1</span></span>
+<span id="cb14-55"><a href="#cb14-55" tabindex="-1"></a><span class="dv">13061</span><span class="sc">:</span>       fibrinolyt      <span class="dv">1</span></span>
+<span id="cb14-56"><a href="#cb14-56" tabindex="-1"></a><span class="dv">13062</span><span class="sc">:</span>           hercul      <span class="dv">1</span></span>
+<span id="cb14-57"><a href="#cb14-57" tabindex="-1"></a><span class="dv">13063</span><span class="sc">:</span>           ceroni      <span class="dv">1</span></span>
+<span id="cb14-58"><a href="#cb14-58" tabindex="-1"></a></span>
+<span id="cb14-59"><a href="#cb14-59" tabindex="-1"></a><span class="sc">$</span><span class="st">`</span><span class="at">2</span><span class="st">`</span></span>
+<span id="cb14-60"><a href="#cb14-60" tabindex="-1"></a>             WORDS COUNTS</span>
+<span id="cb14-61"><a href="#cb14-61" tabindex="-1"></a>    <span class="dv">1</span><span class="sc">:</span>       trade   <span class="dv">3077</span></span>
+<span id="cb14-62"><a href="#cb14-62" tabindex="-1"></a>    <span class="dv">2</span><span class="sc">:</span>        bank   <span class="dv">2578</span></span>
+<span id="cb14-63"><a href="#cb14-63" tabindex="-1"></a>    <span class="dv">3</span><span class="sc">:</span>      market   <span class="dv">2535</span></span>
+<span id="cb14-64"><a href="#cb14-64" tabindex="-1"></a>    <span class="dv">4</span><span class="sc">:</span>         pct   <span class="dv">2416</span></span>
+<span id="cb14-65"><a href="#cb14-65" tabindex="-1"></a>    <span class="dv">5</span><span class="sc">:</span>        rate   <span class="dv">2308</span></span>
+<span id="cb14-66"><a href="#cb14-66" tabindex="-1"></a>   <span class="sc">---</span>                   </span>
+<span id="cb14-67"><a href="#cb14-67" tabindex="-1"></a><span class="dv">13702</span><span class="sc">:</span>        <span class="st">&quot;mfn      1</span></span>
+<span id="cb14-68"><a href="#cb14-68" tabindex="-1"></a><span class="st">13703:         uk&gt;      1</span></span>
+<span id="cb14-69"><a href="#cb14-69" tabindex="-1"></a><span class="st">13704:    honolulu      1</span></span>
+<span id="cb14-70"><a href="#cb14-70" tabindex="-1"></a><span class="st">13705:        arap      1</span></span>
+<span id="cb14-71"><a href="#cb14-71" tabindex="-1"></a><span class="st">13706: infinitesim      1</span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>freq_clust_kmed <span class="ot">=</span> textTinyR<span class="sc">::</span><span class="fu">cluster_frequency</span>(<span class="at">tokenized_list_text =</span> clust_vec<span class="sc">$</span>token, </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">cluster_vector =</span> kmed<span class="sc">$</span>clusters, <span class="at">verbose =</span> T)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>Time difference of <span class="fl">0.1685851</span> secs</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>freq_clust_kmed <span class="ot">=</span> textTinyR<span class="sc">::</span><span class="fu">cluster_frequency</span>(<span class="at">tokenized_list_text =</span> clust_vec<span class="sc">$</span>token, </span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>                                               <span class="at">cluster_vector =</span> kmed<span class="sc">$</span>clusters, <span class="at">verbose =</span> T)</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>Time difference of <span class="fl">0.1685851</span> secs</span></code></pre></div>
 <p><br></p>
-<p>This is one of the ways that the transformed word-vectors can be used and is solely based on tokens (words) and word frequencies. However a more advanced approach would be to cluster documents based on word <em>n-grams</em> and take advantage of <em>graphs</em> as explained <a href="https://www.tidytextmining.com/ngrams.html#visualizing-bigrams-in-other-texts">here</a> in order to plot the nodes, edges and text.</p>
+<p>This is one of the ways that the transformed word-vectors can be used
+and is solely based on tokens (words) and word frequencies. However a
+more advanced approach would be to cluster documents based on word
+<em>n-grams</em> and take advantage of <em>graphs</em> as explained <a href="https://www.tidytextmining.com/ngrams.html#visualizing-bigrams-in-other-texts">here</a>
+in order to plot the nodes, edges and text.</p>
 <p><br><br></p>
 <p><em>References</em>:</p>
 <ul>

@@ -1,4 +1,4 @@
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  
 #  NLTK = reticulate::import("nltk.corpus")
 #  
@@ -11,7 +11,7 @@
 #  
 #  nltk$download('reuters')
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  
 #  documents = text_reuters$fileids()
 #  
@@ -35,7 +35,7 @@
 #  one_doc
 #  
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  
 #  documents = text_reuters$fileids()
 #  
@@ -57,7 +57,7 @@
 #  train_labels = as.vector(sapply(train_docs_id, function(x) text_reuters$categories(x)))
 #  test_labels = as.vector(sapply(test_docs_id, function(x) text_reuters$categories(x)))
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  concat = c(unlist(train_docs), unlist(test_docs))
 #  
 #  length(concat)
@@ -99,7 +99,7 @@
 #  
 #  str(gl_term_w)
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  
 #   save_dat = textTinyR::tokenize_transform_vec_docs(object = concat, as_token = T,
 #                                                     to_lower = T,
@@ -114,7 +114,7 @@
 #                                                     threads = 1,                     # whenever I save data to file set the number threads to 1
 #                                                     verbose = T)
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  
 #  PATH_INPUT = "/path_to_your_folder/output_token_single_file.txt"
 #  
@@ -128,7 +128,7 @@
 #                                  minn = 0, maxn = 0, thread = 6, t = 1e-04, verbose = 2)
 #  
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  
 #  init = textTinyR::Doc2Vec$new(token_list = clust_vec$token,
 #  
@@ -151,13 +151,13 @@
 #  File is successfully opened
 #  total.number.lines.processed.output: 25000
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  
 #  # res_wv = init$pre_processed_wv()
 #  #
 #  # str(res_wv)
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  
 #  doc2_sum = init$doc2vec_methods(method = "sum_sqrt", threads = 6)
 #  doc2_norm = init$doc2vec_methods(method = "min_max_norm", threads = 6)
@@ -176,7 +176,7 @@
 #  > dim(doc2_idf)
 #  [1] 10788   300
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  
 #  scal_dat = ClusterR::center_scale(doc2_sum)     # center and scale the data
 #  
@@ -191,7 +191,7 @@
 #                                             seed = 1)
 #  
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  
 #  num_clust = 5
 #  
@@ -206,7 +206,7 @@
 #   713 2439 2393 2607 2636
 #  
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  
 #  kmed = ClusterR::Cluster_Medoids(scal_dat, clusters = num_clust,
 #                                   distance_metric = "pearson_correlation",
@@ -220,7 +220,7 @@
 #  2396 2293 2680  875 2544
 #  
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  
 #  freq_clust = textTinyR::cluster_frequency(tokenized_list_text = clust_vec$token,
 #                                            cluster_vector = km$clusters, verbose = T)
@@ -228,7 +228,7 @@
 #  Time difference of 0.1762383 secs
 #  
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  > freq_clust
 #  
 #  $`3`
@@ -303,7 +303,7 @@
 #  
 #  
 
-## ---- eval = F, echo = T------------------------------------------------------
+## ----eval = F, echo = T-------------------------------------------------------
 #  
 #  freq_clust_kmed = textTinyR::cluster_frequency(tokenized_list_text = clust_vec$token,
 #                                                 cluster_vector = kmed$clusters, verbose = T)
